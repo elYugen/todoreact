@@ -22,6 +22,9 @@ Projet ToDo List en React
 *Update*
 
 - Le projet est sous docker, aller dans le dossier contenant frontend et backend, et éxécuter la commande `docker-compose up --build`
+Pour éxécuter des commandes tel que les commandes pratique ci-dessous, on doit les éxécuter dans le conteneur.
+Pour cela on ouvre un nouveau terminal et l'on tape : `docker-compose exec <nomDuConteneur>  <commande>`.
+Ce qui devrait donner en éxécution réel `docker-compose exec frontend npx yugenpages`
 
   
 
