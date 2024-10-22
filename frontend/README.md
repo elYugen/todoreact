@@ -1,6 +1,3 @@
-# Mon Projet
+# Front de la ToDo
 
-## Documentation
-
-- [Doc Backend](./backend/README.md)
-- [Doc Frontend](./frontend/README.md)
+## A faire :
