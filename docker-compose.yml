@@ -1,43 +1,59 @@
-version: '3'
 services:
-  backend:
-    build: ./backend
-    ports:
-      - "80:80"  
-    environment:
-      - NODE_ENV=development
-      - DB_HOST=backend 
-      - DB_USER=todo
-      - DB_PASSWORD=todo
-      - DB_NAME=todo
-    volumes:
-      - ./backend:/app 
-      - /app/node_modules  
-    depends_on:
-      - mysql
-
   frontend:
-    build: ./frontend
+    build:
+      context: frontend/
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"  
-    environment:
-      - NODE_ENV=development
+      - "5173:5173"
     volumes:
-      - ./frontend:/app  
+      - ./frontend:/app
       - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - VITE_WATCH_POLL=true
     depends_on:
       - backend
 
-  mysql:
-    image: mysql:8
+  backend:
+    build: 
+      context: backend/
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - DB_HOST=db
+      - DB_USER=todo
+      - DB_PASSWORD=todo
+      - DB_NAME=todo
+    depends_on:
+      - db
+
+  db:
+    image: mysql
     environment:
       MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: mydb
+      MYSQL_USER: todo
+      MYSQL_PASSWORD: todo
+      MYSQL_DATABASE: todo
     volumes:
-      - mysql-data:/var/lib/mysql  # Volume persistant pour les données MySQL
+      - db_data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d
     ports:
-      - "3306:3306"  # Expose MySQL sur le port 3306
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"  # http://localhost:8081
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - MYSQL_ROOT_PASSWORD=example
+    depends_on:
+      - db
 
 volumes:
-  mysql-data:
-    driver: local
+  db_data:

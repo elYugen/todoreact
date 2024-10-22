@@ -1,20 +1,14 @@
-# Utiliser l'image Node.js officielle
-FROM node:18
+# image de base
+FROM node:20 AS build
 
-# Créer un répertoire de travail pour l'application
+# créer un dossier app
 WORKDIR /app
-
-# Copier package.json et package-lock.json
-COPY package*.json ./
-
-# Installer les dépendances
+COPY ./package*.json ./
 RUN npm install
+# COPY . .
+# RUN npm run dev
+ENV CHOKIDAR_USEPOLLING=true
+ENV VITE_WATCH_POLL=true
 
-# Copier tout le code de l'application dans le conteneur
-COPY . .
-
-# Exposer le port que le serveur de développement React utilise (par défaut 3000)
-EXPOSE 3000
-
-# Commande pour démarrer l'application en mode développement avec watch
-CMD ["npm", "start"]
+EXPOSE 5173
+CMD ["npm", "run", "dev", "--", "--host"]
