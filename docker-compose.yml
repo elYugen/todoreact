@@ -3,25 +3,41 @@ services:
   backend:
     build: ./backend
     ports:
-      - "80:80"  # Rediriger le port 80 du conteneur vers le port 80 de l'hôte
+      - "80:80"  
     environment:
       - NODE_ENV=development
+      - DB_HOST=backend 
+      - DB_USER=todo
+      - DB_PASSWORD=todo
+      - DB_NAME=todo
     volumes:
-      - ./backend:/app
-      - /app/node_modules
+      - ./backend:/app 
+      - /app/node_modules  
+    depends_on:
+      - mysql
 
   frontend:
     build: ./frontend
     ports:
-      - "3000:3000"  # Rediriger le port 3000 du conteneur vers le port 3000 de l'hôte
+      - "3000:3000"  
     environment:
       - NODE_ENV=development
     volumes:
-      - ./frontend:/app  # Monter le dossier frontend pour voir les changements
-      - /app/node_modules  # Ne pas monter les node_modules depuis l'hôte
+      - ./frontend:/app  
+      - /app/node_modules
     depends_on:
       - backend
 
-networks:
-  default:
-    driver: bridge
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: mydb
+    volumes:
+      - mysql-data:/var/lib/mysql  # Volume persistant pour les données MySQL
+    ports:
+      - "3306:3306"  # Expose MySQL sur le port 3306
+
+volumes:
+  mysql-data:
+    driver: local

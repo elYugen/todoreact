@@ -23,6 +23,7 @@ Projet ToDo List en React
 ## À faire
 - [Backend](./backend/README.md)
 - [Frontend](./frontend/README.md)
+
  ***Consigne de base :***
  
  - Création de tâches : Les utilisateurs doivent pouvoir créer de nouvelles tâches avec un titre, une description, une catégorie et une date d'échéance optionnelle.
