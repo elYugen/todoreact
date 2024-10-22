@@ -1,0 +1,27 @@
+version: '3'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "80:80"  # Rediriger le port 80 du conteneur vers le port 80 de l'hôte
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"  # Rediriger le port 3000 du conteneur vers le port 3000 de l'hôte
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/app  # Monter le dossier frontend pour voir les changements
+      - /app/node_modules  # Ne pas monter les node_modules depuis l'hôte
+    depends_on:
+      - backend
+
+networks:
+  default:
+    driver: bridge
