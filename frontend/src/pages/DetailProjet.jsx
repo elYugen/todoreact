@@ -1,9 +1,14 @@
+// On importe le composant TopBar
+import TopBar from "../components/TopBar/TopBar";
+
 function detailProjet() {
   return (
 
     <>
     <section className="containerGeneral">
-    <h1 className="titrePage">Détails du projet</h1>
+      {/* On initialise une nouvelle instance du composant et on lui passe le paramètre "pagename"
+          que l'on retrouve dans le composant (en paramètre de la fonction) */}
+    <TopBar pagename={"Détails du projet"}/>
     <h2 className="titreBloc titreProjet">Voyage au Japon</h2>
 
     <article className="bordureBloc">

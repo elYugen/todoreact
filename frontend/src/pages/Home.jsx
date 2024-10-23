@@ -39,6 +39,8 @@ function Home() {
             <button class="homeTaskState">Reviewing</button>
           </div>
           <MyTask/>
+          <MyTask/>
+          <MyTask/>
         </div>
 
       </div>
