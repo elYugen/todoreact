@@ -9,8 +9,8 @@ function Navbar() {
       <ul className="navbarItem">
         <li className="navbarLink navbarLinkActive"><a href="/"><i class="bi bi-house-door"></i></a></li>
         <li className="navbarLink"><a href="#"><i class="bi bi-calendar4"></i></a></li>
-        <li className="navbarLink"><a href="#"><i class="bi bi-plus-circle"></i></a></li>
-        <li className="navbarLink"><a href="project"><i class="bi bi-star-fill"></i></a></li>
+        <li className="navbarLink"><a href="detailprojet"><i class="bi bi-plus-circle"></i></a></li>
+        <li className="navbarLink"><a href="habitstracker"><i class="bi bi-star-fill"></i></a></li>
         <li className="navbarLink"><a href="#"><i class="bi bi-person"></i></a></li>
       </ul>
     </nav>
