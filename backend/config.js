@@ -1,17 +1,12 @@
-import { Sequelize } from 'sequelize';
+// importe le module 'dotenv' qui permet de charger les variables d'environnement contenu dans le .env
 import dotenv from 'dotenv';
 
+// charge les variables d'environnement depuis le fichier .env
+// les variables seront accessibles via process.env
 dotenv.config();
 
-const sequelize = new Sequelize(
-    process.env.MYSQL_DATABASE,
-    process.env.MYSQL_USER,
-    process.env.MYSQL_PASSWORD,
-    {
-        host: process.env.MYSQL_HOST,
-        port: process.env.MYSQL_PORT || 3306,
-        dialect: 'mysql',
-    }
-);
+// exporte la variable PORT qui est contenu dans le fichier .env
+export const PORT = process.env.PORT;
 
-export default sequelize;
+// exporte l'url de connexion mongodb contenu le fichier .env
+export const mongoDBURL = process.env.MONGODB_URL;
