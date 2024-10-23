@@ -8,6 +8,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
+import DetailProjet from "./pages/DetailProjet";
+import HabitsTracker from "./pages/HabitsTracker";
 
 // On importe le style global qui sera appliqué à l'ensemble de l'application
 import './assets/css/style.css'
@@ -28,6 +30,8 @@ function App() {
               la propriété path correspond à la route attribué (localhost/maroute)
               la propriété element correspond à la page que l'on importe */}
           {/* <Route path="coucou" element={<Blogs />} /> */}
+          <Route path="detailprojet" element={<DetailProjet/>} />
+          <Route path="habitstracker" element={<HabitsTracker/>} />
 
           {/* Le path * correspond à l'erreur 404, si une page est inexistante ou introuvable */}
           <Route path="*" element={<NoPage />} />
