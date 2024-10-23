@@ -55,7 +55,7 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
 .bordureBloc {
     margin: auto;
     border: 1px solid #1464C7;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-bottom: 20px;
     box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
 }
@@ -70,7 +70,7 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
 .bordureBloc2 {
     margin: auto;
     border: 1px solid #1464C7;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-bottom: 20px;
     display: flex;
     flex-direction: row;
