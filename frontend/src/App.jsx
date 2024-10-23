@@ -1,6 +1,5 @@
+// On importe les dépendances nécessaires pour le projet
 import { React } from 'react'
-
-// On importe les dépendances nécessaires pour le Router
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
