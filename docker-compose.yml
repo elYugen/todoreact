@@ -24,30 +24,11 @@ services:
       - ./backend:/app
       - /app/node_modules
     environment:
-      # - DB_HOST=db
-      # - DB_USER=todo
-      # - DB_PASSWORD=todo
-      # - DB_NAME=todo
-      # Ajout de la variable d'environnement pour MongoDB
       - MONGODB_URI=mongodb://mongodb:27017/todo
     depends_on:
-      # - db
       - mongodb
 
-  # db:
-  #   image: mysql
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: example
-  #     MYSQL_USER: todo
-  #     MYSQL_PASSWORD: todo
-  #     MYSQL_DATABASE: todo
-  #   volumes:
-  #     - db_data:/var/lib/mysql
-  #     - ./database:/docker-entrypoint-initdb.d
-  #   ports:
-  #     - "3306:3306"
-
-  # Ajout de MongoDB
+  # MongoDB
   mongodb:
     image: mongo:latest
     ports:
@@ -58,28 +39,16 @@ services:
       - MONGO_INITDB_DATABASE=todo
 
   # Interface graphique pour MongoDB
-  # mongo-express:
-  #   image: mongo-express
-  #   ports:
-  #     - "8082:8081"
-  #   environment:
-  #     - ME_CONFIG_MONGODB_SERVER=mongodb
-  #     - ME_CONFIG_BASICAUTH_USERNAME=admin
-  #     - ME_CONFIG_BASICAUTH_PASSWORD=admin
-  #   depends_on:
-  #     - mongodb
-
-  # phpmyadmin:
-  #   image: phpmyadmin/phpmyadmin
-  #   ports:
-  #     - "8081:80"
-  #   environment:
-  #     - PMA_HOST=db
-  #     - PMA_PORT=3306
-  #     - MYSQL_ROOT_PASSWORD=example
-  #   depends_on:
-  #     - db
+  mongo-express:
+    image: mongo-express
+    ports:
+      - "8081:8081" 
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=admin
+    depends_on:
+      - mongodb
 
 volumes:
-  db_data:
   mongodb_data:
