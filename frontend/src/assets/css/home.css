@@ -1,0 +1,44 @@
+.homeContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 15px;
+}
+
+.homeTop {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.homeTop a {
+    color: #2eaebf;
+}
+
+.homeTaskStateList {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.homeTaskStateActive {
+    background-color: #1464c7;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+}
+
+.homeTaskState {
+    background-color: #ffffff;
+    border: none;
+    color: grey;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+}

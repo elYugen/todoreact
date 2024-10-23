@@ -1,0 +1,67 @@
+.categorieBox {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 150px;
+  height: 145px;
+  color: white;
+}
+
+.categorieBoxTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.categorieBoxTop i {
+  font-size: 22px;
+}
+
+.categorieIconBox {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  justify-content:center;
+  align-content: center;
+}
+
+.categorieIconBox span {
+  font-size: 22px;
+  margin-top: 7px;
+}
+
+.categorieBoxInfo {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  margin-top: -20px;
+  height: 40px;
+}
+
+.categorieBoxInfo p {
+  margin-top: -15px;
+}
+
+.categorieBoxProgress {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+}
+
+.progress-container {
+  width: 60%;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 5px;
+  background-color: #4CAF50;
+  border-radius: 5px;
+  transition: width 0.5s ease-in-out;
+}
