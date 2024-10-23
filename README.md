@@ -41,4 +41,4 @@ Projet ToDo List en React
 ***Terminé :***
 
 - [**✔️**] Progressive Web App
-- [**✔️**] Schéma des utilisateurs
+- [**✔️**] Schéma & route des utilisateurs
