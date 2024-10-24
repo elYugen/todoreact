@@ -1,0 +1,46 @@
+@media only screen and (max-width: 768px) {
+    .loginContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    }
+
+    .loginContainerForm {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .loginContainerForm a {
+        color: #1464c7;
+    }
+
+    .loginContainerForm input {
+        background-color: #ffffff;
+        width: 250px;
+        height: 40px;
+        border-radius: 15px;
+        border: 2px solid transparent;
+        padding-left: 40px;
+        padding-right: 40px; 
+        color: #91949c;
+        transition: border-color 0.3s ease; 
+        box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.1);
+    }
+
+    .loginContainerForm input:focus {
+        outline: none; 
+        border-color: rgba(46, 174, 191, 0.2); 
+        box-shadow: 0 0 0 3px rgba(46, 174, 191, 0.1); 
+    }
+
+    .loginContainerFormButton {
+        color: white;
+        border: none;
+        border-radius: 10px;
+        height: 40px;
+        background-color: #1464c7;
+    }
+}

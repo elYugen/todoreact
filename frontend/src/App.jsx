@@ -9,9 +9,12 @@ import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
 import DetailProjet from "./pages/DetailProjet";
 import HabitsTracker from "./pages/HabitsTracker";
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 // On importe le style global qui sera appliqué à l'ensemble de l'application
 import './assets/css/style.css'
+
 
 function App() {
 
@@ -31,6 +34,8 @@ function App() {
           {/* <Route path="coucou" element={<Blogs />} /> */}
           <Route path="detailprojet" element={<DetailProjet/>} />
           <Route path="habitstracker" element={<HabitsTracker/>} />
+          <Route path="login" element={<Login/>} />
+          <Route path="register" element={<Register/>} />
 
           {/* Le path * correspond à l'erreur 404, si une page est inexistante ou introuvable */}
           <Route path="*" element={<NoPage />} />

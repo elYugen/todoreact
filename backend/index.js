@@ -1,5 +1,5 @@
 // importe toutes les dépendances
-import express from "express"; // express pour créer notre application
+import express from "express"; // framework js express pour créer notre application
 import { PORT, mongoDBURL } from "./config.js"; // on recup les informations de configuration
 import mongoose from "mongoose"; // pour se connecter à la base de données mongodb
 import cors from "cors"; // permet à notre application de communiquer avec d'autres sites
@@ -8,15 +8,27 @@ import MongoStore from 'connect-mongo'; // stocke les informations de connexion 
 import userRoute from "./routes/usersRoute.js"; // la route contenant le crud lié aux utilisateurs
 
 // on crée notre application web avec Express
-const app = express();
+const app = express()
 
 // on choisit sur quel port notre site sera accessible
 const port = process.env.PORT; 
 
-// démarre notre serveur
-app.listen(port, () => {
- console.log(`serveur en cours sur le port http://localhost:${port}`);
-});
+// initialise une instance de mongoose
+mongoose
+      // dit a mongoose de se connecter a mongoDBURL, trouvable dans config.js
+      .connect(mongoDBURL)
+      // si cela marche, alors on retourne, connecté a la bdd, et sur quel port on écoute
+      .then(() => {
+         console.log('Connecté à la base de données');
+         // démarre le serveur
+         app.listen(PORT, () => {
+            console.log(`App écoute sur le port : ${PORT}`);
+         });
+      })
+      // si cela échoue, alors on affiche un message d'erreur
+      .catch((error) => {
+         console.log("Erreur de connexion à MongoDB : ", error);
+      });
 
 // configure qui a le droit de requeter sur notre application
 app.use(cors({ 
@@ -38,3 +50,10 @@ app.get('/', (req, res) => {
 
 // route lié aux utilisateurs
 app.use('/users', userRoute);
+
+
+// Gestion des erreurs globale
+app.use((err, req, res, next) => {
+   console.error(err.stack);
+  res.status(500).send('Quelque chose s\'est mal passé!');
+});
