@@ -5,6 +5,7 @@ import SearchBar from "../components/SearchBar/SearchBar";
 import CategoriesBox from "../components/CategoriesBox/CategoriesBox"
 import MyTask from "../components/MyTask/MyTask"
 import "../assets/css/home.css"
+import Loading from "../components/Loading/Loading";
 
 function Home() {
 
