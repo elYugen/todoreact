@@ -9,4 +9,8 @@ dotenv.config();
 export const PORT = process.env.PORT;
 
 // exporte l'url de connexion mongodb contenu le fichier .env
-export const mongoDBURL = process.env.MONGODB_URL;
+export const mongoDBURL = process.env.MONGODB_URI;
+
+// Log pour le débogage
+console.log('Configuration de connexion MongoDB:');
+console.log('URL:', mongoDBURL);
