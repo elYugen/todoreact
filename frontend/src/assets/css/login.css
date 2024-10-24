@@ -12,6 +12,10 @@
         flex-direction: column;
         gap: 10px;
     }
+    
+    .loginContainerForm a {
+        color: #1464c7;
+    }
 
     .loginContainerForm input {
         background-color: #ffffff;
