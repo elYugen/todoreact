@@ -148,3 +148,129 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
     box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
 
 }
+
+/* bloc Agenda */
+.SelectYears {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.SelectMonths {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.calendarContainer {
+    display: flex;
+    margin: auto;
+    height: 100%;
+    align-items: center;
+    width: fit-content;
+}
+
+.agendaTitle{
+    text-align: center;
+}
+
+.toggleButton {
+    width: auto;
+    background-color: #4cc0ee;
+    border: none;
+    color: white;
+    margin: 30px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+   
+  }
+  
+  .toggleButton:hover {
+    background-color: #3e9ee0;
+  }
+  
+  /* Conteneur pour les mois */
+.monthsContainer {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 15px; 
+  margin-top: 20px;
+}
+
+/* Style pour chaque bouton de mois */
+.monthsContainer button {
+  padding: 15px 30px; 
+  background-color: #4cc0ee; 
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-size: 1.2em; 
+  width: 200px; 
+  text-align: center; 
+  transition: background-color 0.3s ease; 
+}
+
+/* Changement de couleur au survol */
+.monthsContainer button:hover {
+  background-color: #3e9ee0; 
+}
+
+
+
+/* blockBucketList */
+
+/* blockBucketList */
+
+.iconePlus {
+    width: 5%;
+    color: white;
+}
+
+.boxBck {
+    width: 150px;
+    height: 145px;
+    background-color: #4cc0ee;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+}
+
+.boxCtn {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
+.boutonBck {
+    background-color: #4cc0ee;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.ctnPrBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconeHabits {
+    width: 50px; /* Ajoutez une taille pour que l'image ait des dimensions visibles */
+    height: 50px; /* Ajustez selon la taille souhaitée */
+}
+
+.BckTitle {
+ margin: 50px;
+}
