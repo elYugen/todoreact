@@ -9,6 +9,9 @@ import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
 import DetailProjet from "./pages/DetailProjet";
 import HabitsTracker from "./pages/HabitsTracker";
+import CreateProject from './pages/CreateProject';
+import CreateTask from './pages/CreateTask';
+import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
@@ -32,6 +35,11 @@ function App() {
               la propriété path correspond à la route attribué (localhost/maroute)
               la propriété element correspond à la page que l'on importe */}
           {/* <Route path="coucou" element={<Blogs />} /> */}
+          <Route path="detailprojet" element={<DetailProjet/>}/>
+          <Route path="habitstracker" element={<HabitsTracker/>}/>
+          <Route path="createproject" element={<CreateProject/>}/>
+          <Route path="createtask" element={<CreateTask/>}/>
+          <Route path="profile" element={<Profile/>}/>
           <Route path="detailprojet" element={<DetailProjet/>} />
           <Route path="habitstracker" element={<HabitsTracker/>} />
           <Route path="login" element={<Login/>} />

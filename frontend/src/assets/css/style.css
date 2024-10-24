@@ -148,3 +148,107 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
     box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
 
 }
+/* ----------------------------  Page creer nouveau projet------------------------------------------ */
+.generalProjet{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.creerProjet{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 20px;
+}
+
+.inputNomProjet{
+    height: 30px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+    border: none;
+}
+
+.inputDescriptionProjet{
+    height: 200px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+    border: none;
+}
+
+/* ----------------------------  Page creer nouveau projet------------------------------------------ */
+
+.generalTask {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.labelTask{
+    margin-bottom: 10px;
+}
+
+.creerTask {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 20px; 
+}
+
+.inputNomTask{
+    height: 30px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+    border: none;
+}
+
+.radioTask {
+    margin-top: 10px;
+}
+
+.optionTask {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.inputCategorie{
+    margin-top: 20px;
+}
+
+.inputDescriptionTask{
+    height: 100px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+    border: none;
+    margin-top: 20px;
+}
+
+#selectProjet{
+padding: 5px;
+box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+    border: none;
+}
+
+.buttonTask{
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+/* ----------------------------  Page profile ------------------------------------------ */
+.profilePic{
+    width: 200px;
+    border-radius: 50%;
+}
+
+.iconeBoxProfile{
+    width: 20px;
+}
