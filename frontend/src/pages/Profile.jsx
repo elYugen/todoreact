@@ -5,27 +5,44 @@ function Profile() {
     return(
         <>
         <TopBar pagename={"Mon profil"}/>
-        <section className="containerGeneral">
+        <section className="containerGeneral generalProfil">
+        <img className="profilePic" src="../../public/1201275-200.png" alt="annoying Guy profile pic"/>
             <article className="topBox">
-                <img className="profilePic" src="../../public/1201275-200.png" alt="annoying Guy profile pic"/>
                 <p>Annoying Guy</p>
                 
                 <div className="topBoxMini">
-                <div>
+                <div className="countBox">
                     <img className="iconeBoxProfile" src="../../public/certificate-solid.svg" alt="" />
                     <p>Points</p>
+                    <p>212</p>
                 </div>
-                <div>
+                <div className="countBox">
                 <img className="iconeBoxProfile" src="../../public/crown-solid.svg" alt="" />
                 <p>Niveaux</p>
+                <p>5</p>
                 </div>
-                <div>
+                <div className="countBox2">
                 <img className="iconeBoxProfile" src="../../public/shield-solid.svg" alt="" />
                 <p>Badges</p>
+                <p>3</p>
                 </div>
+                </div>
+            </article>
+            <article className="bottomBox">
+                <div className="barreTracker barreProfil">
+                <a href="#">Agenda</a>
                 </div>
 
+                <div className="barreTracker barreProfil">
+                <a href="#">Projets</a>
+                </div>
+
+                <div className="barreTracker barreProfil">
+                <a href="#">Habits Trackers</a>
+                </div>
             </article>
+
+            <a className="deco" href="#">Se deconnecter</a>
             
         </section>
         </>

@@ -244,11 +244,84 @@ box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
 }
 
 /* ----------------------------  Page profile ------------------------------------------ */
-.profilePic{
-    width: 200px;
-    border-radius: 50%;
+.generalProfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -100px;
 }
+
+.profilePic{
+    width: 150px;
+    border-radius: 50%;
+    background-color: #1464C7;
+    z-index: +1;
+    position: relative;
+    top: 80px;
+    margin: auto;
+    text-align: center;
+}
+
+.topBox{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 80px;
+    border-radius: 15px;
+    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+}
+
 
 .iconeBoxProfile{
     width: 20px;
+    padding-top: 10px;
+}
+
+.topBoxMini{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.countBox{
+    width: 33%;
+    border-top: solid 1px black;
+    border-right: solid 1px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.countBox2{
+    width: 33%;
+    border-top: solid 1px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.bottomBox{
+    width: 100%;
+    margin-top: 20px;
+}
+
+.barreProfil{
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+    border: none;
+}
+
+.deco{
+    size: 1.5em;
+    font-weight: bolder;
+    margin-top: 5px;
 }
