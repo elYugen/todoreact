@@ -25,7 +25,7 @@ function Home() {
         <div className="homeContainer">
           <div className="homeTop">
               <h3>Catégories</h3>
-              <a href="#">Voir tout</a>
+              <a href="/homeafter">Voir tout</a>
           </div>
           <CategoriesBox/>
         </div> 
