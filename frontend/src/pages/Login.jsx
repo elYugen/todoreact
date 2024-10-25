@@ -28,7 +28,7 @@ function Login() {
       <>
       <div className="loginContainer">
         <h1>ToDo CasseC</h1>
-        <form className="loginContainerForm">
+        <form className="loginContainerForm" onSubmit={handleSubmit}>
           <input type="email" placeholder="Adresse mail" value={email} onChange={(e) => setEmail(e.target.value)} />
           <input type="password" placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} />
           <button type="submit" className="loginContainerFormButton">Connexion</button>

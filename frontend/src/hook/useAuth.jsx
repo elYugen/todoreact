@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext, useContext } from 'react';
+import axios from 'axios';
 
 const AuthContext = createContext(null);
 
@@ -7,29 +8,24 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Configure Axios pour inclure automatiquement les cookies dans les requêtes
+  axios.defaults.withCredentials = true;
+  axios.defaults.baseURL = 'http://localhost:8080';
+
   // Fonction pour récupérer les informations de l'utilisateur
   const fetchUserInfo = async () => {
     try {
-      // Appel à l'API /me avec les credentials pour que les cookies de session soient envoyés
-      const response = await fetch('http://localhost:8080/auth/me', {
-        credentials: 'include', // Important pour les sessions !
-      });
-
-      if (!response.ok) {
-        if (response.status === 401) {
-          setUser(null);
-          return;
-        }
-        throw new Error('Erreur lors de la récupération des informations utilisateur');
-      }
-
-      const userData = await response.json();
-      console.log('Données utilisateur récupérées dans fetchUserInfo:', userData); // Log pour vérifier l'utilisateur
-      setUser(userData);
+      const response = await axios.get('/auth/me');
+      console.log(response.data);
+      setUser(response.data);
       setError(null);
-    } catch (err) {
-      setError(err.message);
-      setUser(null);
+    } catch (error) {
+      console.error(error);
+      if (error.response && error.response.status === 401) {
+        setUser(null);
+      } else {
+        setError('Erreur lors de la récupération des informations utilisateur');
+      }
     } finally {
       setLoading(false);
     }
@@ -38,30 +34,13 @@ export const AuthProvider = ({ children }) => {
   // Fonction de connexion
   const login = async ({ email, password }) => {
     try {
-      const response = await fetch('http://localhost:8080/auth/login', {
-        method: 'POST',
-        credentials: 'include', // Important pour les sessions !
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Erreur de connexion');
-      }
-
-      const userData = await response.json();
-      console.log('Données utilisateur après connexion:', userData); // Log pour vérifier l'utilisateur
-
-      setUser(userData);
+      const response = await axios.post('/auth/login', { email, password });
+      setUser(response.data);
       setError(null);
-
-      // Recharger les informations utilisateur après la connexion
-      await fetchUserInfo();
+      console.log("Utilisateur connecté :", response.data); // Ajout de log pour le succès de la connexion
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data.message || 'Erreur de connexion');
+      console.error("Erreur de connexion :", err); // Ajout de log pour l'erreur de connexion
       throw err;
     }
   };
@@ -69,26 +48,10 @@ export const AuthProvider = ({ children }) => {
   // Fonction d'inscription
   const register = async ({ username, email, password }) => {
     try {
-      const response = await fetch('http://localhost:8080/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, email, password }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Erreur lors de l\'inscription');
-      }
-
-      const userData = await response.json();
-      console.log('Données utilisateur après inscription:', userData); // Log pour vérifier l'utilisateur
-
-      // Après l'inscription réussie, on connecte automatiquement l'utilisateur
-      await login({ username, password });
+      await axios.post('/auth/register', { username, email, password });
+      await login({ email, password });
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data.message || 'Erreur lors de l\'inscription');
       throw err;
     }
   };
@@ -96,18 +59,10 @@ export const AuthProvider = ({ children }) => {
   // Fonction de déconnexion
   const logout = async () => {
     try {
-      const response = await fetch('http://localhost:8080/auth/logout', {
-        method: 'POST',
-        credentials: 'include', // Important pour les sessions !
-      });
-
-      if (!response.ok) {
-        throw new Error('Erreur lors de la déconnexion');
-      }
-
+      await axios.post('/auth/logout');
       setUser(null);
     } catch (err) {
-      setError(err.message);
+      setError('Erreur lors de la déconnexion');
     }
   };
 

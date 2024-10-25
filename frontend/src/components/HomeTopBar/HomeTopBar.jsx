@@ -16,21 +16,31 @@ function HomeTopBar() {
 
   return (
     <>
+    {user ? (
     <div className="hometopbar">
       <div className="hometopbarYou">
-        {/* <div className="hometopbarLogo">
-          <img src="favicon.png" alt="ProfilPicture"/>
-        </div> */}
-        {user ? (
-        <h3>Bonjour, User</h3>
-        ) : (
-          <h3>Vous n'êtes pas connecté</h3>
-        )}
+        <div className="hometopbarLogo">
+          <img src={user.profilePicture} alt="ProfilPicture"/>
+        </div>
+        <h3>Bonjour, {user.username}</h3>
       </div>
       <div className="hometopbarNotif">
         <i className="bi bi-bell"></i>
       </div>
     </div>
+    ) : (
+    <div className="hometopbar">
+      <div className="hometopbarYou">
+        <div className="hometopbarLogo">
+          <img src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" alt="ProfilPicture"/>
+        </div>
+        <h3>Vous n'êtes pas connecté</h3>
+      </div>
+      <div className="hometopbarNotif">
+        <i className="bi bi-bell"></i>
+      </div>
+    </div>
+    )}
     </>
   );
 };

@@ -1,10 +1,20 @@
+import { useAuth } from '../hook/useAuth';
+import { useNavigate } from 'react-router-dom';
 import TopBar from "../components/TopBar/TopBar";
 
 function Profile() {
+    const { logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = async (e) => {
+        e.preventDefault(); // Empêche le comportement par défaut du lien
+        await logout(); // Appelle la fonction de déconnexion
+        navigate('/'); // Redirige vers la page d'accueil
+    };
 
     return(
         <>
-        <TopBar pagename={"Mon profil"}/>
+        <TopBar/>
         <section className="containerGeneral generalProfil">
         <img className="profilePic" src="../../public/1201275-200.png" alt="annoying Guy profile pic"/>
             <article className="topBox">
@@ -42,7 +52,7 @@ function Profile() {
                 </div>
             </article>
 
-            <a className="deco" href="#">Se deconnecter</a>
+            <a className="deco" href="/" onClick={handleLogout}>Se deconnecter</a>
             
         </section>
         </>
