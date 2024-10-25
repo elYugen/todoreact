@@ -2,6 +2,7 @@
 import { React } from 'react'
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from './hook/useAuth';
 
 // On importe les pages que l'on veut ajouter à notre Router et donc à notre application
 import Layout from "./pages/Layout";
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <>
+    <AuthProvider>
     <BrowserRouter>
       <Routes>
         {/* Layout va permettre le rendu de l'ensemble des pages */}
@@ -50,6 +52,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
     </>
   )
 }
