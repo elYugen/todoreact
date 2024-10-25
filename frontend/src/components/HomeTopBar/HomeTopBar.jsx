@@ -1,12 +1,13 @@
 import React from 'react';
 import { useAuth } from '../../hook/useAuth';
+import Loading from '../Loading/Loading';
 
 import './HomeTopBar.css';
 
 function HomeTopBar() {
   const { user, loading, error, login, logout } = useAuth();
   if (loading) {
-    return <div>Chargement...</div>;
+    return <Loading/>;
   }
 
   // S'il y a une erreur, on l'affiche
@@ -25,7 +26,7 @@ function HomeTopBar() {
         <h3>Bonjour, {user.username}</h3>
       </div>
       <div className="hometopbarNotif">
-        <i className="bi bi-bell"></i>
+      <a onClick={() => {window.location.reload}}><i className="bi bi-bell"></i></a>
       </div>
     </div>
     ) : (
@@ -37,7 +38,7 @@ function HomeTopBar() {
         <h3>Vous n'êtes pas connecté</h3>
       </div>
       <div className="hometopbarNotif">
-        <i className="bi bi-bell"></i>
+      <a onClick={() => {window.location.reload}}><i className="bi bi-bell"></i></a>
       </div>
     </div>
     )}
