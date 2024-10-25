@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-
 body {
     background-color: #ffffff;
     color: #00002c;
@@ -27,7 +26,7 @@ a {
 
 /* ----------------------------  Page détail projet ------------------------------------------ */
 
-.containerGeneral{
+.containerGeneral {
     width: 90%;
     margin: auto;
 }
@@ -41,15 +40,15 @@ a {
     font-size: 1.5em;
 }
 
-/* bloc description projet*/
+/* bloc description projet */
 
-.titreProjet{
-font-size: 1.8em;
-background-color: #1464C7;
-border-radius: 5px;
-text-align: center;
-color: white;
-box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
+.titreProjet {
+    font-size: 1.8em;
+    background-color: #1464C7;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
 }
 
 .bordureBloc {
@@ -65,7 +64,7 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
     margin: auto;
 }
 
-/* bloc liste taches projet*/
+/* bloc liste taches projet */
 
 .bordureBloc2 {
     margin: auto;
@@ -91,13 +90,13 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
     padding: 5px;
 }
 
-.titreBoutonTask{
+.titreBoutonTask {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.UlListTask{
+.UlListTask {
     display: flex;
     flex-direction: column;
     padding: 0;
@@ -126,8 +125,9 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
 .barreTracker {
     display: flex;
     justify-content: space-between;
-    border: 1px solid black;
-    border-radius: 15px;
+    border: 1px solid #1464C7;
+    border-radius: 5px;
+    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
     padding-left: 10px;
     padding-right: 10px;
     background-color: #4cc0ee;
@@ -143,27 +143,140 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
     border: none;
 }
 
-.barreTracker {
-    border: 1px solid #1464C7;
-    border-radius: 5px;
-    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+/* ----------------------------  Page Agenda ------------------------------------------ */
 
+.SelectYears {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
 }
-/* ----------------------------  Page creer nouveau projet------------------------------------------ */
-.generalProjet{
+
+.SelectMonths {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.calendarContainer {
+    display: flex;
+    margin: auto;
+    height: 100%;
+    align-items: center;
+    width: fit-content;
+}
+
+.agendaTitle {
+    text-align: center;
+}
+
+.toggleButton {
+    width: auto;
+    background-color: #4cc0ee;
+    border: none;
+    color: white;
+    margin: 30px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.toggleButton:hover {
+    background-color: #3e9ee0;
+}
+
+.monthsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.monthsContainer button {
+    padding: 15px 30px;
+    background-color: #4cc0ee;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    width: 200px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.monthsContainer button:hover {
+    background-color: #3e9ee0;
+}
+
+/* ----------------------------  Block Bucket List ------------------------------------------ */
+
+.iconePlus {
+    width: 5%;
+    color: white;
+}
+
+.boxBck {
+    width: 150px;
+    height: 145px;
+    background-color: #4cc0ee;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+}
+
+.boxCtn {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
+.boutonBck {
+    background-color: #4cc0ee;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.ctnPrBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.BckTitle {
+    margin: 50px;
+}
+
+/* ----------------------------  Page creer nouveau projet ------------------------------------------ */
+
+.generalProjet {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.creerProjet{
+.creerProjet {
     display: flex;
     flex-direction: column;
     width: 90%;
     padding: 20px;
 }
 
-.inputNomProjet{
+.inputNomProjet,
+.inputDescriptionProjet,
+.inputNomTask,
+.inputDescriptionTask,
+#selectProjet {
     height: 30px;
     width: 100%;
     margin-top: 10px;
@@ -172,41 +285,16 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
     border: none;
 }
 
-.inputDescriptionProjet{
+.inputDescriptionProjet {
     height: 200px;
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 30px;
-    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
-    border: none;
 }
 
-/* ----------------------------  Page creer nouveau projet------------------------------------------ */
-
-.generalTask {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.inputDescriptionTask {
+    height: 100px;
 }
 
-.labelTask{
+.labelTask {
     margin-bottom: 10px;
-}
-
-.creerTask {
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    padding: 20px; 
-}
-
-.inputNomTask{
-    height: 30px;
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
-    border: none;
 }
 
 .radioTask {
@@ -218,41 +306,26 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
     margin-bottom: 10px;
 }
 
-.inputCategorie{
+.inputCategorie {
     margin-top: 20px;
 }
 
-.inputDescriptionTask{
-    height: 100px;
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 30px;
-    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
-    border: none;
-    margin-top: 20px;
-}
-
-#selectProjet{
-padding: 5px;
-box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
-    border: none;
-}
-
-.buttonTask{
+.buttonTask {
     padding: 10px;
     margin-top: 10px;
     margin-right: 10px;
 }
 
 /* ----------------------------  Page profile ------------------------------------------ */
-.generalProfil{
+
+.generalProfil {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: -100px;
 }
 
-.profilePic{
+.profilePic {
     width: 150px;
     border-radius: 50%;
     background-color: #1464C7;
@@ -263,7 +336,7 @@ box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
     text-align: center;
 }
 
-.topBox{
+.topBox {
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -274,19 +347,19 @@ box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
     box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
 }
 
-
-.iconeBoxProfile{
+.iconeBoxProfile {
     width: 20px;
     padding-top: 10px;
 }
 
-.topBoxMini{
+.topBoxMini {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
-.countBox{
+.countBox,
+.countBox2 {
     width: 33%;
     border-top: solid 1px black;
     border-right: solid 1px black;
@@ -297,32 +370,50 @@ box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
     padding: 5px;
 }
 
-.countBox2{
-    width: 33%;
-    border-top: solid 1px black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-}
-
-.bottomBox{
+.bottomBox {
     width: 100%;
     margin-top: 20px;
 }
 
-.barreProfil{
+.barreProfil {
     padding: 15px;
     display: flex;
     justify-content: center;
     margin-bottom: 15px;
     box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
-    border: none;
 }
 
-.deco{
-    size: 1.5em;
-    font-weight: bolder;
-    margin-top: 5px;
+/* ----------------------------  Page autres ------------------------------------------ */
+
+.carteH {
+    margin-bottom: 20px;
+}
+
+.carte {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #1464C7;
+    border-radius: 15px;
+    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+}
+
+.carteTitle {
+    background-color: #1464C7;
+    border-radius: 10px 10px 0 0;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+.imgCarte {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.description {
+    padding: 10px;
+    color: #00002c;
 }
