@@ -4,26 +4,34 @@ import mongoose from "mongoose";
 // on crée un schema qui décrit comment seront stockées les informations des utilisateurs
 const UserSchema = new mongoose.Schema(
    {
-   // nom d'utilisateur:
-   // doit être du texte (String)
-   // est obligatoire (required: true)
-   // doit être unique (unique: true)
-   username: { type: String, required: true, unique: true },
+       // nom d'utilisateur:
+       // doit être du texte (String)
+       // est obligatoire (required: true)
+       // doit être unique (unique: true)
+       username: { type: String, required: true, unique: true },
 
-   // mot de passe:
-   // doit être du texte
-   // est obligatoire
-   password: { type: String, required: true },
+       // mot de passe:
+       // doit être du texte
+       // est obligatoire
+       password: { type: String, required: true },
 
-   // email:
-   // doit être du texte
-   // est obligatoire
-   email: { type: String, required: true },
+       // email:
+       // doit être du texte
+       // est obligatoire
+       email: { type: String, required: true },
 
-   // niveau de l'utilisateur:
-   // doit être un nombre
-   // commence à 1 par défaut quand on crée un nouvel utilisateur
-   level: {type: Number, default: 1}
+       // niveau de l'utilisateur:
+       // doit être un nombre
+       // commence à 1 par défaut quand on crée un nouvel utilisateur
+       level: { type: Number, default: 1 },
+
+       // image de profil:
+       // doit être du texte (String)
+       // avec une valeur par défaut
+       profilePicture: { 
+           type: String, 
+           default: 'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg' 
+       }
    },
    {
        // ajoute automatiquement la date de création et de dernière modification

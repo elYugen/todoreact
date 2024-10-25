@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-
 body {
     background-color: #ffffff;
     color: #00002c;
@@ -27,7 +26,7 @@ a {
 
 /* ----------------------------  Page détail projet ------------------------------------------ */
 
-.containerGeneral{
+.containerGeneral {
     width: 90%;
     margin: auto;
 }
@@ -41,15 +40,15 @@ a {
     font-size: 1.5em;
 }
 
-/* bloc description projet*/
+/* bloc description projet */
 
-.titreProjet{
-font-size: 1.8em;
-background-color: #1464C7;
-border-radius: 5px;
-text-align: center;
-color: white;
-box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
+.titreProjet {
+    font-size: 1.8em;
+    background-color: #1464C7;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
 }
 
 .bordureBloc {
@@ -65,7 +64,7 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
     margin: auto;
 }
 
-/* bloc liste taches projet*/
+/* bloc liste taches projet */
 
 .bordureBloc2 {
     margin: auto;
@@ -91,13 +90,13 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
     padding: 5px;
 }
 
-.titreBoutonTask{
+.titreBoutonTask {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.UlListTask{
+.UlListTask {
     display: flex;
     flex-direction: column;
     padding: 0;
@@ -126,15 +125,17 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
 .barreTracker {
     display: flex;
     justify-content: space-between;
-    border: 1px solid black;
-    border-radius: 15px;
-    padding: 10px;
+    border: 1px solid #1464C7;
+    border-radius: 5px;
+    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+    padding-left: 10px;
+    padding-right: 10px;
     background-color: #4cc0ee;
     margin-bottom: 10px;
 }
 
 .pHabits {
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 
 .boutonHabits {
@@ -142,14 +143,8 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
     border: none;
 }
 
-.barreTracker {
-    border: 1px solid #1464C7;
-    border-radius: 5px;
-    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+/* ----------------------------  Page Agenda ------------------------------------------ */
 
-}
-
-/* bloc Agenda */
 .SelectYears {
     display: flex;
     justify-content: center;
@@ -172,7 +167,7 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
     width: fit-content;
 }
 
-.agendaTitle{
+.agendaTitle {
     text-align: center;
 }
 
@@ -186,46 +181,38 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-   
-  }
-  
-  .toggleButton:hover {
+}
+
+.toggleButton:hover {
     background-color: #3e9ee0;
-  }
-  
-  /* Conteneur pour les mois */
+}
+
 .monthsContainer {
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  gap: 15px; 
-  margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
 }
 
-/* Style pour chaque bouton de mois */
 .monthsContainer button {
-  padding: 15px 30px; 
-  background-color: #4cc0ee; 
-  color: white; 
-  border: none; 
-  border-radius: 5px; 
-  cursor: pointer; 
-  font-size: 1.2em; 
-  width: 200px; 
-  text-align: center; 
-  transition: background-color 0.3s ease; 
+    padding: 15px 30px;
+    background-color: #4cc0ee;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    width: 200px;
+    text-align: center;
+    transition: background-color 0.3s ease;
 }
 
-/* Changement de couleur au survol */
 .monthsContainer button:hover {
-  background-color: #3e9ee0; 
+    background-color: #3e9ee0;
 }
 
-
-
-/* blockBucketList */
-
-/* blockBucketList */
+/* ----------------------------  Block Bucket List ------------------------------------------ */
 
 .iconePlus {
     width: 5%;
@@ -266,11 +253,167 @@ box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
     align-items: center;
 }
 
-.iconeHabits {
-    width: 50px; /* Ajoutez une taille pour que l'image ait des dimensions visibles */
-    height: 50px; /* Ajustez selon la taille souhaitée */
+.BckTitle {
+    margin: 50px;
 }
 
-.BckTitle {
- margin: 50px;
+/* ----------------------------  Page creer nouveau projet ------------------------------------------ */
+
+.generalProjet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.creerProjet {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 20px;
+}
+
+.inputNomProjet,
+.inputDescriptionProjet,
+.inputNomTask,
+.inputDescriptionTask,
+#selectProjet {
+    height: 30px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+    border: none;
+}
+
+.inputDescriptionProjet {
+    height: 200px;
+}
+
+.inputDescriptionTask {
+    height: 100px;
+}
+
+.labelTask {
+    margin-bottom: 10px;
+}
+
+.radioTask {
+    margin-top: 10px;
+}
+
+.optionTask {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.inputCategorie {
+    margin-top: 20px;
+}
+
+.buttonTask {
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+/* ----------------------------  Page profile ------------------------------------------ */
+
+.generalProfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -100px;
+}
+
+.profilePic {
+    width: 150px;
+    border-radius: 50%;
+    background-color: #1464C7;
+    z-index: +1;
+    position: relative;
+    top: 80px;
+    margin: auto;
+    text-align: center;
+}
+
+.topBox {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 80px;
+    border-radius: 15px;
+    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+}
+
+.iconeBoxProfile {
+    width: 20px;
+    padding-top: 10px;
+}
+
+.topBoxMini {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.countBox,
+.countBox2 {
+    width: 33%;
+    border-top: solid 1px black;
+    border-right: solid 1px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.bottomBox {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.barreProfil {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+}
+
+/* ----------------------------  Page autres ------------------------------------------ */
+
+.carteH {
+    margin-bottom: 20px;
+}
+
+.carte {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #1464C7;
+    border-radius: 15px;
+    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+}
+
+.carteTitle {
+    background-color: #1464C7;
+    border-radius: 10px 10px 0 0;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+.imgCarte {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.description {
+    padding: 10px;
+    color: #00002c;
 }
