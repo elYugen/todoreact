@@ -18,7 +18,7 @@ function Register() {
       username, email, password 
     }
     setCreated(true)
-    axios.post('http://localhost:8080/users', data)
+    axios.post('http://localhost:8080/auth/register', data)
     .then(() => {
       navigate('/')
     })

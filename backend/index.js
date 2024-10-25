@@ -6,6 +6,7 @@ import cors from "cors"; // permet à notre application de communiquer avec d'au
 import session from "express-session"; // garde en mémoire les informations des utilisateurs connecté
 import MongoStore from 'connect-mongo'; // stocke les informations de connexion dans mongodb
 import userRoute from "./routes/usersRoute.js"; // la route contenant le crud lié aux utilisateurs
+import authRoute from "./routes/authRoute.js"; // la route contenant les requetes d'inscription/connexion/recup de donnée utilisateur
 
 // on crée notre application web avec Express
 const app = express()
@@ -30,6 +31,22 @@ mongoose
          console.log("Erreur de connexion à MongoDB : ", error);
       });
 
+
+app.use(session({
+  secret: 'jesuisuneclesecreteenculerdemerde',
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: mongoDBURL,
+    collectionName: 'sessions',
+  }),
+  cookie: {
+    secure: false,
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24
+  }
+}));
+
 // configure qui a le droit de requeter sur notre application
 app.use(cors({ 
  // origin: '*',  // autorise toutes les adresses
@@ -50,6 +67,7 @@ app.get('/', (req, res) => {
 
 // route lié aux utilisateurs
 app.use('/users', userRoute);
+app.use('/auth', authRoute);
 
 
 // Gestion des erreurs globale
