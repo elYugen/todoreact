@@ -42,3 +42,4 @@ Projet ToDo List en React
 
 - [**✔️**] Progressive Web App
 - [**✔️**] Schéma & route des utilisateurs
+- [**✔️**] Front

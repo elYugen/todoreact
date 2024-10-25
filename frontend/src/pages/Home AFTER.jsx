@@ -16,6 +16,8 @@ function Home() {
 
   return (
       <>
+      {user ? (
+        <>
       {/* Je fais une instance de mon composant pour l'intégrer à ma page*/}
       <HomeTopBar/>
       <div className="container">
@@ -49,6 +51,22 @@ function Home() {
       </div>
       
       <Navbar/>
+      </>
+      ) : (
+      <>
+      <div className="homeBody">
+      <div class="homePage">
+        <div class="homeLogo">
+            <img src="logo.png" alt="Logo"/>
+            <p>La ToDo qui te prend part les <strong>boules</strong></p>
+        </div>
+        <a href="/login">
+        <button className="homeDisconnectButton">Commencer</button>
+        </a>
+      </div>
+      </div>
+      </>
+      )}
       </>
   );
 };
