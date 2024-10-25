@@ -16,6 +16,9 @@ import CreateTask from './pages/CreateTask';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Agenda from './pages/Agenda';
+import Bucketlist from './pages/Bucketlist';
+import CreateTask from './pages/CreateTask';
 
 // On importe le style global qui sera appliqué à l'ensemble de l'application
 import './assets/css/style.css'
@@ -46,8 +49,11 @@ function App() {
           <Route path="profile" element={<Profile/>}/>
           <Route path="detailprojet" element={<DetailProjet/>} />
           <Route path="habitstracker" element={<HabitsTracker/>} />
+          <Route path="agenda" element={<Agenda/>} />
+          <Route path="bucketlist" element={<Bucketlist/>} />
           <Route path="login" element={<Login/>} />
           <Route path="register" element={<Register/>} />
+          <Route path="create/task" element={<CreateTask />} />
 
           {/* Le path * correspond à l'erreur 404, si une page est inexistante ou introuvable */}
           <Route path="*" element={<NoPage />} />
