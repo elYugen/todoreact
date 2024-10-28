@@ -5,8 +5,14 @@ function MyTask() {
   return (
     <div className="myTaskBox">
       <div className="myTaskBoxContent">
+        <div className="myTaskBoxContentIcon" style={{ backgroundColor: "lightgrey"}}>
+        <span>🤹</span>
+        </div>
         <div className="myTaskBoxContentTitle">
           <p>Ma super tâche</p>
+        </div>
+        <div className="myTaskBoxSeeDetails">
+          <i class="bi bi-chevron-right"></i>
         </div>
       </div>
     </div>

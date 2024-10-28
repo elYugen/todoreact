@@ -1,0 +1,15 @@
+.tasksContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.tasksContainerTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tasksContainerTitleDate {
+    margin-top: -15px;
+}

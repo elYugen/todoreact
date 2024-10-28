@@ -8,7 +8,7 @@ function TopBar({ pagename }) {
     <div className="topbar">
       <div className="topbarInfo">
         <div className="topbarLogo">
-          <a href="/"><i class="bi bi-arrow-left"></i></a>
+          <a href="/"><i className="bi bi-arrow-left"></i></a>
         </div>
         {/* Voici mon props "pagename", quand ce composant sera appelé sur une autre page,
             il suffira de lui donner le paramètre "pagename" pour afficher le nom de la page */}

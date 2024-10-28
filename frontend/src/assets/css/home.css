@@ -41,6 +41,7 @@
     border-radius: 10px;
     width: 100px;
     height: 40px;
+    transition: background-color 0.5s ease, transform 0.3s ease;
 }
 
 .homeBody {
@@ -74,4 +75,15 @@
     width: 200px;
     height: 50px;
     font-weight: 600;
+}
+
+.homeCategoriesBox {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: auto;
+    white-space: nowrap; 
+    max-width: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }

@@ -6,7 +6,7 @@ import './HomeTopBar.css';
 
 function HomeTopBar() {
   // Utilisation du hook useAuth pour obtenir les informations d'utilisateur, l'état de chargement, et les fonctions d'authentification
-  const { user, loading, error, login, logout } = useAuth();
+  const { user, loading, error } = useAuth();
   // Si le chargement est en cours, retourner null (ou un composant de chargement)
   if (loading) {
     return <Loading/>;
