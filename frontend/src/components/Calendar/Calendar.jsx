@@ -1,20 +1,38 @@
-import React from 'react';
-import FullCalendar from '@fullcalendar/react'; // Doit être importé depuis le package
-import dayGridPlugin from '@fullcalendar/daygrid'; // Plugin du calendrier pour la vue mensuelle
+import React, { useState } from 'react';
 import './Calendar.css';
 
-function Calendar() {
+const generateDates = (numDays, startDate = new Date()) => {
+  return Array.from({ length: numDays }, (_, i) => {
+    const date = new Date(startDate);
+    date.setDate(date.getDate() + i);
+    return date;
+  });
+};
+
+const Calendar = ({ onDateSelect }) => {
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const dates = generateDates(30);
+
+  const handleDateClick = (date) => {
+    const formattedDate = date.toISOString().split('T')[0];
+    setSelectedDate(formattedDate);
+    onDateSelect(formattedDate);
+  };
+
   return (
-    <FullCalendar
-      plugins={[dayGridPlugin]}
-      initialView="dayGridMonth"
-      weekends={true}
-      events={[
-        { title: 'event 1', date: '2023-10-24' },
-        { title: 'event 2', date: '2023-10-25' }
-      ]}
-    />
+    <div className="horizontal-date-picker">
+      {dates.map((date) => (
+        <div
+          key={date.toISOString()}
+          className={`date-item ${date.toISOString().split('T')[0] === selectedDate ? 'selected' : ''}`}
+          onClick={() => handleDateClick(date)}
+        >
+          <span className="day-name">{date.toLocaleDateString('fr-FR', { weekday: 'short' })}</span>
+          <span className="day-number">{date.getDate()}</span>
+        </div>
+      ))}
+    </div>
   );
-}
+};
 
 export default Calendar;

@@ -1,3 +1,49 @@
-.Calendar {
-    /* Ajouter le css ici */
-  }
+.horizontal-date-picker {
+  display: flex;
+  overflow-x: auto;
+  padding: 10px;
+  white-space: nowrap;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+.date-item {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 60px;
+  text-align: center;
+  cursor: pointer;
+  margin: 0 5px;
+  padding: 10px 0;
+  color: #666;
+  font-weight: 500;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+}
+
+.date-item.selected {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.day-name {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.day-number {
+  font-size: 1.2rem;
+}
+
+.month-year-selectors {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.month-year-selectors select,
+.month-year-selectors button {
+  padding: 5px;
+  font-size: 1rem;
+}

@@ -29,6 +29,13 @@ Projet ToDo List en React
 - [Frontend](./frontend/README.md)
 - [Liste d'idée à ajouter](./IDEA.md)
 
+- (Simple à faire), en se basant sur le composant HomeTopBar, affiché la photo de profil, le niveau et le nom de l'utilisateur dans la page profil
+- CRUD Tâche
+- CRUD Catégorie
+- Crud Bucketlist
+- Affichage & création des données dans le front
+- Affichage des tâches du jour dans l'agenda
+
 ***Consigne de base :***
 
 - Création de tâches : Les utilisateurs doivent pouvoir créer de nouvelles tâches avec un titre, une description, une catégorie et une date d'échéance optionnelle.
