@@ -7,7 +7,6 @@ import { AuthProvider } from './hook/useAuth';
 // On importe les pages que l'on veut ajouter à notre Router et donc à notre application
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
-import HomeAfter from "./pages/HomeAFTER";
 import NoPage from "./pages/NoPage";
 import DetailProjet from "./pages/DetailProjet";
 import HabitsTracker from "./pages/HabitsTracker";
@@ -35,7 +34,6 @@ function App() {
 
           {/* On définit quel page sera l'index de notre application */}
           <Route index element={<Home />} />
-          <Route path="homeafter" element={<HomeAfter />} />
 
           {/* On définit l'ensemble des pages de notre projet,
               la propriété path correspond à la route attribué (localhost/maroute)

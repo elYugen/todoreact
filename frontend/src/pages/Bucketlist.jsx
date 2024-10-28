@@ -1,9 +1,10 @@
-import Navbar from "../components/Navbar/Navbar"
+import Navbar from "../components/Navbar/Navbar";
+import Bucketliste from "../components/Bucketlist/Bucketlist"
 
 function Bucketlist() {
   return (
     <>
-      <Bucketlist/>
+      <Bucketliste/>
       <Navbar/>
     </>
   );
