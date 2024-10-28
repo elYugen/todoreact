@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
     try {
       // Appel à l'API de connexion
       const response = await axios.post('/auth/login', { email, password });
-      setUser(response.data);        // Stocke les données utilisateur
+      await fetchUserInfo();  // Cette fonction mettra à jour user avec toutes les infos
       setError(null);                // Réinitialise les erreurs
       console.log("Utilisateur connecté :", response.data);
     } catch (err) {
