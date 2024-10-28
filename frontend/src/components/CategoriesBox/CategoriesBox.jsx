@@ -8,15 +8,15 @@ function CategoriesBox() {
         <div className="categorieIconBox" style={{ backgroundColor: "#3e9ee0"}}>
           <span>🤹</span>
         </div>
-        <i class="bi bi-arrow-right"></i>
+        <i className="bi bi-arrow-right"></i>
       </div>
       <div className="categorieBoxInfo">
         <h4>Nom Categorie</h4>
         <p>2 Tâches</p>
       </div>
       <div className="categorieBoxProgress">
-        <div class="progress-container">
-          <div class="progress-bar" style={{width: "20%"}}></div>
+        <div className="progress-container">
+          <div className="progress-bar" style={{width: "20%"}}></div>
         </div>
         <p>2/10</p>
       </div>

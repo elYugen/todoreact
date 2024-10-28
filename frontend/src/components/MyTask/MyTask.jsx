@@ -12,7 +12,7 @@ function MyTask() {
           <p>Ma super tâche</p>
         </div>
         <div className="myTaskBoxSeeDetails">
-          <i class="bi bi-chevron-right"></i>
+          <i className="bi bi-chevron-right"></i>
         </div>
       </div>
     </div>
