@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema(
        // avec une valeur par défaut
        profilePicture: { 
            type: String, 
-           default: 'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg' 
+           default: 'https://mycrazystuff.com/20695-width_1000/decapsuleur-testicules.jpg' 
        }
    },
    {

@@ -1,8 +1,10 @@
+import TopBar from "../components/TopBar/TopBar";
+
 function HabitsTacker() {
   return (
       <>
+      <TopBar pagename={"Trackeur D'Habitude"}/>
       <section className="containerGeneral">
-      <h1 className="titrePage">Habits Trackers</h1>
 
       <article className="today">
         <h2 className="titreBloc">Aujourd'hui</h2>
