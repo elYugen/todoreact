@@ -61,7 +61,7 @@ function Home() {
         {/* Liste des catégories */}
         <div className="homeContainer">
           <div className="homeTop">
-              <h3>Catégories</h3>
+              <h3>Projet en cours</h3>
               <a href="#">Voir tout</a>
           </div>
           <div className="homeCategoriesBox">
