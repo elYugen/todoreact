@@ -14,6 +14,8 @@ const ProjectSchema = new mongoose.Schema(
        // doit être du texte
        description: { type: String },
 
+       user: { type: String, required: true },
+
    },
 
    {

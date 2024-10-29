@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('', async (request, response) => {
     try {
         // On vérifie si tous les champs obligatoires sont remplis
-        if (!request.body.projectname) {
+        if (!request.body.projectname || !request.body.user) {
             return response.status(400).send({
                 message: "Veuillez fournir tous les champs, bordel",
             });
@@ -19,6 +19,7 @@ router.post('', async (request, response) => {
         const newProject = {
             projectname: request.body.projectname,
             description: request.body.description,
+            user: request.body.user,
         };
  
         // On crée le projet dans la base de données
