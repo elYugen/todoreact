@@ -23,7 +23,7 @@ import MongoStore from 'connect-mongo';
 import userRoute from "./routes/usersRoute.js";    // Routes pour la gestion des utilisateurs (CRUD)
 import authRoute from "./routes/authRoute.js";      // Routes pour l'authentification
 import taskRoute from "./routes/taskRoute.js";
-
+import projectsRoute from "./routes/projectsRoute.js"; // Routes pour la gestion des projets (CRUD)
 
 /************************************/
 /*    CRÉATION DE L'APPLICATION     */
@@ -111,6 +111,7 @@ app.get('/', (req, res) => {
 app.use('/task', taskRoute);
 app.use('/users', userRoute);  // Toutes les routes commençant par /users
 app.use('/auth', authRoute);   // Toutes les routes commençant par /auth
+app.use('/projects', projectsRoute); //Toutes les routes commençant par /projects
 
 /************************************/
 /*    GESTION GLOBALE DES ERREURS  */

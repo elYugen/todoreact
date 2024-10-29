@@ -14,73 +14,83 @@ function Profile() {
         navigate('/'); // Redirige vers la page d'accueil
     };
 
-     
 
-        //utilise le hook d'auth pour accéder aux données utilisateur
-        const { user, loading, error, fetchUserInfo } = useAuth();
-    
-        useEffect(() => {
-            if(!user) {
-                fetchUserInfo();
-            }
-        }, [fetchUserInfo]);
 
-        // Si le chargement est en cours, retourner null (ou un composant de chargement)
-  if (loading) {
-    return <Loading/>;
-  }
+    //utilise le hook d'auth pour accéder aux données utilisateur
+    const { user, loading, error, fetchUserInfo } = useAuth();
 
-  // S'il y a une erreur, on l'affiche
-  if (error) {
-    return <div>Erreur: {error}</div>;
-  }
-        
+    useEffect(() => {
+        if (!user) {
+            fetchUserInfo();
+        }
+    }, [fetchUserInfo]);
 
-    
+    // Si le chargement est en cours, retourner null (ou un composant de chargement)
+    if (loading) {
+        return <Loading />;
+    }
 
-    return(
+    // S'il y a une erreur, on l'affiche
+    if (error) {
+        return <div>Erreur: {error}</div>;
+    }
+
+    const goToHabits = async (e) => { // fonction fléché qui permet de rediriger vers habitstracker
+        navigate('/habitstracker');   // en cliquant sur le bouton Tracker D'habitude
+    }
+
+    const goToAgenda = async (e) => { // fonction fléché qui permet de rediriger vers l'agenda
+        navigate('/agenda');          // en cliquant sur le bouton agenda
+    }
+
+    const goToBucketlist = async (e) => { // fonction fléché qui permet de rediriger vers la bucketlist
+        navigate('/bucketlist');          // en cliquant sur le bouton bucketlist
+    }
+
+
+    return (
         <>
-        <TopBar/>
-        <section className="containerGeneral generalProfil">
-        <img className='profilePic' src={user.profilePicture} alt="ProfilPicture"/>
-            <article className="topBox">
-              <h3>Bonjour, {user.username}</h3>
-                
-                <div className="topBoxMini">
-                <div className="countBox">
-                    <img className="iconeBoxProfile" src="../../public/certificate-solid.svg" alt="" />
-                    <p>Points</p>
-                    <p>212</p>
-                </div>
-                <div className="countBox">
-                <img className="iconeBoxProfile" src="../../public/crown-solid.svg" alt="" />
-                <p>Niveaux</p>
-                <p>{user.level }</p>
-                </div>
-                <div className="countBox2">
-                <img className="iconeBoxProfile" src="../../public/shield-solid.svg" alt="" />
-                <p>Badges</p>
-                <p>3</p>
-                </div>
-                </div>
-            </article>
-            <article className="bottomBox">
-                <div className="barreTracker barreProfil">
-                <a href="#">Agenda</a>
-                </div>
+            <TopBar />
+            <section className="containerGeneral generalProfil">
+                <img className='profilePic' src={user.profilePicture} alt="ProfilPicture" />
+                <article className="topBox">
+                    <p>{user.username}</p>
 
-                <div className="barreTracker barreProfil">
-                <a href="#">Projets</a>
-                </div>
+                    <div className="topBoxMini">
+                        <div className="countBox">
+                            <img className="iconeBoxProfile" src="../../public/certificate-solid.svg" alt="" />
+                            <p>Points</p>
+                            <p>212</p>
+                        </div>
+                        <div className="countBox">
+                            <img className="iconeBoxProfile" src="../../public/crown-solid.svg" alt="" />
+                            <p>Niveaux</p>
+                            <p>{user.level}</p>
+                        </div>
+                        <div className="countBox2">
+                            <img className="iconeBoxProfile" src="../../public/shield-solid.svg" alt="" />
+                            <p>Badges</p>
+                            <p>3</p>
+                        </div>
+                    </div>
+                </article>
+                <article className="bottomBox">
+                    <div className="barreTracker barreProfil" onClick={goToAgenda}>
+                        <a href="#">Agenda</a>
+                    </div>
 
-                <div className="barreTracker barreProfil">
-                <a href="#">Habits Trackers</a>
-                </div>
-            </article>
+                    <div className="barreTracker barreProfil" onClick={goToBucketlist}>
+                        <a href="#">Bucketlist</a>
+                    </div>
 
-            <a className="deco" href="/" onClick={handleLogout}>Se deconnecter</a>
-            
-        </section>
+                    <div className="barreTracker barreProfil" onClick={goToHabits}>
+                        <a href="#">Habits Trackers</a>
+                    </div>
+                </article>
+
+                <a className="deco" href="/" onClick={handleLogout}>Se deconnecter</a>
+
+            </section>
         </>
     )
 }

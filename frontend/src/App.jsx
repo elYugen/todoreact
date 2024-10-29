@@ -41,7 +41,7 @@ function App() {
           {/* <Route path="coucou" element={<Blogs />} /> */}
           <Route path="detailprojet" element={<DetailProjet/>}/>
           <Route path="habitstracker" element={<HabitsTracker/>}/>
-          <Route path="createproject" element={<CreateProject/>}/>
+          <Route path="create/project" element={<CreateProject/>}/>
           <Route path="create/task" element={<CreateTask/>}/>
           <Route path="profile" element={<Profile/>}/>
           <Route path="detailprojet" element={<DetailProjet/>} />
