@@ -24,7 +24,7 @@ import userRoute from "./routes/usersRoute.js";    // Routes pour la gestion des
 import authRoute from "./routes/authRoute.js";      // Routes pour l'authentification
 import taskRoute from "./routes/taskRoute.js";
 import projectsRoute from "./routes/projectsRoute.js"; // Routes pour la gestion des projets (CRUD)
-
+import HabitsTrackersRoute from "./routes/HabitsTrackersRoute.js";
 /************************************/
 /*    CRÉATION DE L'APPLICATION     */
 /************************************/
@@ -112,7 +112,7 @@ app.use('/task', taskRoute);
 app.use('/users', userRoute);  // Toutes les routes commençant par /users
 app.use('/auth', authRoute);   // Toutes les routes commençant par /auth
 app.use('/projects', projectsRoute); //Toutes les routes commençant par /projects
-
+app.use('/habitstrackers', HabitsTrackersRoute);
 /************************************/
 /*    GESTION GLOBALE DES ERREURS  */
 /************************************/
