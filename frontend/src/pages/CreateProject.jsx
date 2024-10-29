@@ -13,7 +13,7 @@ function CreateProject() {
 
     const [projectname, setProjectname] = useState('');
     const [description, setDescription] = useState('');
-    const {user} = useAuth('');
+    const {user} = useAuth();
 
     const [created, setCreated] = useState(false);
     const navigate = useNavigate();
