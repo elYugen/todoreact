@@ -19,6 +19,12 @@ function CreateProject() {
     const navigate = useNavigate();
 
     const handleSaveNewProject = () => {
+
+        if(!user || !user._id){
+            console.error("Utilisateur non connecté");
+            return;
+        }
+        
         const data = {
             projectname, description, user: user._id
         }

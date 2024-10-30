@@ -2,26 +2,26 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Bucketlist.css";
+import { useAuth } from "../../hook/useAuth";
 
 function Bucketlist() {
-  // État pour stocker les projets
   const [projects, setProjects] = useState([]);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
-  // Fonction pour récupérer les projets depuis l'API
   const fetchProjects = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/projects');
-      setProjects(response.data.data); // Met à jour l'état avec la liste des projets
+      // Récupère les projets liés à l'utilisateur connecté
+      const response = await axios.get(`http://localhost:8080/projects?userId=${user._id}`);
+      setProjects(response.data.data);
     } catch (error) {
       console.error("Erreur lors de la récupération des projets :", error);
     }
   };
 
-  // Utilisation de useEffect pour récupérer les projets au chargement du composant
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    if (user) fetchProjects();
+  }, [user]);
 
   return (
     <div className="container">

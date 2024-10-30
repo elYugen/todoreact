@@ -38,7 +38,9 @@ router.post('', async (request, response) => {
 router.get('/', async (request, response) => {
    try {
        // On récupère la liste de tous les projets
-       const projects = await Projects.find();
+       const { userId } = request.query; // Récupére userId depuis la requête
+       const query = userId ?  {user:userId} : {};  //filtre user si userId est fourni
+       const projects = await Projects.find(query);
        return response.status(200).json({
            count: projects.length,  // Nombre total de projets
            data: projects         // Liste des projets
