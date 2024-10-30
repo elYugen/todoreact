@@ -2,9 +2,11 @@ import React from "react";
 import useUserProjects from "../../hook/useUserProjects";
 import Loading from "../Loading/Loading";
 import "./Bucketlist.css";
+import { useNavigate } from 'react-router-dom';
 
 const Bucketlist = ({ userId }) => {
   const { projects, loading, error } = useUserProjects(userId);
+  const navigate = useNavigate();
 
   if (loading) return <Loading/>;
   if (error) return <div>Erreur: {error}</div>;
@@ -12,7 +14,7 @@ const Bucketlist = ({ userId }) => {
   return (
     <>
       {projects.map((project) => (
-        <div className="bucketlistBox" key={project._id}>
+        <div className="bucketlistBox" key={project._id} onClick={() => navigate(`/details/project/${project._id}`)}>
           <div className="bucketlistBoxContent">
             <div className="bucketlistIconBox" style={{ backgroundColor: "#efefef" }}>
               <span>📌</span>
