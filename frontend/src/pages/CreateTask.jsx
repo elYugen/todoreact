@@ -55,7 +55,7 @@ function CreateTask() {
 
         Catégorie : <br></br>
         <div>
-        <button value={category} onClick={() => setCategory('Agenda')} className="addTask buttonTask" type="button" >Agenda</button>
+        <input value={category} onChange={(e) => setCategory(e.target.value)} className="addTask buttonTask" type="text" ></input>
         </div>
         </label>
 
