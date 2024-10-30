@@ -21,8 +21,8 @@ function CategoriesBox( {userId} ) {
         <i className="bi bi-arrow-right"></i>
       </div>
       <div className="categorieBoxInfo">
-      <p><b>{project.projectname}</b></p>/
-        <p>2 Tâches</p>
+      <p><b>{project.projectname}</b></p>
+        <p>2/10 Tâches</p>
       </div>
       <div className="categorieBoxProgress">
         <div className="progress-container">
