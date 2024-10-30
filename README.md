@@ -31,6 +31,7 @@ Projet ToDo List en React
 
 
 - Ajouter une route pour récupéré les projet, tâches et habits d'un utilisateur grace a son id
+- Créer un hook pour l'affichage des projets, tâches et habits d'un utilisateur grace a son id
 - Affichage & création des données dans le front
 - Affichage des tâches du jour dans l'agenda
 
