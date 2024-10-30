@@ -118,13 +118,14 @@ a {
 /* ----------------------------  Page habits trackers ------------------------------------------ */
 
 .iconeHabits {
-    width: 20px;
+    font-size: 1.5em;
     padding-left: 6px;
 }
 
 .barreTracker {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border: 1px solid #1464C7;
     border-radius: 5px;
     box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
@@ -141,6 +142,8 @@ a {
 .boutonHabits {
     background-color: transparent;
     border: none;
+    width: 40px;
+    height: 40px;
 }
 
 
