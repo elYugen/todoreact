@@ -99,6 +99,23 @@ router.delete('/:id', async (request, response) => {
    }
 })
 
+<<<<<<< HEAD
+// Route pour RÉCUPÉRER les tasks d'un utilisateur spécifique (GET)
+router.get('/user/:userId', async (request, response) => {
+    try {
+        const { userId } = request.params;
+        const task = await Task.find({ author: userId });
+        return response.status(200).json({
+            count: task.length,
+            data: task
+        });
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({message: error.message});
+    }
+ });
+
+=======
 router.get('/user/:userId', async (request, response) => {
     try {
       const { userId } = request.params;
@@ -121,5 +138,6 @@ router.get('/user/:userId', async (request, response) => {
   });
 
   
+>>>>>>> origin/main
 // On exporte notre routeur pour l'utiliser dans notre application
 export default router;
