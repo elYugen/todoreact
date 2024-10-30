@@ -22,5 +22,5 @@ const HabitsTrackersSchema = new mongoose.Schema(
  
  // on crée le modèle 'User' à partir de notre schema ci dessus
  // c'est ce modèle qu'on utilisera pour créer, modifier ou rechercher des utilisateurs
- export const HabitsTrackers = mongoose.model('habitsTrackers', HabitsTrackersSchemaSchema);
+ export const HabitsTrackers = mongoose.model('habitsTrackers', HabitsTrackersSchema);
  
