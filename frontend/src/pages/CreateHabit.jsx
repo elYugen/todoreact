@@ -15,6 +15,7 @@ function CreateHabit() {
     const [icone, setIcone] = useState('');
     const [habitname, setHabitName] = useState('');
     const {user} = useAuth('');
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
     const [created, setCreated] = useState(false);
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ function CreateHabit() {
         }
         setCreated(true)
 
-        axios.post('http://localhost:8080/projects', data)
+        axios.post('http://localhost:8080/habitstrackers', data)
         .then(() => {
             navigate('/habitstracker')
 
@@ -36,11 +37,12 @@ function CreateHabit() {
     }
 
     function handleReaction() {
-//attraper le code de l'émoji
-const emojiData = EmojiClickData;
-//envoyer l'émoji comme valeur de l'input
+        setShowEmojiPicker(!showEmojiPicker);
+    }
 
-return <input className="inputNomProjet" name="inputNomProjet" value={icone} onChange={(e) => setIcone(e.target.value)}/>
+    function onEmojiClick(emojiObject) {
+        setIcone(emojiObject.emoji);
+        setShowEmojiPicker(false);
     }
 
     return(
@@ -52,7 +54,10 @@ return <input className="inputNomProjet" name="inputNomProjet" value={icone} onC
 
         <label>
         Icone : <input className="inputNomProjet" name="inputNomProjet" value={icone} onChange={(e) => setIcone(e.target.value)}/>
-        <EmojiPicker reactionsDefaultOpen={true} onReactionClick={handleReaction}/>
+        <button onClick={handleReaction}>Choisir un emoji</button>
+    {showEmojiPicker && (
+        <EmojiPicker onEmojiClick={onEmojiClick} />
+    )}
         </label>
 
         <label>
