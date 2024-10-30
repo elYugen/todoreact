@@ -56,13 +56,13 @@ function Home() {
       {/* Je fais une instance de mon composant pour l'intégrer à ma page */}
       <HomeTopBar/>
       <div className="container">
-        <SearchBar/> 
+        <SearchBar userId={user._id}/> 
 
         {/* Liste des catégories */}
         <div className="homeContainer">
           <div className="homeTop">
               <h3>Projet en cours</h3>
-              <a href="#">Voir tout</a>
+              <a href="bucketlist">Voir tout</a>
           </div>
           <div className="homeCategoriesBox">
             <CategoriesBox/>

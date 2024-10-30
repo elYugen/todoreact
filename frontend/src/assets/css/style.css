@@ -27,7 +27,7 @@ a {
 /* ----------------------------  Page détail projet ------------------------------------------ */
 
 .containerGeneral {
-    width: 90%;
+    width: 95%;
     margin: auto;
 }
 
@@ -36,27 +36,17 @@ a {
     font-size: 2em;
 }
 
-.titreBloc {
-    font-size: 1.5em;
-}
-
 /* bloc description projet */
 
 .titreProjet {
     font-size: 1.8em;
-    background-color: #1464C7;
-    border-radius: 5px;
     text-align: center;
-    color: white;
-    box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
 }
 
 .bordureBloc {
     margin: auto;
-    border: 1px solid #1464C7;
     border-radius: 10px;
     margin-bottom: 20px;
-    box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.718);
 }
 
 .divDescriptionProjet {
@@ -87,6 +77,13 @@ a {
     background-color: #1464C7;
     border: 1px solid #1464C7;
     border-radius: 5px;
+    padding: 5px;
+}
+
+.add {
+    color: #1464C7;
+    background: none;
+    border: none;
     padding: 5px;
 }
 
@@ -224,6 +221,7 @@ a {
     top: 80px;
     margin: auto;
     text-align: center;
+    object-fit: cover;
     width: 120px;
     height: 120px;
 }

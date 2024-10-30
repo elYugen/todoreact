@@ -14,7 +14,7 @@ function Navbar() {
           <ul className="sous">
             <li><a href="create/task"><i className="bi bi-check2-square me-2"></i>Tâche</a></li>
             <li><a href="create/project"><i className="bi bi-folder me-2"></i>Projet</a></li>
-            <li><a href="create/habit"><i className="bi bi-folder me-2"></i>Habitude</a></li>
+            <li><a href="create/habit"><i class="bi bi-alarm"></i>Habitude</a></li>
           </ul>
         </li>
         {/* <li className="navbarLink"><a href="habitstracker"><i className="bi bi-star"></i></a></li> */}
