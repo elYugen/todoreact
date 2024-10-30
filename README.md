@@ -29,10 +29,8 @@ Projet ToDo List en React
 - [Frontend](./frontend/README.md)
 - [Liste d'idée à ajouter](./IDEA.md)
 
-- CRUD Tâche
-- CRUD Catégorie
-- Crud Bucketlist
-- Crud Habits Tracker
+
+- Ajouter une route pour récupéré les projet, tâches et habits d'un utilisateur grace a son id
 - Affichage & création des données dans le front
 - Affichage des tâches du jour dans l'agenda
 
@@ -50,3 +48,7 @@ Projet ToDo List en React
 - [**✔️**] Progressive Web App
 - [**✔️**] Schéma & route des utilisateurs
 - [**✔️**] Front
+- [**✔️**] CRUD Tâche
+- [**✔️**] CRUD Catégorie
+- [**✔️**] Crud Bucketlist
+- [**✔️**] Crud Habits Tracker
