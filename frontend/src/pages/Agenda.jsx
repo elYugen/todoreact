@@ -1,5 +1,6 @@
 // Import des dépendances React et des composants nécessaires
 import React, { useState } from 'react';
+import Navbar from '../components/Navbar/Navbar';
 import TopBar from "../components/TopBar/TopBar";
 import Calendar from '../components/Calendar/Calendar';
 import '../assets/css/agenda.css';
@@ -76,6 +77,7 @@ function Agenda() {
           )}
         </div>
       </div>
+      <Navbar/>
     </>
   );
 }

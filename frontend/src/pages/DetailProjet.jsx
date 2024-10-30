@@ -1,67 +1,72 @@
-// On importe le composant TopBar
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import TopBar from "../components/TopBar/TopBar";
+import axios from "axios";
+import Loading from "../components/Loading/Loading";
 
-function detailProjet() {
+function DetailProjet() {
+  const { id: projectId } = useParams();
+  const [project, setProject] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProjectDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/projects/${projectId}`);
+        setProject(response.data);
+      } catch (error) {
+        setError("Une erreur est survenue lors de la récupération des détails du projet.");
+        console.error("Erreur de récupération du projet :", error);
+      }
+    };
+
+    if (projectId) fetchProjectDetails();
+  }, [projectId]);
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!project) {
+    return <Loading/>;
+  }
+
   return (
-
     <>
-    <section className="containerGeneral">
-      {/* On initialise une nouvelle instance du composant et on lui passe le paramètre "pagename"
-          que l'on retrouve dans le composant (en paramètre de la fonction) */}
-    <TopBar pagename={"Détails du projet"}/>
-    <h2 className="titreBloc titreProjet">Voyage au Japon</h2>
+    <TopBar pagename={"Détails du projet"} /> 
+      <section className="containerGeneral">
+        {/* Passe project.name en prop à TopBar */}
+        <h2 className="titreProjet">{project.projectname}</h2>
 
-    <article className="bordureBloc">
-      <div className="divDescriptionProjet">
-      <h2 className="titreBloc">Description</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos reprehenderit necessitatibus est deleniti optio velit iusto magnam placeat doloribus distinctio non aspernatur odio provident soluta, sequi aliquid fugiat voluptatem unde.</p>
-      </div>
-    </article>
+        <article className="bordureBloc">
+          <div className="divDescriptionProjet">
+            <h3>Description</h3>
+            <p>{project.description}</p>
+          </div>
+        </article>
 
-    <article className="bordureBloc2">
-      <div className="divBlocListeTaches">
-      <div className="titreBoutonTask">
-      <h2 className="titreBloc">Liste des tâches</h2>
-      <input className="addTask" type="button" value="Add Task"/>
-      </div>
+        <article className="bordureBloc">
+          <div className="divBlocListeTaches">
+            <div className="titreBoutonTask">
+              <h3>Liste des tâches</h3>
+              <input className="add" type="button" value="Ajouter" />
+            </div>
 
-      <div className="ListTask">
-      <ul className="UlListTask">
-
-        <div className="radioBoutonLabel">
-        <label htmlFor="tache1">Super tâche 1</label>
-        <input type="radio" id="projet1" value="tache1"/>
-        </div>
-
-        <div className="radioBoutonLabel">
-        <label htmlFor="tache1">Super tâche 1</label>
-        <input type="radio" id="projet1" value="tache1"/>
-        </div>
-        
-        <div className="radioBoutonLabel">
-        <label htmlFor="tache1">Super tâche 1</label>
-        <input type="radio" id="projet1" value="tache1"/>
-        </div>
-        
-        <div className="radioBoutonLabel">
-        <label htmlFor="tache1">Super tâche 1</label>
-        <input type="radio" id="projet1" value="tache1"/>
-        </div>
-        
-        <div className="radioBoutonLabel">
-        <label htmlFor="tache1">Super tâche 1</label>
-        <input type="radio" id="projet1" value="tache1"/>
-        </div>
-        
-      </ul>
-      </div>
-      </div>
-    </article>
-
-    </section>
+            <div className="ListTask">
+              <ul className="UlListTask">
+                {project.tasks && project.tasks.map((task) => (
+                  <div className="radioBoutonLabel" key={task._id}>
+                    <label htmlFor={task._id}>{task.name}</label>
+                    <input type="radio" id={task._id} value={task.name} />
+                  </div>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </article>
+      </section>
     </>
-
   );
-};
+}
 
-export default detailProjet;
+export default DetailProjet;

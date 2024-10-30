@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 
 const HabitsTrackersSchema = new mongoose.Schema(
     {
-        icone: { type: String, 
-            default: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngegg.com%2Fen%2Fpng-nejwa&psig=AOvVaw0xIIsNER2qFasSuusZBndc&ust=1730299083308000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJi2q8Xos4kDFQAAAAAdAAAAABAJ' },
+        icone: { type: String, required: true },
         
         habitname: { type: String, required: true, unique: true },
  
         // description projet :
         // doit être du texte
+        date: { type: String, required: true },
  
         user: { type: String, required: true },
  

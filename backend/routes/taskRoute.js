@@ -99,6 +99,7 @@ router.delete('/:id', async (request, response) => {
    }
 })
 
+<<<<<<< HEAD
 // Route pour RÉCUPÉRER les tasks d'un utilisateur spécifique (GET)
 router.get('/user/:userId', async (request, response) => {
     try {
@@ -114,5 +115,29 @@ router.get('/user/:userId', async (request, response) => {
     }
  });
 
+=======
+router.get('/user/:userId', async (request, response) => {
+    try {
+      const { userId } = request.params;
+      const { query } = request.query;
+  
+      const filters = { author: userId };
+      if (query) {
+        filters.name = { $regex: query, $options: 'i' };  
+      }
+  
+      const tasks = await Task.find(filters);
+      return response.status(200).json({
+        count: tasks.length,
+        data: tasks
+      });
+    } catch (error) {
+      console.log(error.message);
+      response.status(500).send({ message: error.message });
+    }
+  });
+
+  
+>>>>>>> origin/main
 // On exporte notre routeur pour l'utiliser dans notre application
 export default router;

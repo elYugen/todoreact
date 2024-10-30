@@ -41,6 +41,7 @@ function Home() {
       {user ? (
         // Interface pour utilisateur connecté
         <>
+<<<<<<< HEAD
           <HomeTopBar/>
           <div className="container">
             <SearchBar/>
@@ -55,6 +56,25 @@ function Home() {
                 <CategoriesBox userId={user._id}/>
               </div>
             </div> 
+=======
+      {/* Je fais une instance de mon composant pour l'intégrer à ma page */}
+      <HomeTopBar/>
+      <div className="container">
+        <SearchBar userId={user._id}/> 
+
+        {/* Liste des catégories */}
+        <div className="homeContainer">
+          <div className="homeTop">
+              <h3>Projet en cours</h3>
+              <a href="bucketlist">Voir tout</a>
+          </div>
+          <div className="homeCategoriesBox">
+            <CategoriesBox/>
+            <CategoriesBox/>
+            <CategoriesBox/>
+          </div>
+        </div> 
+>>>>>>> origin/main
 
             {/* Liste des tâches */}
             <div className="homeContainer">

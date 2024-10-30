@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('', async (request, response) => {
     try {
         // On vérifie si tous les champs obligatoires sont remplis
-        if (!request.body.habitname || !request.body.user) {
+        if (!request.body.habitname || !request.body.user || !request.body.icone || !request.body.date) {
             return response.status(400).send({
                 message: "Veuillez fournir tous les champs, bordel",
             });
@@ -20,6 +20,7 @@ router.post('', async (request, response) => {
             icone: request.body.icone,
             habitname: request.body.habitname,
             user: request.body.user,
+            date: request.body.date,
         };
  
         // On crée le projet dans la base de données
@@ -96,6 +97,21 @@ router.delete('/:id', async (request, response) => {
        response.status(500).send({message:error.message})
    }
 })
+
+// Route pour RÉCUPÉRER les habitudes d'un utilisateur spécifique (GET)
+router.get('/user/:userId', async (request, response) => {
+    try {
+        const { userId } = request.params;
+        const habits = await HabitsTrackers.find({ user: userId });
+        return response.status(200).json({
+            count: habits.length,
+            data: habits
+        });
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({message: error.message});
+    }
+ });
 
 // On exporte notre routeur pour l'utiliser dans notre application
 export default router;
