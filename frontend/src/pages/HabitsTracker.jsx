@@ -1,45 +1,33 @@
 import TopBar from "../components/TopBar/TopBar";
+import Navbar from "../components/Navbar/Navbar";
+import HabitsTrackers from "../components/HabitsTrackers/HabitsTrackers";
+import { useAuth } from '../hook/useAuth';
+import Loading from "../components/Loading/Loading";
+import { useNavigate } from 'react-router-dom';
 
 function HabitsTacker() {
+
+  const { user, loading: authLoading } = useAuth();
+  const navigate = useNavigate();
+    // Pendant que les informations d'authentification chargent, affiche un message de chargement
+    if (authLoading) return <Loading/>;
+  
+    // Vérifie que l’utilisateur est bien défini avant de rendre le composant `Bucketliste`
+    if (!user) return <div>Utilisateur non authentifié.</div>;
+
   return (
       <>
-      <TopBar pagename={"Trackeur D'Habitude"}/>
+      <TopBar pagename={"Tracker d'habitude"}/>
       <section className="containerGeneral">
 
       <article className="today">
-        <h2 className="titreBloc">Aujourd'hui</h2>
+        <h2 className="titreBloc">Habitudes du jour</h2>
 
-        <div className="barreTracker">
-          <img className="iconeHabits" src="glass-water-droplet-solid.svg" alt="glass of water icon" />
-          <p className="pHabits">Eau</p>
-          <button className="boutonHabits"><img className="iconeHabits" src="plus-solid.svg" alt="plus icon"/></button>
-        </div>
+      <HabitsTrackers userId={user._id} />
 
-        <div className="barreTracker">
-          <img className="iconeHabits" src="dumbbell-solid.svg" alt="dumbbell icon" />
-          <p className="pHabits">Sport</p>
-          <button className="boutonHabits"><img className="iconeHabits" src="plus-solid.svg" alt="plus icon"/></button>
-        </div>
-
-      </article>
-
-      <article className="thisWeek">
-      <h2 className="titreBloc">Cette semaine</h2>
-
-      <div className="barreTracker">
-          <img className="iconeHabits" src="shoe-prints-solid.svg" alt="glass of water icon" />
-          <p className="pHabits">Pas</p>
-          <button className="boutonHabits"><img className="iconeHabits" src="plus-solid.svg" alt="plus icon"/></button>
-        </div>
-
-        <div className="barreTracker">
-          <img className="iconeHabits" src="moon-solid.svg" alt="glass of water icon" />
-          <p className="pHabits">Sommeil</p>
-          <button className="boutonHabits"><img className="iconeHabits" src="plus-solid.svg" alt="plus icon"/></button>
-        </div>
-        
       </article>
       </section>
+      <Navbar/>
       </>
   );
 };

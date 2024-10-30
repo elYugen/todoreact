@@ -16,13 +16,14 @@ function CreateHabit() {
     const [habitname, setHabitName] = useState('');
     const {user} = useAuth('');
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+    const [date, setDate] = useState('')
 
     const [created, setCreated] = useState(false);
     const navigate = useNavigate();
 
     const handleSaveNewHabit = () => {
         const data = {
-            icone, habitname, user: user._id
+            icone, habitname, user: user._id, date,
         }
         setCreated(true)
 
@@ -64,6 +65,9 @@ function CreateHabit() {
         Nom de l'habitude : <input className="inputNomProjet" name="inputNomProjet" value={habitname} onChange={(e) => setHabitName(e.target.value)}/>
         </label>
 
+        <label className="labelTask">
+        Date : <input value={date} onChange={(e) => setDate(e.target.value)} type="Date" className="inputCategorie" name="inputCategorie"/>
+        </label>
 
         <input className="addTask" type="button" value="Créer le tracker" onClick={handleSaveNewHabit}/>
         </div>
