@@ -7,7 +7,7 @@ function SearchBar() {
       <div className="searchBar">
           <div className="inputWrapper">
               <i className="bi bi-search searchIcon"></i>
-              <input type="text" placeholder="Rechercher une tâche..."/>
+              <input type="text" placeholder="Rechercher une tâche, ou un projet..."/>
               {/* <img src="filter.svg" alt="Filtre" id="filter"/> */}
           </div>
       </div>
