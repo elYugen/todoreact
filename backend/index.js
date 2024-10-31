@@ -19,12 +19,16 @@ import session from "express-session";
 // Connect-mongo : Stocke les sessions dans MongoDB au lieu de la mémoire du serveur
 import MongoStore from 'connect-mongo';
 
+// Web Push : Notification push pour notre application
+import webpush from "web-push";
+
 // Import des routes : Fichiers contenant la logique pour différentes parties de l'application
 import userRoute from "./routes/usersRoute.js";    // Routes pour la gestion des utilisateurs (CRUD)
 import authRoute from "./routes/authRoute.js";      // Routes pour l'authentification
-import taskRoute from "./routes/taskRoute.js";
+import taskRoute from "./routes/taskRoute.js"; // Routes pour la gestion des tâches (CRUD)
 import projectsRoute from "./routes/projectsRoute.js"; // Routes pour la gestion des projets (CRUD)
-import HabitsTrackersRoute from "./routes/HabitsTrackersRoute.js";
+import HabitsTrackersRoute from "./routes/HabitsTrackersRoute.js"; // Routes pour la gestion des habitudes (CRUD)
+
 /************************************/
 /*    CRÉATION DE L'APPLICATION     */
 /************************************/
@@ -33,6 +37,12 @@ const app = express()
 
 // Définition du port d'écoute (récupéré depuis les variables d'environnement)
 const port = process.env.PORT;
+
+// Définition des vapidKeys (récupéré depuis les variables d'environnement)
+const vapidKeys = {
+   publicKey: process.env.VAPID_PUBLIC_KEY,
+   privateKey: process.env.VAPID_PRIVATE_KEY,
+};
 
 /************************************/
 /*   CONNEXION BASE DE DONNÉES      */
@@ -112,7 +122,8 @@ app.use('/task', taskRoute);
 app.use('/users', userRoute);  // Toutes les routes commençant par /users
 app.use('/auth', authRoute);   // Toutes les routes commençant par /auth
 app.use('/projects', projectsRoute); //Toutes les routes commençant par /projects
-app.use('/habitstrackers', HabitsTrackersRoute);
+app.use('/habitstrackers', HabitsTrackersRoute); //Toutes les routes commençant par /habitstrackers
+
 /************************************/
 /*    GESTION GLOBALE DES ERREURS  */
 /************************************/
@@ -120,4 +131,49 @@ app.use('/habitstrackers', HabitsTrackersRoute);
 app.use((err, req, res, next) => {
    console.error(err.stack);  // Log l'erreur pour le débogage
    res.status(500).send('Quelque chose s\'est mal passé!');  // Renvoie une réponse d'erreur générique
+});
+
+/************************************/
+/*        NOTIFICATION PUSH         */
+/************************************/
+webpush.setVapidDetails(
+   "mailto:test@gmail.com",
+   vapidKeys.publicKey,
+   vapidKeys.privateKey,
+)
+
+let subscriptions = [];
+
+app.post("/subscribe", (req, res) => {
+   const subscription = req.body;
+   console.log("nouvelle souscription:", subscription);
+   subscriptions.push(subscription);
+   res.status(201).json({status: "abonnement effectué"});
+});
+
+app.get("/subscriptions", (req, res) => {
+   res.json(subscriptions);
+});
+
+
+app.post("/send-notification", (req, res) => {
+   const notificationPayload = {
+      title: "Nouvelle notif",
+      body: "C'est la nouvelle notif",
+      icon: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgnz3qx_3h36bMDGZX_y3_wIrFVS2LdkZgrg0prdaQdg7XLUVzk8LidsSTNY-jU_tLTAsJqkyfHf_sdnPJu2aR5XKdwBi25yap8uS5LZXfRKu-ib-sHHIyP0nc3AE1XkUZWjrTJgAmjFbiC/s640/PB193883.JPG",
+      data: {
+         url: "coucou.html"
+      },
+   };
+
+   Promise.all(
+      subscriptions.map((subscription) =>
+         webpush.sendNotification(subscription, JSON.stringify(notificationPayload))
+      )
+   )
+   .then(() => res.status(200).json({ status: "envoyé" }))
+   .catch((err) => {
+      console.error("erreur a l'envoie de la notification", err);
+      res.status(500);
+   });
 });

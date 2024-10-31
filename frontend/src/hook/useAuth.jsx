@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
     try {
       // Appel à l'API pour récupérer les infos utilisateur
       const response = await axios.get('/auth/me');
-      console.log(response.data);
+      console.log(response.data); // Log les infos de l'utilisateur
       setUser(response.data);        // Met à jour l'état avec les données utilisateur
       setError(null);                // Réinitialise les erreurs
     } catch (error) {
