@@ -11,6 +11,9 @@ function CategoriesBox( {userId} ) {
   if (loading) return <Loading/>;
   if (error) return <div>Erreur: {error}</div>;
 
+  if (projects.length === 0) {
+    return <><p>Tu n'as pas encore de projet en cours.</p></>;
+  }
 
   return (
     <>
@@ -24,7 +27,7 @@ function CategoriesBox( {userId} ) {
       </div>
       <div className="categorieBoxInfo">
       <p><b>{project.projectname}</b></p>
-        <p>2/10 Tâches</p>
+        {/* <p>2/10 Tâches</p> */}
       </div>
       <div className="categorieBoxProgress">
         <div className="progress-container">

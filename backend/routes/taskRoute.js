@@ -1,31 +1,37 @@
 // On importe les dépendances dont on a besoin
 import express from "express" // framework js express pour créer notre application
-import {Task} from "../models/taskModel.js"; // notre schéma utilisateur
+import {Task} from "../models/taskModel.js"; // notre schéma taches
+import { Projects } from '../models/projectModel.js';
 
-// On crée un routeur qui va gérer toutes nos routes pour les utilisateurs
+// On crée un routeur qui va gérer toutes nos routes pour les taches
 const router = express.Router();
 
-// Route pour CRÉER un nouvel utilisateur (POST)
+// Route pour CRÉER une nouvelle tache (POST)
 router.post('', async (request, response) => {
     try {
         // On vérifie si tous les champs obligatoires sont remplis
-        if (!request.body.name || !request.body.category || !request.body.date || !request.body.contenu || !request.body.author) {
+        if (!request.body.name || !request.body.project || !request.body.date || !request.body.contenu || !request.body.author) {
             return response.status(400).send({
                 message: "Veuillez fournir tous les champs, bordel",
             });
         }
  
-        // On prépare les données du nouvel utilisateur
+        // On prépare les données du nouvel tache
         const newTask = {
             name: request.body.name,
-            category: request.body.category,
+            project: request.body.project,
             date: request.body.date,
             contenu: request.body.contenu,
             author: request.body.author,
         };
  
-        // On crée l'utilisateur dans la base de données
+        // On crée la tache dans la base de données
         const task = await Task.create(newTask);
+
+        // Ajoutez l'ID de la tâche au projet
+        await Projects.findByIdAndUpdate(request.body.project, {
+            $addToSet: { tasks: task._id } // Ajoutez l'ID de la tâche au tableau des tâches du projet
+        });
         return response.status(201).send(task);
  
     } catch (error) {

@@ -56,7 +56,7 @@ router.get('/', async (request, response) => {
 router.get('/:id', async (request, response) => {
    try {
        const { id } = request.params;  // On récupère l'ID depuis l'URL
-       const projet = await Projects.findById(id);  // On cherche le projet
+       const projet = await Projects.findById(id).populate('tasks');  // On cherche le projet
        return response.status(200).json(projet)
    } catch (error) {
        // Gestion des erreurs

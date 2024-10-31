@@ -13,6 +13,10 @@ function MyTask({ userId, filter }) {
   if (loading) return <Loading />;
   if (error) return <div>Erreur: {error}</div>;
 
+  if (tasks.length === 0) {
+    return <><p>Tu n'as pas encore de tâche en cours.</p></>;
+  }
+
   // Fonction pour marquer une tâche comme complétée
   const completeTask = async (taskId) => {
     try {
