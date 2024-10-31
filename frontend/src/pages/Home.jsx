@@ -38,9 +38,8 @@ function Home() {
   return (
       <>
        {/* Rendu conditionnel basé sur l'état de connexion grâce à un if simplifié */}
-      {user ? (
-        // Interface pour utilisateur connecté
-        <>
+      {/* {user ? (
+        <> */}
           <HomeTopBar/>
           <div className="container">
             <SearchBar/>
@@ -75,23 +74,22 @@ function Home() {
           </div>
           <Navbar/>
         </>
-      ) : (
-        // Page d'accueil pour utilisateur non connecté
-        <>
-          <div className="homeBody">
-            <div className="homePage">
-              <div className="homeLogo">
-                  <img src="logo.png" alt="Logo"/>
-                  <p>La ToDo qui te prend par les <strong>boules</strong></p>
-              </div>
-              <a href="/login">
-                <button className="homeDisconnectButton">Commencer</button>
-              </a>
-            </div>
-          </div>
-        </>
-      )}
-      </>
+      // ) : (
+      //   <>
+      //     <div className="homeBody">
+      //       <div className="homePage">
+      //         <div className="homeLogo">
+      //             <img src="logo.png" alt="Logo"/>
+      //             <p>La ToDo qui te prend par les <strong>boules</strong></p>
+      //         </div>
+      //         <a href="/login">
+      //           <button className="homeDisconnectButton">Commencer</button>
+      //         </a>
+      //       </div>
+      //     </div>
+      //   </>
+      // )}
+      // </>
   );
 };
 

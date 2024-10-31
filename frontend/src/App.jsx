@@ -1,5 +1,5 @@
 // On importe les dépendances nécessaires pour le projet
-import { React } from 'react'
+import { React, useEffect } from 'react'
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from './hook/useAuth';
@@ -22,8 +22,56 @@ import CreateHabit from "./pages/CreateHabit";
 // On importe le style global qui sera appliqué à l'ensemble de l'application
 import './assets/css/style.css'
 
-
 function App() {
+  // Systeme de notification
+  function urlBase64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+    const base64 = (base64String + padding)
+      .replace(/\-/g, '+')
+      .replace(/_/g, '/');
+  
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+  
+    for (let i = 0; i < rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+  }
+  
+  const applicationServerKey = urlBase64ToUint8Array("BIqxCm0En7wunT0pnDujiPHnmw_ne8XRjC--sFcdceKCa5-_Scy1XUbyiMKYplr6bwe9x66vwM5w4gWHYTmCDn0");
+
+  
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      const handleServiceWorker = async () => {
+        try {
+          const register = await navigator.serviceWorker.register("/sw.js");
+          console.log("sw enregistré", register);
+  
+          const subscription = await register.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: applicationServerKey,
+          });
+  
+          const res = await fetch("http://localhost:8080/subscribe", {
+            method: "POST",
+            body: JSON.stringify(subscription),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+  
+          const data = await res.json();
+          console.log(data);
+        } catch (error) {
+          console.error("erreur a l'enregistrement du sw ou a l'abo a la notif", error);
+        }
+      };
+      
+      handleServiceWorker();
+    }
+  }, []);
 
   return (
     <>

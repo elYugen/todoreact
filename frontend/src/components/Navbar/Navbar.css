@@ -5,8 +5,10 @@
     width: 100%;
     z-index: 100;
     background-color: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(5px); 
+    backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
+    -moz-backdrop-filter: blur(5px);
+    -o-backdrop-filter: blur(5px);
     padding-bottom: 20px;
     padding-top: 20px;
   }
@@ -41,53 +43,63 @@
     font-size: 14px;
     color: #00002c;
     font-weight: 500;
+    text-decoration: none;
   }
 
-  .navbarItem :hover {
+  .navbarItem .navbarLink:hover {
     color: #2eaebf;
     cursor: pointer;
   }
 
-  .navbarItem :hover a {
+  .navbarItem .navbarLink:hover a {
     color: #2eaebf;
     cursor: pointer;
   }
+
   .navbarLinkActive {
     color: #2eaebf;
   }
 
   .navbarLinkActive a {
-    color: #2eaebf;
+    color: #2eaebf !important;
   }
 
   /* Styles pour le menu déroulant */
   .sous {
-    display: none;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
     position: absolute;
     bottom: calc(100% + 10px);
     left: 50%;
-    transform: translateX(-50%);
-    background-color: #ffff;
+    transform: translateX(-50%) translateY(10px);
+    background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     padding: 8px 0;
     min-width: 150px;
     z-index: 1000;
+    transition: all 0.2s ease-in-out;
+    pointer-events: none;
   }
 
-  .deroulant:hover .sous,
-  .sous:hover {
-    display: block;
+  .sous.visible {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
   }
 
   .sous li {
     list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   .sous li a {
+    display: flex;
     flex-direction: row !important;
-    justify-content: flex-start;
-    gap: 8px;
+    align-items: center;
     padding: 10px 16px;
     color: #00002c !important;
     font-size: 14px;
@@ -95,14 +107,14 @@
     transition: all 0.2s ease;
   }
 
+  .sous li a i {
+    font-size: 16px;
+    margin-right: 8px;
+  }
+
   .sous li a:hover {
     background-color: rgba(46, 174, 191, 0.1);
     color: #2eaebf !important;
-  }
-
-  .sous li a i {
-    font-size: 16px;
-    margin-right: 4px;
   }
 
   /* Triangle décoratif sous le menu */
@@ -116,20 +128,6 @@
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-top: 8px solid rgba(255, 255, 255, 0.9);
-  }
-
-  /* Animation du menu */
-  .sous {
-    opacity: 0;
-    transform: translateX(-50%) translateY(10px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-
-  .deroulant:hover .sous,
-  .sous:hover {
-    display: block;
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    border-top: 8px solid #ffffff;
   }
 }
