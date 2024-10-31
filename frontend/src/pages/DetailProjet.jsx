@@ -28,14 +28,13 @@ function DetailProjet() {
   }
 
   if (!project) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
     <>
-    <TopBar pagename={"Détails du projet"} /> 
+      <TopBar pagename={"Détails du projet"} /> 
       <section className="containerGeneral">
-        {/* Passe project.name en prop à TopBar */}
         <h2 className="titreProjet">{project.projectname}</h2>
 
         <article className="bordureBloc">
