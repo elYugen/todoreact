@@ -5,7 +5,6 @@ import "./Bucketlist.css";
 import { useAuth } from "../../hook/useAuth";
 import { useNavigate } from 'react-router-dom';
 
-
 const Bucketlist = ({ userId }) => {
   const { projects, loading, error } = useUserProjects(userId);
   const navigate = useNavigate();
