@@ -1,5 +1,5 @@
 // On importe les dépendances nécessaires pour le projet
-import { React } from 'react'
+import { React } from 'react';
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from './hook/useAuth';
@@ -18,10 +18,10 @@ import Register from './pages/Register';
 import Agenda from './pages/Agenda';
 import Bucketlist from './pages/Bucketlist';
 import CreateHabit from "./pages/CreateHabit";
+import TaskDetail from './pages/TaskDetail.jsx'; 
 
 // On importe le style global qui sera appliqué à l'ensemble de l'application
-import './assets/css/style.css'
-
+import './assets/css/style.css';
 
 function App() {
 
@@ -52,7 +52,7 @@ function App() {
           <Route path="login" element={<Login/>} />
           <Route path="register" element={<Register/>} />
           <Route path="create/habit" element={<CreateHabit/>} />
-
+          <Route path="task/:id" element={<TaskDetail />} /> {/* Nouvelle route pour afficher une tâche spécifique */}
 
           {/* Le path * correspond à l'erreur 404, si une page est inexistante ou introuvable */}
           <Route path="*" element={<NoPage />} />
@@ -61,7 +61,7 @@ function App() {
     </BrowserRouter>
     </AuthProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -121,5 +121,3 @@ app.use((err, req, res, next) => {
    console.error(err.stack);  // Log l'erreur pour le débogage
    res.status(500).send('Quelque chose s\'est mal passé!');  // Renvoie une réponse d'erreur générique
 });
-
-module.exports = app; 
