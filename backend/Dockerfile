@@ -9,4 +9,4 @@ RUN npm install
 RUN npm install -g nodemon
 
 EXPOSE 80
-CMD ["nodemon", "--legacy-watch", "index.js"]
+CMD ["nodemon", "--legacy-watch", "server.js"]

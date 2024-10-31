@@ -49,7 +49,7 @@ function Home() {
             <div className="homeContainer">
               <div className="homeTop">
                   <h3>Projet en cours</h3>
-                  <a href="#">Voir tout</a>
+                  <a href="bucketlist">Voir tout</a>
               </div>
               <div className="homeCategoriesBox">
                 <CategoriesBox userId={user._id}/>

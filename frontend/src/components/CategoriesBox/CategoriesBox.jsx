@@ -2,9 +2,11 @@ import React from 'react';
 import './CategoriesBox.css';
 import Loading from '../Loading/Loading';
 import useUserProjects from '../../hook/useUserProjects';
+import { useNavigate } from 'react-router-dom';
 
 function CategoriesBox( {userId} ) {
   const { projects, loading, error } = useUserProjects(userId);
+  const navigate = useNavigate();
 
   if (loading) return <Loading/>;
   if (error) return <div>Erreur: {error}</div>;
@@ -13,7 +15,7 @@ function CategoriesBox( {userId} ) {
   return (
     <>
     {projects.map((project) => (
-    <div className="categorieBox" style={{ backgroundColor: "#4cc0ee"}} key={project._id}>
+    <div className="categorieBox" style={{ backgroundColor: "#4cc0ee"}} key={project._id} onClick={() => navigate(`/details/project/${project._id}`)}>
       <div className="categorieBoxTop">
         <div className="categorieIconBox" style={{ backgroundColor: "#3e9ee0"}}>
           <span>🤹</span>
@@ -21,8 +23,8 @@ function CategoriesBox( {userId} ) {
         <i className="bi bi-arrow-right"></i>
       </div>
       <div className="categorieBoxInfo">
-      <p><b>{project.projectname}</b></p>/
-        <p>2 Tâches</p>
+      <p><b>{project.projectname}</b></p>
+        <p>2/10 Tâches</p>
       </div>
       <div className="categorieBoxProgress">
         <div className="progress-container">
