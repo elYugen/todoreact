@@ -22,6 +22,17 @@ const AuthContext = createContext(null);
   axios.defaults.withCredentials = true;            // Permet l'envoi automatique des cookies
   axios.defaults.baseURL = 'https://todoback-production-2aac.up.railway.app'; // URL de base de notre API
 
+  axios.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      if (error.response?.status === 401) {
+        setUser(null);
+        // Rediriger vers la page de login si nécessaire
+      }
+      return Promise.reject(error);
+    }
+  );
+
 /************************************/
 /*     PROVIDER D'AUTHENTIFICATION  */
 /************************************/
@@ -33,22 +44,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);     // Indique si une opération est en cours
   const [error, setError] = useState(null);         // Stocke les messages d'erreur
 
-  useEffect(() => {
-    const interceptorId = axios.interceptors.response.use(
-      (response) => response,
-      async (error) => {
-        if (error.response?.status === 401) {
-          setUser(null);
-        }
-        return Promise.reject(error);
-      }
-    );
-
-    return () => {
-      axios.interceptors.response.eject(interceptorId);
-    };
-  }, []); 
-
   /************************************/
   /*     FONCTIONS D'AUTHENTIFICATION */
   /************************************/
@@ -56,40 +51,35 @@ export const AuthProvider = ({ children }) => {
   // Fonction pour récupérer les informations de l'utilisateur connecté
   const fetchUserInfo = async () => {
     try {
+      // Appel à l'API pour récupérer les infos utilisateur
       const response = await axios.get('/auth/me');
-      console.log('info utilisateur : ', response.data);
-      if (response.data) {
-        setUser(response.data);
-        setError(null);
-        return response.data;
-      }
-      setUser(null);
-      return null;
+      console.log("Info utilisateur :", response.data); // Log les infos de l'utilisateur
+      setUser(response.data);        // Met à jour l'état avec les données utilisateur
+      setError(null);                // Réinitialise les erreurs
     } catch (error) {
-      console.error('Fetch user info error:', error);
-      setUser(null);
-      if (error.response?.status !== 401) {
+      console.error("Erreur du fetch des infos utilisateur : ",error);
+      // Si l'erreur est 401 (non authentifié), on réinitialise l'utilisateur
+      if (error.response && error.response.status === 401) {
+        setUser(null);
+      } else {
         setError('Erreur lors de la récupération des informations utilisateur');
       }
-      throw error;
     } finally {
-      setLoading(false);
+      setLoading(false);  // Indique que le chargement est terminé
     }
   };
+
   // Fonction de connexion
   const login = async ({ email, password }) => {
     try {
       // Appel à l'API de connexion
       const response = await axios.post('/auth/login', { email, password });
-      console.log("Utilisateur connecté :", response.data);
+      setTimeout(async () => {
+        await fetchUserInfo();
+      }, 1000);
       
-      // Attendre que la session soit établie
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      // Récupérer les informations utilisateur
-      const userInfo = await fetchUserInfo();
       setError(null);
-      return userInfo;
+      console.log("Utilisateur connecté :", response.data);
     } catch (err) {
       // Gestion des erreurs avec message personnalisé
       setError(err.response?.data.message || 'Erreur de connexion');
