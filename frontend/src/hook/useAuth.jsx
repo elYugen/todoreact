@@ -21,7 +21,7 @@ const AuthContext = createContext(null);
   // Configuration globale d'Axios
   axios.defaults.withCredentials = true;            // Permet l'envoi automatique des cookies
   axios.defaults.baseURL = 'https://todoback-production-2aac.up.railway.app'; // URL de base de notre API
-  
+
 /************************************/
 /*     PROVIDER D'AUTHENTIFICATION  */
 /************************************/
@@ -49,6 +49,7 @@ export const AuthProvider = ({ children }) => {
       console.error(error);
       // Si l'erreur est 401 (non authentifié), on réinitialise l'utilisateur
       if (error.response && error.response.status === 401) {
+        logout();
         setUser(null);
       } else {
         setError('Erreur lors de la récupération des informations utilisateur');
