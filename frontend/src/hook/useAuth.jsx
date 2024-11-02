@@ -74,10 +74,9 @@ export const AuthProvider = ({ children }) => {
     try {
       // Appel à l'API de connexion
       const response = await axios.post('/auth/login', { email, password });
-      console.log('Login response:', response.data);
       setTimeout(async () => {
         await fetchUserInfo();
-      }, 100);
+      }, 1000);
       
       setError(null);
       console.log("Utilisateur connecté :", response.data);
