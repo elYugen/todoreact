@@ -40,7 +40,7 @@ function Login() {
       await login({ email, password });
       
       // Si la connexion réussit, redirection vers la page d'accueil
-      navigate('/');
+      navigate('/profile');
     } catch (err) {
       // En cas d'erreur, affichage dans la console
       console.error(err);
