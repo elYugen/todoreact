@@ -49,7 +49,6 @@ export const AuthProvider = ({ children }) => {
       console.error(error);
       // Si l'erreur est 401 (non authentifié), on réinitialise l'utilisateur
       if (error.response && error.response.status === 401) {
-        logout();
         setUser(null);
       } else {
         setError('Erreur lors de la récupération des informations utilisateur');
