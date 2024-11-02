@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.post('/auth/login', { email, password });
       setTimeout(async () => {
         await fetchUserInfo();
-      }, 1000);
+      }, 10000);
       
       setError(null);
       console.log("Utilisateur connecté :", response.data);
