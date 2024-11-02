@@ -19,7 +19,6 @@ import Agenda from './pages/Agenda';
 import Bucketlist from './pages/Bucketlist';
 import CreateHabit from "./pages/CreateHabit";
 import TaskDetail from './pages/TaskDetail.jsx'; 
-import LoggedHome from './pages/LoggedHome.jsx'
 
 // On importe le style global qui sera appliqué à l'ensemble de l'application
 import './assets/css/style.css';
@@ -91,7 +90,6 @@ function App() {
               la propriété element correspond à la page que l'on importe */}
           {/* <Route path="coucou" element={<Blogs />} /> */}
           <Route path="detailprojet" element={<DetailProjet/>}/>
-          <Route path="loggedhome" element={<LoggedHome/>}/>
           <Route path="habitstracker" element={<HabitsTracker/>}/>
           <Route path="create/project" element={<CreateProject/>}/>
           <Route path="create/task" element={<CreateTask/>}/>
