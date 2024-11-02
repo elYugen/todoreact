@@ -18,7 +18,7 @@ function Agenda() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/task');
+        const response = await axios.get('https://todoreact-ynno.onrender.com/task');
         console.log("Tâches récupérées :", response.data); // Vérifiez le format ici
         // Accédez à response.data.data pour obtenir le tableau des tâches
         if (Array.isArray(response.data.data)) {

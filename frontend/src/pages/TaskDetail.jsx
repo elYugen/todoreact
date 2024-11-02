@@ -14,7 +14,7 @@ function TaskDetail() {
     useEffect(() => {
       const fetchTaskDetails = async () => {
         try {
-          const response = await axios.get(`http://localhost:8080/task/${taskId}`);
+          const response = await axios.get(`https://todoreact-ynno.onrender.com/task/${taskId}`);
           setTask(response.data);
         } catch (error) {
           setError("Une erreur est survenue lors de la récupération des détails de la tâche.");
@@ -61,7 +61,7 @@ function TaskDetail() {
     // Marque la tâche comme complétée
     async function handleComplete(id) {
       try {
-        await axios.put(`http://localhost:8080/task/${id}`, { isCompleted: true });
+        await axios.put(`https://todoreact-ynno.onrender.com/task/${id}`, { isCompleted: true });
         setTask({ ...task, isCompleted: true });
         alert("Tâche marquée comme complétée !");
       } catch (error) {
@@ -72,7 +72,7 @@ function TaskDetail() {
     // Supprime la tâche et redirige vers la page de liste des tâches
     async function handleDelete(id) {
       try {
-        await axios.delete(`http://localhost:8080/task/${id}`);
+        await axios.delete(`https://todoreact-ynno.onrender.com/task/${id}`);
         alert("Tâche supprimée avec succès !");
         navigate("/mytasks");
       } catch (error) {

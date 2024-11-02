@@ -27,7 +27,7 @@ function CreateHabit() {
         }
         setCreated(true)
 
-        axios.post('http://localhost:8080/habitstrackers', data)
+        axios.post('https://todoreact-ynno.onrender.com/habitstrackers', data)
         .then(() => {
             navigate('/habitstracker')
 

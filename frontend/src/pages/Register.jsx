@@ -33,7 +33,7 @@ function Register() {
     setCreated(true) // On indique que la création est en cours
     
     // Requête POST vers notre serveur pour créer le compte
-    axios.post('http://localhost:8080/auth/register', data)
+    axios.post('https://todoreact-ynno.onrender.com/auth/register', data)
     .then(() => {
       // Si la création réussit, on redirige vers la page d'accueil
       navigate('/')

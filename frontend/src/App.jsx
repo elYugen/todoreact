@@ -55,7 +55,7 @@ function App() {
             applicationServerKey: applicationServerKey,
           });
   
-          const res = await fetch("http://localhost:8080/subscribe", {
+          const res = await fetch("https://todoreact-ynno.onrender.com/subscribe", {
             method: "POST",
             body: JSON.stringify(subscription),
             headers: {

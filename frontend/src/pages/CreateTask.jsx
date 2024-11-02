@@ -16,7 +16,7 @@ function CreateTask() {
 
   useEffect(() => {
     if (user) { // Vérification que user est défini
-      axios.get(`http://localhost:8080/projects/user/${user._id}`)
+      axios.get(`https://todoreact-ynno.onrender.com/projects/user/${user._id}`)
         .then(response => setProjects(response.data.data))
         .catch(error => console.error("Erreur de chargement des projets:", error));
     }
@@ -28,7 +28,7 @@ function CreateTask() {
       name, project: projectId, date, contenu, author: user._id,
     };
     console.log("Données envoyées :", data);
-    axios.post('http://localhost:8080/task', data)
+    axios.post('https://todoreact-ynno.onrender.com/task', data)
       .then(() => navigate('/'))
       .catch(error => console.error("Erreur lors de la création de la tâche:", error));
   };

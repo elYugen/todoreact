@@ -12,7 +12,7 @@ const useUserHabits = (userId) => {
                 setLoading(true);
                 setError(null);
                 
-                const response = await axios.get(`http://localhost:8080/habitstrackers/user/${userId}`, { withCredentials: true });
+                const response = await axios.get(`https://todoreact-ynno.onrender.com/habitstrackers/user/${userId}`, { withCredentials: true });
                 
                 setHabits(response.data.data);
             } catch (err) {

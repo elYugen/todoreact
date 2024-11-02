@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
 
   // Configuration globale d'Axios
   axios.defaults.withCredentials = true;            // Permet l'envoi automatique des cookies
-  axios.defaults.baseURL = 'http://localhost:8080'; // URL de base de notre API
+  axios.defaults.baseURL = 'https://todoreact-ynno.onrender.com'; // URL de base de notre API
 
   /************************************/
   /*     FONCTIONS D'AUTHENTIFICATION */

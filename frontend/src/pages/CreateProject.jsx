@@ -30,7 +30,7 @@ function CreateProject() {
         }
         setCreated(true)
 
-        axios.post('http://localhost:8080/projects', data)
+        axios.post('https://todoreact-ynno.onrender.com/projects', data)
         .then(() => {
             navigate('/bucketlist')
 

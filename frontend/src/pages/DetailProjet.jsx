@@ -12,7 +12,7 @@ function DetailProjet() {
   useEffect(() => {
     const fetchProjectDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/projects/${projectId}`);
+        const response = await axios.get(`https://todoreact-ynno.onrender.com/projects/${projectId}`);
         setProject(response.data);
       } catch (error) {
         setError("Une erreur est survenue lors de la récupération des détails du projet.");

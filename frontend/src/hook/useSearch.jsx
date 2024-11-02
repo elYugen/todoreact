@@ -19,14 +19,14 @@ const useSearch = (userId) => {
   
       try {
         // Appel de la route dédiée aux projets de l'utilisateur avec le paramètre `query`
-        const projectsResponse = await axios.get(`http://localhost:8080/projects/user/${userId}`, {
+        const projectsResponse = await axios.get(`https://todoreact-ynno.onrender.com/projects/user/${userId}`, {
           params: { query },
         });
         console.log("Réponse projets:", projectsResponse.data);
         setProjects(projectsResponse.data.data);
   
         // Appel de la route dédiée aux tâches de l'utilisateur
-        const tasksResponse = await axios.get(`http://localhost:8080/task/user/${userId}`, {
+        const tasksResponse = await axios.get(`https://todoreact-ynno.onrender.com/task/user/${userId}`, {
           params: { query },
         });
         console.log("Réponse tache:", tasksResponse.data);
