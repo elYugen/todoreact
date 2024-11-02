@@ -12,7 +12,7 @@ const useUserProjects = (userId) => {
                 setLoading(true);
                 setError(null);
                 
-                const response = await axios.get(`https://todoreact-ynno.onrender.com/projects/user/${userId}`, { withCredentials: true });
+                const response = await axios.get(`https://todoback-production-2aac.up.railway.app/projects/user/${userId}`, { withCredentials: true });
                 
                 setProjects(response.data.data);
             } catch (err) {

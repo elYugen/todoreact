@@ -20,7 +20,7 @@ function MyTask({ userId, filter }) {
   // Fonction pour marquer une tâche comme complétée
   const completeTask = async (taskId) => {
     try {
-      await axios.put(`https://todoreact-ynno.onrender.com/task/${taskId}`, { isCompleted: true });
+      await axios.put(`https://todoback-production-2aac.up.railway.app/task/${taskId}`, { isCompleted: true });
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
           task._id === taskId ? { ...task, isCompleted: true } : task
@@ -40,7 +40,7 @@ function MyTask({ userId, filter }) {
   // Fonction pour enregistrer les modifications de la tâche
   const saveEditedTask = async (taskId) => {
     try {
-      await axios.put(`https://todoreact-ynno.onrender.com/task/${taskId}`, { name: editedTaskName });
+      await axios.put(`https://todoback-production-2aac.up.railway.app/task/${taskId}`, { name: editedTaskName });
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
           task._id === taskId ? { ...task, name: editedTaskName } : task
@@ -55,7 +55,7 @@ function MyTask({ userId, filter }) {
   // Fonction pour supprimer une tâche
   const deleteTask = async (taskId) => {
     try {
-      await axios.delete(`https://todoreact-ynno.onrender.com/task/${taskId}`);
+      await axios.delete(`https://todoback-production-2aac.up.railway.app/task/${taskId}`);
       setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
     } catch (error) {
       console.error("Erreur lors de la suppression de la tâche :", error);

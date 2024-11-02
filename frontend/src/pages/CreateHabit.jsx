@@ -27,7 +27,7 @@ function CreateHabit() {
         }
         setCreated(true)
 
-        axios.post('https://todoreact-ynno.onrender.com/habitstrackers', data)
+        axios.post('https://todoback-production-2aac.up.railway.app/habitstrackers', data)
         .then(() => {
             navigate('/habitstracker')
 

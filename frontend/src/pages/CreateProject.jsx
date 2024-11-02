@@ -30,7 +30,7 @@ function CreateProject() {
         }
         setCreated(true)
 
-        axios.post('https://todoreact-ynno.onrender.com/projects', data)
+        axios.post('https://todoback-production-2aac.up.railway.app/projects', data)
         .then(() => {
             navigate('/bucketlist')
 

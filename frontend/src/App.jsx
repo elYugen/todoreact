@@ -55,7 +55,7 @@ function App() {
             applicationServerKey: applicationServerKey,
           });
   
-          const res = await fetch("https://todoreact-ynno.onrender.com/subscribe", {
+          const res = await fetch("https://todoback-production-2aac.up.railway.app/subscribe", {
             method: "POST",
             body: JSON.stringify(subscription),
             headers: {

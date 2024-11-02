@@ -14,7 +14,7 @@ function TaskDetail() {
     useEffect(() => {
       const fetchTaskDetails = async () => {
         try {
-          const response = await axios.get(`https://todoreact-ynno.onrender.com/task/${taskId}`);
+          const response = await axios.get(`https://todoback-production-2aac.up.railway.app/task/${taskId}`);
           setTask(response.data);
         } catch (error) {
           setError("Une erreur est survenue lors de la récupération des détails de la tâche.");
