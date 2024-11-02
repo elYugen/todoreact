@@ -18,6 +18,10 @@ import axios from 'axios';
 // La valeur initiale est null
 const AuthContext = createContext(null);
 
+  // Configuration globale d'Axios
+  axios.defaults.withCredentials = true;            // Permet l'envoi automatique des cookies
+  axios.defaults.baseURL = 'https://todoback-production-2aac.up.railway.app'; // URL de base de notre API
+  
 /************************************/
 /*     PROVIDER D'AUTHENTIFICATION  */
 /************************************/
@@ -28,10 +32,6 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);           // Stocke les informations de l'utilisateur connecté
   const [loading, setLoading] = useState(true);     // Indique si une opération est en cours
   const [error, setError] = useState(null);         // Stocke les messages d'erreur
-
-  // Configuration globale d'Axios
-  axios.defaults.withCredentials = true;            // Permet l'envoi automatique des cookies
-  axios.defaults.baseURL = 'https://todoback-production-2aac.up.railway.app'; // URL de base de notre API
 
   /************************************/
   /*     FONCTIONS D'AUTHENTIFICATION */
