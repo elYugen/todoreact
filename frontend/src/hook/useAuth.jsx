@@ -22,6 +22,17 @@ const AuthContext = createContext(null);
   axios.defaults.withCredentials = true;            // Permet l'envoi automatique des cookies
   axios.defaults.baseURL = 'https://todoback-production-2aac.up.railway.app'; // URL de base de notre API
 
+  axios.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      if (error.response?.status === 401) {
+        setUser(null);
+        // Rediriger vers la page de login si nécessaire
+      }
+      return Promise.reject(error);
+    }
+  );
+
 /************************************/
 /*     PROVIDER D'AUTHENTIFICATION  */
 /************************************/
@@ -42,11 +53,11 @@ export const AuthProvider = ({ children }) => {
     try {
       // Appel à l'API pour récupérer les infos utilisateur
       const response = await axios.get('/auth/me');
-      console.log(response.data); // Log les infos de l'utilisateur
+      console.log("Info utilisateur :", response.data); // Log les infos de l'utilisateur
       setUser(response.data);        // Met à jour l'état avec les données utilisateur
       setError(null);                // Réinitialise les erreurs
     } catch (error) {
-      console.error(error);
+      console.error("Erreur du fetch des infos utilisateur : ",error);
       // Si l'erreur est 401 (non authentifié), on réinitialise l'utilisateur
       if (error.response && error.response.status === 401) {
         setUser(null);
@@ -54,7 +65,7 @@ export const AuthProvider = ({ children }) => {
         setError('Erreur lors de la récupération des informations utilisateur');
       }
     } finally {
-      setLoading(false);             // Indique que le chargement est terminé
+      setLoading(false);  // Indique que le chargement est terminé
     }
   };
 
@@ -63,8 +74,12 @@ export const AuthProvider = ({ children }) => {
     try {
       // Appel à l'API de connexion
       const response = await axios.post('/auth/login', { email, password });
-      await fetchUserInfo();  // Cette fonction mettra à jour user avec toutes les infos
-      setError(null);                // Réinitialise les erreurs
+      console.log('Login response:', response.data);
+      setTimeout(async () => {
+        await fetchUserInfo();
+      }, 100);
+      
+      setError(null);
       console.log("Utilisateur connecté :", response.data);
     } catch (err) {
       // Gestion des erreurs avec message personnalisé
