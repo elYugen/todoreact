@@ -17,8 +17,8 @@ export default defineConfig({
         name: 'ToDo List',
         short_name: 'App',
         description: 'Projet ToDo List en groupe',
-        theme_color: '#2eaebf',
-        background_color: '#2eaebf', 
+        theme_color: '#ffffff',
+        background_color: '#ffffff', 
         icons: [
           {
             src: 'favicon.png',
