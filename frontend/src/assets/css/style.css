@@ -73,6 +73,7 @@ a {
 }
 
 .addTask {
+    height: 50px;
     color: white;
     background-color: #1464C7;
     border: 1px solid #1464C7;
@@ -164,7 +165,7 @@ a {
 .inputNomTask,
 .inputDescriptionTask,
 #selectProjet {
-    height: 30px;
+    height: 50px;
     width: 100%;
     margin-top: 10px;
     margin-bottom: 30px;
@@ -176,7 +177,7 @@ a {
 }
 
 .inputDescriptionProjet {
-    height: 200px;
+    height: 50px;
 }
 
 .inputDescriptionTask {
