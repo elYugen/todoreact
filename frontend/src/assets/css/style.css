@@ -113,6 +113,38 @@ a {
     padding-right: 10px;
 }
 
+.icone-input-container {
+    display: flex;
+    flex-direction: row-reverse; 
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  
+  .emoji-button {
+    height: 50px; 
+    width: 300px;
+    padding: 0 20px;
+    font-size: 16px;
+    background-color: #1464C7;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .emoji-button:hover {
+    background-color: #0d4fa3;
+  }
+  
+  .inputEmoji {
+    flex: 1;
+    margin-bottom: 0;
+    pointer-events: none; 
+    background-color: #f0f0f0; 
+  }
+
 /* ----------------------------  Page habits trackers ------------------------------------------ */
 
 .iconeHabits {
@@ -161,6 +193,7 @@ a {
 }
 
 .inputNomProjet,
+.inputEmoji,
 .inputDescriptionProjet,
 .inputNomTask,
 .inputDescriptionTask,
