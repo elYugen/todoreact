@@ -1,4 +1,4 @@
-@media only screen and (max-width: 768px) {
+
   .topbar {
   display: flex;
   flex-direction: row;   
@@ -57,4 +57,3 @@
     color: #868686;
     box-shadow: 0 0 18px 1px rgba(128, 128, 128, 0.2);
   }
-}
