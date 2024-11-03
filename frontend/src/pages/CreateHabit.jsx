@@ -53,13 +53,15 @@ function CreateHabit() {
 
         <div className="creerProjet">
 
-        <label>
-        Icone : <input className="inputNomProjet" name="inputNomProjet" value={icone} onChange={(e) => setIcone(e.target.value)}/>
-        <button onClick={handleReaction}>Choisir un emoji</button>
-    {showEmojiPicker && (
+        <div className="icone-input-container">
+            <label>
+                Icone : <input className="inputEmoji" name="inputNomProjet" value={icone} onChange={(e) => setIcone(e.target.value)}/>
+            </label>
+            <button className="emoji-button" onClick={handleReaction}>Choisir un emoji</button>
+        </div>
+        {showEmojiPicker && (
         <EmojiPicker onEmojiClick={onEmojiClick} />
-    )}
-        </label>
+        )}
 
         <label>
         Nom de l'habitude : <input className="inputNomProjet" name="inputNomProjet" value={habitname} onChange={(e) => setHabitName(e.target.value)}/>
