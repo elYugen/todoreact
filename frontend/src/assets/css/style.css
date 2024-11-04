@@ -231,7 +231,14 @@ a {
 }
 
 .inputCategorie {
+    height: 50px;
     margin-top: 20px;
+    margin-bottom: 30px;
+    background-color: #ffffff;
+    transition: border-color 0.3s ease; 
+    box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.1);
+    border: none;
+    border-radius: 10px
 }
 
 .buttonTask {

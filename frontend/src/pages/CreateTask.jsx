@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../hook/useAuth";
+import Loading from "../components/Loading/Loading";
 
 function CreateTask() {
   const [name, setName] = useState('');
@@ -33,7 +34,7 @@ function CreateTask() {
       .catch(error => console.error("Erreur lors de la création de la tâche:", error));
   };
 
-  if (!user) return <p>Chargement...</p>;
+  if (!user) return <Loading/>;
 
   return (
     <section className="containerGeneral generalTask">
@@ -45,7 +46,7 @@ function CreateTask() {
         </label>
 
         <label className="labelTask">
-          Catégorie :
+          Projet :
           <div>
             {projects.map(project => (
               <button
@@ -62,7 +63,7 @@ function CreateTask() {
         <label className="labelTask">
           Date : <input value={date} onChange={(e) => setDate(e.target.value)} type="Date" className="inputCategorie" />
         </label>
-
+            <br />
         <label className="labelTask">
           Contenu : <input value={contenu} onChange={(e) => setContenu(e.target.value)} className="inputDescriptionTask" />
         </label>

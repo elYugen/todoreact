@@ -17,6 +17,9 @@ const ProjectSchema = new mongoose.Schema(
        // récupère les taches de l'utilisateur dans la base de donnée
        tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }],
 
+       icone: { type: String, default: '🤹'},
+
+       // le projet est lié à un utilisateur
        user: { type: String, required: true },
 
    },
