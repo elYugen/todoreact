@@ -22,6 +22,12 @@ const ProjectSchema = new mongoose.Schema(
        // le projet est lié à un utilisateur
        user: { type: String, required: true },
 
+       // nombre d'xp que rapporte un projet
+       xp: { type: Number, default: 50 }, 
+
+       // si le projet est fini ou pas
+       completed: { type: Boolean, default: false }
+
    },
 
    {

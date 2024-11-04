@@ -2,6 +2,7 @@
 import express from "express" // framework js express pour créer notre application
 import {Task} from "../models/taskModel.js"; // notre schéma taches
 import { Projects } from '../models/projectModel.js';
+import { updateUserXP } from '../utils/xpManager.js'; // xp manager
 
 // On crée un routeur qui va gérer toutes nos routes pour les taches
 const router = express.Router();
@@ -73,17 +74,50 @@ router.get('/:id', async (request, response) => {
 
 // Route pour MODIFIER un utilisateur (PUT)
 router.put('/:id', async (request, response) => {
-   try {
-       const { id } = request.params  // On récupère l'ID de l'utilisateur à modifier
-       // On met à jour l'utilisateur avec les nouvelles données
-       const result = await Task.findByIdAndUpdate(id, request.body, {new: true})
-       return response.status(200).json(result)
-   } catch (error) {
-       // Gestion des erreurs
-       console.log(error.message);
-       response.status(404).send({ message: error.message })
-   }
-})
+    try {
+        // Extrait l'ID de la tâche des paramètres de la requête
+        const { id } = request.params;
+
+        // Met à jour la tâche dans la base de données et récupère la version mise à jour
+        const updatedTask = await Task.findByIdAndUpdate(id, request.body, { new: true });
+
+        // Vérifie si la tâche vient d'être complétée
+        if (updatedTask.isCompleted) {
+            // Trouve le projet associé à cette tâche et peuple ses tâches
+            const project = await Projects.findOne({ tasks: id }).populate('tasks');
+            
+            // Vérifie si toutes les tâches du projet sont complétées
+            const allTasksCompleted = project.tasks.every(task => task.isCompleted);
+            
+            // Si toutes les tâches sont complétées et que le projet n'était pas déjà marqué comme terminé
+            if (allTasksCompleted && !project.completed) {
+                // Marque le projet comme terminé
+                project.completed = true;
+                // Sauvegarde les changements du projet
+                await project.save();
+
+                // Met à jour l'XP de l'utilisateur associé au projet
+                const updatedUser = await updateUserXP(project.user, project.xp);
+
+                // Renvoie une réponse avec les détails de la tâche mise à jour, le niveau et l'XP de l'utilisateur
+                return response.status(200).json({
+                    message: "Tâche mise à jour et projet fini !",
+                    task: updatedTask,
+                    userLevel: updatedUser.level,
+                    userXP: updatedUser.xp
+                });
+            }
+        }
+
+        // Si le projet n'est pas terminé, renvoie simplement la tâche mise à jour
+        return response.status(200).json(updatedTask);
+    } catch (error) {
+        // En cas d'erreur, affiche le message d'erreur dans la console
+        console.log(error.message);
+        // Envoie une réponse d'erreur au client
+        response.status(500).send({ message: error.message });
+    }
+});
 
 // Route pour SUPPRIMER un utilisateur (DELETE)
 router.delete('/:id', async (request, response) => {

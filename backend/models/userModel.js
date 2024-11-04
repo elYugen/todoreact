@@ -25,6 +25,11 @@ const UserSchema = new mongoose.Schema(
        // commence à 1 par défaut quand on crée un nouvel utilisateur
        level: { type: Number, default: 1 },
 
+       // xp de l'utilisateur:
+       // doit être un nombre
+       // commence à 1 par défaut quand on crée un nouvel utilisateur
+       xp: { type: Number, default: 0 },
+       
        // image de profil:
        // doit être du texte (String)
        // avec une valeur par défaut
