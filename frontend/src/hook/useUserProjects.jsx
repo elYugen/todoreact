@@ -14,13 +14,7 @@ const useUserProjects = (userId) => {
                 
                 const response = await axios.get(`http://localhost:8080/projects/user/${userId}`, { withCredentials: true });
                 
-                // ajoute le nombre de tâches à chaque projet
-                const projectsWithTaskCount = response.data.data.map(project => ({
-                    ...project,
-                    taskCount: project.tasks ? project.tasks.length : 0
-                }));
-                
-                setProjects(projectsWithTaskCount);
+                setProjects(response.data.data);
             } catch (err) {
                 setError(
                     err.response?.data?.message || 
