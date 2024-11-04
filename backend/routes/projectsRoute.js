@@ -110,16 +110,27 @@ router.get('/user/:userId', async (request, response) => {
         if (query) {
           filters.projectname = { $regex: query, $options: 'i' };  
         }
-        const projects = await Projects.find(filters);
+        const projects = await Projects.find(filters).populate('tasks');
+        
+        const projectsWithTaskInfo = projects.map(project => {
+            const totalTasks = project.tasks.length;
+            const completedTasks = project.tasks.filter(task => task.isCompleted).length;
+            return {
+                ...project.toObject(),
+                taskCount: totalTasks,
+                completedTaskCount: completedTasks
+            };
+        });
+
         return response.status(200).json({
-            count: projects.length,
-            data: projects
+            count: projectsWithTaskInfo.length,
+            data: projectsWithTaskInfo
         });
     } catch (error) {
         console.log(error.message);
         response.status(500).send({message: error.message});
     }
- });
+});
 
  // ROUTE pour la barre de recherche, qui affiche un resultat en fonction de l'entrée et de l'id utilisateur
 // On exporte notre routeur pour l'utiliser dans notre application

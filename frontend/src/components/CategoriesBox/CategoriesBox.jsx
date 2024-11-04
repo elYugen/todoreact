@@ -17,7 +17,7 @@ function CategoriesBox( {userId} ) {
 
   return (
     <>
-    {projects.map((project) => (
+{projects.map((project) => (
     <div className="categorieBox" style={{ backgroundColor: "#4cc0ee"}} key={project._id} onClick={() => navigate(`/details/project/${project._id}`)}>
       <div className="categorieBoxTop">
         <div className="categorieIconBox" style={{ backgroundColor: "#3e9ee0"}}>
@@ -30,12 +30,12 @@ function CategoriesBox( {userId} ) {
       </div>
       <div className="categorieBoxProgress">
         <div className="progress-container">
-          <div className="progress-bar" style={{width: `${(0 / project.taskCount ) * 100}%`}}></div>
+          <div className="progress-bar" style={{width: `${(project.completedTaskCount / project.taskCount) * 100}%`}}></div>
         </div>
-        <p>/{project.taskCount}</p>
+        <p>{project.completedTaskCount}/{project.taskCount}</p>
       </div>
     </div>
-    ))}
+))}
     </>);
 };
 
