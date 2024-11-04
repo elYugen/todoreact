@@ -18,7 +18,7 @@ const Bucketlist = ({ userId }) => {
         <div className="bucketlistBox" key={project._id} onClick={() => navigate(`/details/project/${project._id}`)}>
           <div className="bucketlistBoxContent">
             <div className="bucketlistIconBox" style={{ backgroundColor: "#efefef" }}>
-              <span>📌</span>
+              <span>{project.icone}</span>
             </div>
             <div className="bucketlistBoxTitle" style={{ backgroundColor: "#efefef" }}>
               <div className="bucketlistBoxTitleTitre">

@@ -136,27 +136,33 @@ app.use((err, req, res, next) => {
 /************************************/
 /*        NOTIFICATION PUSH         */
 /************************************/
+
+// Configuration des détails VAPID pour l'authentification des notifications push
 webpush.setVapidDetails(
    "mailto:test@gmail.com",
    vapidKeys.publicKey,
    vapidKeys.privateKey,
 )
 
+// Tableau pour stocker les abonnements des utilisateurs
 let subscriptions = [];
 
+// Route pour gérer les nouvelles souscriptions
 app.post("/subscribe", (req, res) => {
-   const subscription = req.body;
+   const subscription = req.body; // Récupère les données d'abonnement envoyées par le client
    console.log("nouvelle souscription:", subscription);
-   subscriptions.push(subscription);
-   res.status(201).json({status: "abonnement effectué"});
+   subscriptions.push(subscription); // Ajoute l'abonnement au tableau
+   res.status(201).json({status: "abonnement effectué"}); // Répond avec un statut de succès
 });
 
+// Route pour obtenir la liste des abonnements
 app.get("/subscriptions", (req, res) => {
-   res.json(subscriptions);
+   res.json(subscriptions); // Renvoie la liste des abonnements au format JSON
 });
 
-
+// Route pour envoyer une notification à tous les abonnés
 app.post("/send-notification", (req, res) => {
+   // Définition du contenu de la notification
    const notificationPayload = {
       title: "Nouvelle notif",
       body: "C'est la nouvelle notif",
@@ -166,14 +172,15 @@ app.post("/send-notification", (req, res) => {
       },
    };
 
+   // Envoi de la notification à tous les abonnés
    Promise.all(
       subscriptions.map((subscription) =>
          webpush.sendNotification(subscription, JSON.stringify(notificationPayload))
       )
    )
-   .then(() => res.status(200).json({ status: "envoyé" }))
+   .then(() => res.status(200).json({ status: "envoyé" })) // Si tout s'est bien passé, renvoie un statut de succès
    .catch((err) => {
-      console.error("erreur a l'envoie de la notification", err);
-      res.status(500);
+      console.error("erreur a l'envoie de la notification", err); // En cas d'erreur, affiche l'erreur dans la console
+      res.status(500); // Renvoie un statut d'erreur serveur
    });
 });
