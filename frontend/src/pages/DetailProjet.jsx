@@ -40,7 +40,8 @@ function DetailProjet() {
         <article className="bordureBloc">
           <div className="divDescriptionProjet">
             <h3>Description</h3>
-            <p>{project.description}</p>
+            <p>{project.description.length > 0 ? project.description : "Pas de description"}</p>
+
           </div>
         </article>
 

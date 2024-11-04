@@ -21,6 +21,7 @@ router.post('', async (request, response) => {
             description: request.body.description,
             user: request.body.user,
             icone: request.body.icone,
+            xp: 50,
         };
  
         // On crée le projet dans la base de données

@@ -59,8 +59,8 @@ function Profile() {
                     <div className="topBoxMini">
                         <div className="countBox">
                             <img className="iconeBoxProfile" src="../../public/certificate-solid.svg" alt="" />
-                            <p>Points</p>
-                            <p>212</p>
+                            <p>Expérience</p>
+                            <p>{user.xp}</p>
                         </div>
                         <div className="countBox">
                             <img className="iconeBoxProfile" src="../../public/crown-solid.svg" alt="" />
