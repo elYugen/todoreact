@@ -65,7 +65,7 @@ function Home() {
               {/* Onglets de tâches */}
               <div className="homeTaskStateList">
                 <button className={`${activeTab === 'todo' ? 'homeTaskStateActive' : 'homeTaskState'}`} onClick={() => setActiveTab('todo')}>À Faire</button>
-                <button className={`${activeTab === 'completed' ? 'homeTaskStateActive' : 'homeTaskState'}`} onClick={() => setActiveTab('completed')}>Compléter</button>
+                <button className={`${activeTab === 'completed' ? 'homeTaskStateActive' : 'homeTaskState'}`} onClick={() => setActiveTab('completed')}>Complété</button>
                 <button className={`${activeTab === 'all' ? 'homeTaskStateActive' : 'homeTaskState'}`} onClick={() => setActiveTab('all')}>Tout</button>
               </div>
 
