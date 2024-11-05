@@ -41,12 +41,12 @@ const SearchBar = ({ userId }) => {
               <div style={{ padding: "8px" }}>
                 {projects.length ? projects.map((project) => (
                   <p key={project._id} style={{ margin: "4px 0" }}>{project.projectname} - <strong style={{ fontSize: "10px" }}>Projet</strong></p>
-                )) : <></>}
+                )) : <>Aucun projet trouvé</>}
               </div>
               <div style={{ padding: "8px" }}>
                 {task.length ? task.map((task) => (
                   <p key={task._id} style={{ margin: "4px 0" }}>{task.name} - <strong style={{ fontSize: "10px" }}>Tâche</strong></p>
-                )) : <></>}
+                )) : <>Aucune tâche trouvé</>}
               </div>
             </>
           )}

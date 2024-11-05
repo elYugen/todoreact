@@ -5,11 +5,13 @@ import Calendar from '../components/Calendar/Calendar';
 import axios from 'axios'; 
 import '../assets/css/agenda.css';
 import '../components/MyTask/MyTask.css';
+import { useNavigate } from 'react-router-dom';
 
 function Agenda() {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
   const [userTasks, setUserTasks] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleDateSelect = (date) => {
     setSelectedDate(date);
@@ -38,6 +40,10 @@ function Agenda() {
 
   const tasksForSelectedDate = userTasks.filter(task => task.date === selectedDate);
 
+  const goToTask = async (taskId) => {
+    navigate(`/task/${taskId}`)
+  }
+
   return (
     <>
       <TopBar pagename={"Agenda"}/>
@@ -53,7 +59,7 @@ function Agenda() {
           {error && <p>{error}</p>}
           {Array.isArray(userTasks) && tasksForSelectedDate.length > 0 ? (
             tasksForSelectedDate.map(task => (
-              <div className="myTaskBox" key={task._id}>
+              <div className="myTaskBox" key={task._id} onClick={(e) => {e.stopPropagation(); goToTask(task._id);}}>
                 <div className="myTaskBoxContent">
                   <div className="myTaskBoxContentIcon" style={{ backgroundColor: "lightgrey" }}>
                     <span>🤹</span>

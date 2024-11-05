@@ -70,26 +70,46 @@ function Profile() {
                         <div className="countBox2">
                             <img className="iconeBoxProfile" src="../../public/shield-solid.svg" alt="" />
                             <p>Badges</p>
-                            <p>3</p>
+                            <img src={user.badge} alt="Badge" className="profileBadge" />
                         </div>
                     </div>
                 </article>
                 <article className="bottomBox">
-                    <div className="barreTracker barreProfil" onClick={goToAgenda}>
-                        <a href="#">Agenda</a>
+                    <div className="barreProfil" onClick={goToAgenda}>
+                        <div className="profileLink">
+                            <i className="bi bi-calendar"></i>
+                            <a href="#">Agenda</a>                            
+                        </div>
+
+                        <i className="bi bi-chevron-right"></i>
                     </div>
 
-                    <div className="barreTracker barreProfil" onClick={goToBucketlist}>
+                    <div className="barreProfil" onClick={goToBucketlist}>
+                        <div className="profileLink">
+                        <i className="bi bi-bucket"></i>
                         <a href="#">Bucketlist</a>
+                        </div>
+                        <i className="bi bi-chevron-right"></i>
                     </div>
 
-                    <div className="barreTracker barreProfil" onClick={goToHabits}>
+                    <div className="barreProfil" onClick={goToHabits}>
+                        <div className="profileLink">
+                        <i className="bi bi-person-walking"></i>
                         <a href="#">Habits Trackers</a>
+                        </div>
+
+                        <i className="bi bi-chevron-right"></i>
+                    </div>
+
+                    <div className="barreProfil">
+                        <div className="profileLink">
+                        <i className="bi bi-box-arrow-right"></i>
+                        <a className="deco" href="/" onClick={handleLogout}>Se deconnecter</a>
+                        </div>
+
+                        <i className="bi bi-chevron-right"></i>
                     </div>
                 </article>
-
-                <a className="deco" href="/" onClick={handleLogout}>Se deconnecter</a>
-
             </section>
         </>
     )

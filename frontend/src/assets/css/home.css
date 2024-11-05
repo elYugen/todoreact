@@ -30,7 +30,7 @@
     border: none;
     color: white;
     border-radius: 10px;
-    width: 100px;
+    width: 110px;
     height: 40px;
 }
 
@@ -82,8 +82,6 @@
     flex-direction: row;
     gap: 10px;
     overflow-x: auto;
-    white-space: nowrap; 
-    max-width: 100%;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }

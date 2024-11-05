@@ -52,7 +52,10 @@ function CreateHabit() {
         <TopBar pagename={"Tracker une habitude"}/>
 
         <div className="creerProjet">
-
+        <label>
+        Nom de l'habitude : <input className="inputNomProjet" name="inputNomProjet" value={habitname} onChange={(e) => setHabitName(e.target.value)}/>
+        </label>
+        
         <div className="icone-input-container">
             <label>
                 Icone : <input className="inputEmoji" name="inputNomProjet" value={icone} onChange={(e) => setIcone(e.target.value)}/>
@@ -63,9 +66,6 @@ function CreateHabit() {
         <EmojiPicker onEmojiClick={onEmojiClick} />
         )}
 
-        <label>
-        Nom de l'habitude : <input className="inputNomProjet" name="inputNomProjet" value={habitname} onChange={(e) => setHabitName(e.target.value)}/>
-        </label>
 
         <label className="labelTask">
         Date : <input value={date} onChange={(e) => setDate(e.target.value)} type="Date" className="inputCategorie" name="inputCategorie"/>
