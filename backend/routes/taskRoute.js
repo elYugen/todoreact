@@ -109,6 +109,22 @@ router.put('/:id', async (request, response) => {
             }
         }
 
+        // Vérifier si la tâche a été mise à jour avec une nouvelle date d'échéance
+        if (updatedTask.date !== request.body.date) {
+            // Calculer la date à laquelle la notification doit être envoyée (1 jour avant l'échéance)
+            const notificationDate = new Date(updatedTask.date);
+            notificationDate.setDate(notificationDate.getDate() - 1);
+
+            // Vérifier si la notification doit être envoyée aujourd'hui
+            if (notificationDate.toDateString() === new Date().toDateString()) {
+                // Envoyer la notification à tous les abonnés
+                await sendNotification(
+                    subscriptions,
+                    `Rappel : Échéance de la tâche "${updatedTask.name}" demain`
+                );
+            }
+        }
+
         // Si le projet n'est pas terminé, renvoie simplement la tâche mise à jour
         return response.status(200).json(updatedTask);
     } catch (error) {
@@ -141,25 +157,41 @@ router.delete('/:id', async (request, response) => {
 
 router.get('/user/:userId', async (request, response) => {
     try {
-      const { userId } = request.params;
-      const { query } = request.query;
-  
-      const filters = { author: userId };
-      if (query) {
-        filters.name = { $regex: query, $options: 'i' };  
-      }
-  
-      const tasks = await Task.find(filters);
-      return response.status(200).json({
-        count: tasks.length,
-        data: tasks
-      });
-    } catch (error) {
-      console.log(error.message);
-      response.status(500).send({ message: error.message });
-    }
-  });
+        const { userId } = request.params;
+        const { query } = request.query;
 
-  
+        const filters = { author: userId };
+        if (query) {
+            filters.name = { $regex: query, $options: 'i' };  
+        }
+
+        const tasks = await Task.find(filters);
+
+        // Parcourir les tâches et vérifier celles dont la date d'échéance est le lendemain
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        const tasksWithTomorrowDeadline = tasks.filter(task => {
+            const taskDate = new Date(task.date);
+            return taskDate.toDateString() === tomorrow.toDateString();
+        });
+
+        // Envoyer la notification pour chaque tâche avec échéance le lendemain
+        await Promise.all(tasksWithTomorrowDeadline.map(async task => {
+            await sendNotification(
+                subscriptions,
+                `Rappel : Échéance de la tâche "${task.name}" demain`
+            );
+        }));
+
+        return response.status(200).json({
+            count: tasks.length,
+            data: tasks
+        });
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+});
 // On exporte notre routeur pour l'utiliser dans notre application
 export default router;
