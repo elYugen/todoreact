@@ -3,12 +3,15 @@ import './MyTask.css';
 import Loading from '../Loading/Loading';
 import useUserTasks from '../../hook/useUserTask';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function MyTask({ userId, filter }) {
   const { tasks, loading, error, setTasks } = useUserTasks(userId);
-  const [editingTaskId, setEditingTaskId] = useState(null); // ID de la tâche en cours d'édition
-  const [editedTaskName, setEditedTaskName] = useState(''); // Nouveau nom de la tâche
-  
+  const [editingTaskId, setEditingTaskId] = useState(null);
+  const [editedTaskName, setEditedTaskName] = useState('');
+  const [showAllTasks, setShowAllTasks] = useState(false); 
+  const navigate = useNavigate();
+
 
   if (loading) return <Loading />;
   if (error) return <div>Erreur: {error}</div>;
@@ -17,7 +20,6 @@ function MyTask({ userId, filter }) {
     return <><p>Tu n'as pas encore de tâche en cours.</p></>;
   }
 
-  // Fonction pour marquer une tâche comme complétée
   const completeTask = async (taskId) => {
     try {
       await axios.put(`http://localhost:8080/task/${taskId}`, { isCompleted: true });
@@ -31,13 +33,11 @@ function MyTask({ userId, filter }) {
     }
   };
 
-  // Fonction pour commencer l'édition d'une tâche
   const startEditing = (taskId, taskName) => {
-    setEditingTaskId(taskId); // Définit la tâche en cours d'édition
-    setEditedTaskName(taskName); // Définit le nom actuel de la tâche dans le champ d'édition
+    setEditingTaskId(taskId);
+    setEditedTaskName(taskName);
   };
 
-  // Fonction pour enregistrer les modifications de la tâche
   const saveEditedTask = async (taskId) => {
     try {
       await axios.put(`http://localhost:8080/task/${taskId}`, { name: editedTaskName });
@@ -46,13 +46,12 @@ function MyTask({ userId, filter }) {
           task._id === taskId ? { ...task, name: editedTaskName } : task
         )
       );
-      setEditingTaskId(null); // Quitte le mode édition
+      setEditingTaskId(null);
     } catch (error) {
       console.error("Erreur lors de l'édition de la tâche :", error);
     }
   };
 
-  // Fonction pour supprimer une tâche
   const deleteTask = async (taskId) => {
     try {
       await axios.delete(`http://localhost:8080/task/${taskId}`);
@@ -62,54 +61,46 @@ function MyTask({ userId, filter }) {
     }
   };
 
-  // Filtrage des tâches en fonction du filtre actif
   const filteredTasks = tasks.filter((task) => {
     if (filter === 'todo') return !task.isCompleted;
     if (filter === 'completed') return task.isCompleted;
     return true;
   });
 
+  // Limitation à 5 tâches si showAllTasks est false
+  const displayedTasks = showAllTasks ? filteredTasks : filteredTasks.slice(0, 4);
+
+  const goToAgenda = async (e) => { // fonction fléché qui permet de rediriger vers l'agenda
+    navigate('/agenda');          // en cliquant sur le bouton agenda
+  }
+
+  const goToTask = async (taskId) => {
+    navigate(`/task/${taskId}`)
+  }
+
   return (
     <>
-      {filteredTasks.map((task) => (
-        <div className="myTaskBox" key={task._id}>
+      {displayedTasks.map((task) => (
+        <div className="myTaskBox" key={task._id}  onClick={(e) => {e.stopPropagation(); goToTask(task._id);}}>
           <div className="myTaskBoxContent">
             <div className="myTaskBoxContentIcon" style={{ backgroundColor: "lightgrey" }}>
               <span>🤹</span>
             </div>
 
-            {/* Affichage de la tâche, soit en mode lecture, soit en mode édition */}
             <div className="myTaskBoxContentTitle">
-              {editingTaskId === task._id ? (
-                <input 
-                  value={editedTaskName} 
-                  onChange={(e) => setEditedTaskName(e.target.value)} 
-                />
-              ) : (
                 <p><b>{task.name}</b></p>
-              )}
             </div>
-
-            {/* Boutons d'action */}
-            <div className="myTaskActions">
-              {editingTaskId === task._id ? (
-                <>
-                  <button onClick={() => saveEditedTask(task._id)}>Enregistrer</button>
-                  <button onClick={() => setEditingTaskId(null)}>Annuler</button>
-                </>
-              ) : (
-                <>
-                  {!task.isCompleted && (
-                    <button onClick={() => completeTask(task._id)}>Valider</button>
-                  )}
-                  <button onClick={() => startEditing(task._id, task.name)}>Éditer</button>
-                  <button onClick={() => deleteTask(task._id)}>Supprimer</button>
-                </>
-              )}
+            <div className="myTaskBoxSeeDetails">
+                <i className="bi bi-chevron-right"></i>
             </div>
           </div>
         </div>
       ))}
+      
+      {/* Lien "Voir tout" si plus de 5 tâches et showAllTasks est false */}
+      {!showAllTasks && filteredTasks.length > 4 && (
+        <button onClick={goToAgenda} className="seeAllButton">Voir tout</button>
+      )}
     </>
   );
 }
