@@ -59,42 +59,19 @@ function TaskDetail() {
         <section className="containerGeneral">
           {isEditing ? (
             <>
-              <input
-                type="text"
-                name="name"
-                value={editedTask.name}
-                onChange={handleInputChange}
-                className="editInput"
-              />
+              <input type="text" name="name" value={editedTask.name} onChange={handleInputChange} className="editInput"/>
               <article className="bordureBloc">
                 <div className="divDescriptionTache">
                   <h3>Description</h3>
-                  <textarea
-                    name="contenu"
-                    value={editedTask.contenu}
-                    onChange={handleInputChange}
-                    className="editTextarea"
-                  />
+                  <textarea name="contenu" value={editedTask.contenu} onChange={handleInputChange} className="editTextarea"/>
                 </div>
                 <div className="divCategorieTache">
                   <h3>Catégorie</h3>
-                  <input
-                    type="text"
-                    name="category"
-                    value={editedTask.category}
-                    onChange={handleInputChange}
-                    className="editInput"
-                  />
+                  <input type="text" name="category" value={editedTask.category} onChange={handleInputChange} className="editInput"/>
                 </div>
                 <div className="divDateTache">
                   <h3>Date</h3>
-                  <input
-                    type="date"
-                    name="date"
-                    value={editedTask.date}
-                    onChange={handleInputChange}
-                    className="editInput"
-                  />
+                  <input type="date" name="date" value={editedTask.date} onChange={handleInputChange} className="editInput"/>
                 </div>
               </article>
               <div className="taskActions">
@@ -121,12 +98,8 @@ function TaskDetail() {
               </article>
               <div className="taskActions">
                 <label>
+                  <input type="checkbox" checked={task.isCompleted} onChange={handleCheckboxChange}/>
                   Tâche complétée
-                  <input
-                    type="checkbox"
-                    checked={task.isCompleted}
-                    onChange={handleCheckboxChange}
-                  />
                 </label>
                 <button onClick={() => setIsEditing(true)}>Éditer</button>
                 <button onClick={() => handleDelete(taskId)}>Supprimer</button>
