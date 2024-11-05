@@ -166,21 +166,31 @@ app.post("/send-notification", (req, res) => {
    const notificationPayload = {
       title: "Nouvelle notif",
       body: "C'est la nouvelle notif",
-      icon: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgnz3qx_3h36bMDGZX_y3_wIrFVS2LdkZgrg0prdaQdg7XLUVzk8LidsSTNY-jU_tLTAsJqkyfHf_sdnPJu2aR5XKdwBi25yap8uS5LZXfRKu-ib-sHHIyP0nc3AE1XkUZWjrTJgAmjFbiC/s640/PB193883.JPG",
+      icon: "https://example.com/icon.png",
       data: {
          url: "coucou.html"
       },
    };
 
    // Envoi de la notification à tous les abonnés
-   Promise.all(
-      subscriptions.map((subscription) =>
-         webpush.sendNotification(subscription, JSON.stringify(notificationPayload))
-      )
-   )
+   sendNotification(subscriptions, notificationPayload)
    .then(() => res.status(200).json({ status: "envoyé" })) // Si tout s'est bien passé, renvoie un statut de succès
    .catch((err) => {
       console.error("erreur a l'envoie de la notification", err); // En cas d'erreur, affiche l'erreur dans la console
       res.status(500); // Renvoie un statut d'erreur serveur
    });
 });
+
+// Fonction pour envoyer une notification à tous les abonnés
+async function sendNotification(subscriptions, notificationPayload) {
+    try {
+        await Promise.all(
+            subscriptions.map((subscription) =>
+                webpush.sendNotification(subscription, JSON.stringify(notificationPayload))
+            )
+        );
+        console.log("Notification envoyée avec succès");
+    } catch (error) {
+        console.error("Erreur lors de l'envoi de la notification :", error);
+    }
+}
