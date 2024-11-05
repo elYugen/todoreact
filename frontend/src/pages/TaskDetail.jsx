@@ -36,6 +36,11 @@ function TaskDetail() {
       setEditedTask(prev => ({ ...prev, [name]: value }));
     };
 
+    const handleCheckboxChange = (e) => {
+      const { checked } = e.target;
+      handleComplete(taskId, checked);
+    };
+
     const saveEditedTask = async () => {
       try {
         await axios.put(`http://localhost:8080/task/${taskId}`, editedTask);
@@ -107,7 +112,7 @@ function TaskDetail() {
                 </div>
                 <div className="divCategorieTache">
                   <h3>Catégorie</h3>
-                  <p>{task.category}</p>
+                  <p>{task.category && task.category.length > 0 ? task.category : "Aucun projet"}</p>
                 </div>
                 <div className="divDateTache">
                   <h3>Date</h3>
@@ -115,7 +120,14 @@ function TaskDetail() {
                 </div>
               </article>
               <div className="taskActions">
-                <button onClick={() => handleComplete(taskId)}>Valider</button>
+                <label>
+                  Tâche complétée
+                  <input
+                    type="checkbox"
+                    checked={task.isCompleted}
+                    onChange={handleCheckboxChange}
+                  />
+                </label>
                 <button onClick={() => setIsEditing(true)}>Éditer</button>
                 <button onClick={() => handleDelete(taskId)}>Supprimer</button>
               </div>
@@ -125,13 +137,13 @@ function TaskDetail() {
       </>
     );
   
-    async function handleComplete(id) {
+    async function handleComplete(id, isCompleted) {
       try {
-        await axios.put(`http://localhost:8080/task/${id}`, { isCompleted: true });
-        setTask({ ...task, isCompleted: true });
-        alert("Tâche marquée comme complétée !");
+        await axios.put(`http://localhost:8080/task/${id}`, { isCompleted });
+        setTask({ ...task, isCompleted });
+        alert(isCompleted ? "Tâche marquée comme complétée !" : "Tâche marquée comme non complétée !");
       } catch (error) {
-        setError("Erreur lors de la validation de la tâche.");
+        setError("Erreur lors de la mise à jour de l'état de la tâche.");
       }
     }
   

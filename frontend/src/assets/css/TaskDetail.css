@@ -11,9 +11,19 @@
     margin-bottom: 20px;
 }
 
-.taskDetailActions button {
-    margin: 10px;
-    padding: 10px 20px;
+.taskActions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.taskActions button {
+    background-color: #1464c7;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
     cursor: pointer;
 }
 
