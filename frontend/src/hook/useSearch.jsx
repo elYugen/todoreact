@@ -1,6 +1,5 @@
 import { useState, useCallback } from "react";
 import axios from "axios";
-
 const useSearch = (userId) => {
     const [projects, setProjects] = useState([]);
     const [task, setTask] = useState([]);
@@ -15,7 +14,6 @@ const useSearch = (userId) => {
           }
       
           console.log("Requête de recherche avec query :", query); 
-
       setLoading(true);
       setError(null);
   
@@ -45,4 +43,3 @@ const useSearch = (userId) => {
   };
   
   export default useSearch;
-  

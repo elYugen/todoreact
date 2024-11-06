@@ -19,12 +19,16 @@ import session from "express-session";
 // Connect-mongo : Stocke les sessions dans MongoDB au lieu de la mémoire du serveur
 import MongoStore from 'connect-mongo';
 
+// Web Push : Notification push pour notre application
+import webpush from "web-push";
+
 // Import des routes : Fichiers contenant la logique pour différentes parties de l'application
 import userRoute from "./routes/usersRoute.js";    // Routes pour la gestion des utilisateurs (CRUD)
 import authRoute from "./routes/authRoute.js";      // Routes pour l'authentification
-import taskRoute from "./routes/taskRoute.js";
+import taskRoute from "./routes/taskRoute.js"; // Routes pour la gestion des tâches (CRUD)
 import projectsRoute from "./routes/projectsRoute.js"; // Routes pour la gestion des projets (CRUD)
-import HabitsTrackersRoute from "./routes/HabitsTrackersRoute.js";
+import HabitsTrackersRoute from "./routes/HabitsTrackersRoute.js"; // Routes pour la gestion des habitudes (CRUD)
+
 /************************************/
 /*    CRÉATION DE L'APPLICATION     */
 /************************************/
@@ -33,6 +37,12 @@ const app = express()
 
 // Définition du port d'écoute (récupéré depuis les variables d'environnement)
 const port = process.env.PORT;
+
+// Définition des vapidKeys (récupéré depuis les variables d'environnement)
+const vapidKeys = {
+   publicKey: process.env.VAPID_PUBLIC_KEY,
+   privateKey: process.env.VAPID_PRIVATE_KEY,
+};
 
 /************************************/
 /*   CONNEXION BASE DE DONNÉES      */
@@ -112,7 +122,8 @@ app.use('/task', taskRoute);
 app.use('/users', userRoute);  // Toutes les routes commençant par /users
 app.use('/auth', authRoute);   // Toutes les routes commençant par /auth
 app.use('/projects', projectsRoute); //Toutes les routes commençant par /projects
-app.use('/habitstrackers', HabitsTrackersRoute);
+app.use('/habitstrackers', HabitsTrackersRoute); //Toutes les routes commençant par /habitstrackers
+
 /************************************/
 /*    GESTION GLOBALE DES ERREURS  */
 /************************************/
@@ -121,3 +132,67 @@ app.use((err, req, res, next) => {
    console.error(err.stack);  // Log l'erreur pour le débogage
    res.status(500).send('Quelque chose s\'est mal passé!');  // Renvoie une réponse d'erreur générique
 });
+
+/************************************/
+/*        NOTIFICATION PUSH         */
+/************************************/
+
+// Configuration des détails VAPID pour l'authentification des notifications push
+webpush.setVapidDetails(
+   "mailto:test@gmail.com",
+   vapidKeys.publicKey,
+   vapidKeys.privateKey,
+)
+
+// Tableau pour stocker les abonnements des utilisateurs
+let subscriptions = [];
+
+// Route pour gérer les nouvelles souscriptions
+app.post("/subscribe", (req, res) => {
+   const subscription = req.body; // Récupère les données d'abonnement envoyées par le client
+   console.log("nouvelle souscription:", subscription);
+   subscriptions.push(subscription); // Ajoute l'abonnement au tableau
+   res.status(201).json({status: "abonnement effectué"}); // Répond avec un statut de succès
+});
+
+// Route pour obtenir la liste des abonnements
+app.get("/subscriptions", (req, res) => {
+   res.json(subscriptions); // Renvoie la liste des abonnements au format JSON
+});
+
+// Route pour envoyer une notification à tous les abonnés
+app.post("/send-notification", (req, res) => {
+   // Définition du contenu de la notification
+   const notificationPayload = {
+      title: "Nouvelle notif",
+      body: "C'est la nouvelle notif",
+      icon: "https://example.com/icon.png",
+      data: {
+         url: "coucou.html"
+      },
+   };
+
+   // Envoi de la notification à tous les abonnés
+   sendNotification(subscriptions, notificationPayload)
+   .then(() => res.status(200).json({ status: "envoyé" })) // Si tout s'est bien passé, renvoie un statut de succès
+   .catch((err) => {
+      console.error("erreur a l'envoie de la notification", err); // En cas d'erreur, affiche l'erreur dans la console
+      res.status(500); // Renvoie un statut d'erreur serveur
+   });
+});
+
+// Fonction pour envoyer une notification à tous les abonnés
+async function sendNotification(subscriptions, notificationPayload) {
+   try {
+       await Promise.all(
+           subscriptions.map((subscription) =>
+               webpush.sendNotification(subscription, JSON.stringify(notificationPayload))
+           )
+       );
+       console.log("Notification envoyée avec succès");
+   } catch (error) {
+       console.error("Erreur lors de l'envoi de la notification :", error);
+   }
+}
+
+export default app;

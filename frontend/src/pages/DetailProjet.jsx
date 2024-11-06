@@ -23,25 +23,41 @@ function DetailProjet() {
     if (projectId) fetchProjectDetails();
   }, [projectId]);
 
+  const handleTaskCompletion = async (taskId, isCompleted) => {
+    try {
+      await axios.put(`http://localhost:8080/task/${taskId}`, { isCompleted });
+      
+      // Mettre à jour l'état local du projet
+      setProject(prevProject => ({
+        ...prevProject,
+        tasks: prevProject.tasks.map(task => 
+          task._id === taskId ? { ...task, isCompleted } : task
+        )
+      }));
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour de la tâche :", error);
+      setError("Une erreur est survenue lors de la mise à jour de la tâche.");
+    }
+  };
+
   if (error) {
     return <div>{error}</div>;
   }
 
   if (!project) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
     <>
-    <TopBar pagename={"Détails du projet"} /> 
+      <TopBar pagename={"Détails du projet"} /> 
       <section className="containerGeneral">
-        {/* Passe project.name en prop à TopBar */}
         <h2 className="titreProjet">{project.projectname}</h2>
 
         <article className="bordureBloc">
           <div className="divDescriptionProjet">
             <h3>Description</h3>
-            <p>{project.description}</p>
+            <p>{project.description.length > 0 ? project.description : "Pas de description"}</p>
           </div>
         </article>
 
@@ -55,9 +71,16 @@ function DetailProjet() {
             <div className="ListTask">
               <ul className="UlListTask">
                 {project.tasks && project.tasks.map((task) => (
-                  <div className="radioBoutonLabel" key={task._id}>
-                    <label htmlFor={task._id}>{task.name}</label>
-                    <input type="radio" id={task._id} value={task.name} />
+                  <div className="checkboxLabel" key={task._id}>
+                    <label htmlFor={task._id}>
+                      <input 
+                        type="checkbox" 
+                        id={task._id} 
+                        checked={task.isCompleted}
+                        onChange={(e) => handleTaskCompletion(task._id, e.target.checked)}
+                      />
+                      {task.name}
+                    </label>
                   </div>
                 ))}
               </ul>

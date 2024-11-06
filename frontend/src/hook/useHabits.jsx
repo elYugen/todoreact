@@ -18,7 +18,7 @@ const useUserHabits = (userId) => {
             } catch (err) {
                 setError(
                     err.response?.data?.message || 
-                    "Une erreur est survenue lors de la récupération des projets"
+                    "Une erreur est survenue lors de la récupération des habitudes"
                 );
             } finally {
                 setLoading(false);

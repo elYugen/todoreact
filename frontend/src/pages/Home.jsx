@@ -49,7 +49,7 @@ function Home() {
             <div className="homeContainer">
               <div className="homeTop">
                   <h3>Projet en cours</h3>
-                  <a href="#">Voir tout</a>
+                  <a href="bucketlist">Voir tout</a>
               </div>
               <div className="homeCategoriesBox">
                 <CategoriesBox userId={user._id}/>
@@ -59,13 +59,13 @@ function Home() {
             {/* Liste des tâches */}
             <div className="homeContainer">
               <div className="homeTop">
-                <h3>Tâches du jour</h3>
+                <h3>Tâche(s) du jour</h3>
               </div>
               
               {/* Onglets de tâches */}
               <div className="homeTaskStateList">
                 <button className={`${activeTab === 'todo' ? 'homeTaskStateActive' : 'homeTaskState'}`} onClick={() => setActiveTab('todo')}>À Faire</button>
-                <button className={`${activeTab === 'completed' ? 'homeTaskStateActive' : 'homeTaskState'}`} onClick={() => setActiveTab('completed')}>Compléter</button>
+                <button className={`${activeTab === 'completed' ? 'homeTaskStateActive' : 'homeTaskState'}`} onClick={() => setActiveTab('completed')}>Complétée(s)</button>
                 <button className={`${activeTab === 'all' ? 'homeTaskStateActive' : 'homeTaskState'}`} onClick={() => setActiveTab('all')}>Tout</button>
               </div>
 
