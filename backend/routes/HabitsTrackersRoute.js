@@ -67,19 +67,38 @@ router.get('/:id', async (request, response) => {
 // Route pour MODIFIER un utilisateur (PUT)
 router.put('/:id', async (request, response) => {
     try {
-      const { id } = request.params;
-      const { backgroundColor, borderColor, isCompleted } = request.body;
-      const result = await HabitsTrackers.findByIdAndUpdate(
-        id,
-        { backgroundColor, borderColor, isCompleted },
-        { new: true }
-      );
-      return response.status(200).json(result);
+        const { id } = request.params;
+        const { isCompleted } = request.body;
+        
+        // Validation de isCompleted
+        if (typeof isCompleted !== 'boolean') {
+            return response.status(400).json({ 
+                message: "isCompleted doit être un booléen (true/false)" 
+            });
+        }
+
+        const result = await HabitsTrackers.findByIdAndUpdate(
+            id,
+            { isCompleted },
+            { new: true }
+        );
+
+        if (!result) {
+            return response.status(404).json({ 
+                message: "Habitude non trouvée" 
+            });
+        }
+
+        return response.status(200).json(result);
+
     } catch (error) {
-      console.log(error.message);
-      response.status(404).send({ message: error.message });
+        console.error('Erreur lors de la mise à jour :', error.message);
+        return response.status(500).json({ 
+            message: "Erreur lors de la mise à jour de l'habitude",
+            error: error.message 
+        });
     }
-  });
+});
 
 // Route pour SUPPRIMER un projet (DELETE)
 router.delete('/:id', async (request, response) => {
