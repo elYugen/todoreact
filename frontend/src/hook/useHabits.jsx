@@ -37,6 +37,7 @@ const useUserHabits = (userId) => {
         habits,
         loading,
         error,
+        setHabits
     };
 };
 

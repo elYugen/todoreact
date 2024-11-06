@@ -66,17 +66,20 @@ router.get('/:id', async (request, response) => {
 
 // Route pour MODIFIER un utilisateur (PUT)
 router.put('/:id', async (request, response) => {
-   try {
-       const { id } = request.params  // On récupère l'ID du projet à modifier
-       // On met à jour le projet avec les nouvelles données
-       const result = await HabitsTrackers.findByIdAndUpdate(id, request.body, {new: true})
-       return response.status(200).json(result)
-   } catch (error) {
-       // Gestion des erreurs
-       console.log(error.message);
-       response.status(404).send({ message: error.message })
-   }
-})
+    try {
+      const { id } = request.params;
+      const { backgroundColor, borderColor, isCompleted } = request.body;
+      const result = await HabitsTrackers.findByIdAndUpdate(
+        id,
+        { backgroundColor, borderColor, isCompleted },
+        { new: true }
+      );
+      return response.status(200).json(result);
+    } catch (error) {
+      console.log(error.message);
+      response.status(404).send({ message: error.message });
+    }
+  });
 
 // Route pour SUPPRIMER un projet (DELETE)
 router.delete('/:id', async (request, response) => {

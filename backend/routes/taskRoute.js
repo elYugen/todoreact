@@ -193,5 +193,6 @@ router.get('/user/:userId', async (request, response) => {
         response.status(500).send({ message: error.message });
     }
 });
+
 // On exporte notre routeur pour l'utiliser dans notre application
 export default router;
