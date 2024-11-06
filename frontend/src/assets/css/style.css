@@ -30,7 +30,6 @@ a {
 }
 
 /* ----------------------------  Page détail projet ------------------------------------------ */
-
 .containerGeneral {
     width: 95%;
     margin: auto;
@@ -291,6 +290,10 @@ left: 70%;
     margin-right: 10px;
 }
 
+.buttonTaskActive {
+    background-color: #0091ca;
+    border-color: #0091ca;
+}
 /* ----------------------------  Page profile ------------------------------------------ */
 
 .generalProfil {

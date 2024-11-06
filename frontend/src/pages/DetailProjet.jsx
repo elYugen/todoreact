@@ -3,11 +3,13 @@ import { useParams } from "react-router-dom";
 import TopBar from "../components/TopBar/TopBar";
 import axios from "axios";
 import Loading from "../components/Loading/Loading";
+import { useNavigate } from 'react-router-dom';
 
 function DetailProjet() {
   const { id: projectId } = useParams();
   const [project, setProject] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProjectDetails = async () => {
@@ -48,6 +50,10 @@ function DetailProjet() {
     return <Loading />;
   }
 
+  const goToAdd = async () => {
+    navigate(`/create/task`)
+  }
+
   return (
     <>
       <TopBar pagename={"Détails du projet"} /> 
@@ -65,7 +71,7 @@ function DetailProjet() {
           <div className="divBlocListeTaches">
             <div className="titreBoutonTask">
               <h3>Liste des tâches</h3>
-              <input className="add" type="button" value="Ajouter" />
+              <input className="add" type="button" value="Ajouter" onClick={goToAdd} />
             </div>
 
             <div className="ListTask">
@@ -73,12 +79,7 @@ function DetailProjet() {
                 {project.tasks && project.tasks.map((task) => (
                   <div className="checkboxLabel" key={task._id}>
                     <label htmlFor={task._id}>
-                      <input 
-                        type="checkbox" 
-                        id={task._id} 
-                        checked={task.isCompleted}
-                        onChange={(e) => handleTaskCompletion(task._id, e.target.checked)}
-                      />
+                      <input type="checkbox" id={task._id} checked={task.isCompleted} onChange={(e) => handleTaskCompletion(task._id, e.target.checked)}/>
                       {task.name}
                     </label>
                   </div>

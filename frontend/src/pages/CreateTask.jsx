@@ -49,7 +49,7 @@ function CreateTask() {
           Projet :
           <div>
             {projects.map(project => (
-              <button key={project._id} onClick={() => setProjectId(project._id)} className={`addTask buttonTask ${projectId === project._id ? 'active' : ''}`}>
+              <button key={project._id} onClick={() => setProjectId(project._id)} className={`addTask buttonTask ${projectId === project._id ? 'buttonTaskActive' : ''}`}>
                 {project.projectname}
               </button>
             ))}

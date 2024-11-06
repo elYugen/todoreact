@@ -63,7 +63,7 @@ router.get('/', async (request, response) => {
 router.get('/:id', async (request, response) => {
    try {
        const { id } = request.params;  // On récupère l'ID depuis l'URL
-       const task = await Task.findById(id);  // On cherche l'utilisateur
+       const task = await Task.findById(id); 
        return response.status(200).json(task)
    } catch (error) {
        // Gestion des erreurs
