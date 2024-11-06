@@ -5,7 +5,6 @@ import useUserHabits from "../../hook/useHabits"; // Hook personnalisé pour gé
 import Loading from "../Loading/Loading"; // Composant de chargement
 import "./HabitsTrackers.css" // Styles CSS
 import axios from "axios"; // Bibliothèque pour faire des requêtes HTTP
-import { useNavigate } from "react-router-dom";
 
 // Définition du composant HabitsTrackers qui prend userId comme prop
 const HabitsTrackers = ({ userId }) => {
