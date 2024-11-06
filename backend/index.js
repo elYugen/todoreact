@@ -183,14 +183,16 @@ app.post("/send-notification", (req, res) => {
 
 // Fonction pour envoyer une notification à tous les abonnés
 async function sendNotification(subscriptions, notificationPayload) {
-    try {
-        await Promise.all(
-            subscriptions.map((subscription) =>
-                webpush.sendNotification(subscription, JSON.stringify(notificationPayload))
-            )
-        );
-        console.log("Notification envoyée avec succès");
-    } catch (error) {
-        console.error("Erreur lors de l'envoi de la notification :", error);
-    }
+   try {
+       await Promise.all(
+           subscriptions.map((subscription) =>
+               webpush.sendNotification(subscription, JSON.stringify(notificationPayload))
+           )
+       );
+       console.log("Notification envoyée avec succès");
+   } catch (error) {
+       console.error("Erreur lors de l'envoi de la notification :", error);
+   }
 }
+
+export default app;
