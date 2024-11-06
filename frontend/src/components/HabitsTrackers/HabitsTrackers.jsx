@@ -4,6 +4,7 @@ import useUserHabits from "../../hook/useHabits"; // Hook personnalisé pour gé
 import Loading from "../Loading/Loading"; // Composant de chargement
 import "./HabitsTrackers.css" // Styles CSS
 import axios from "axios"; // Bibliothèque pour faire des requêtes HTTP
+import { useNavigate } from "react-router-dom";
 
 // Définition du composant HabitsTrackers qui prend userId comme prop
 const HabitsTrackers = ({ userId }) => {
@@ -13,8 +14,9 @@ const HabitsTrackers = ({ userId }) => {
   // error: message d'erreur s'il y en a un
   // setHabits: fonction pour mettre à jour les habitudes
   const { habits, loading, error, setHabits } = useUserHabits(userId);
+  const navigate = useNavigate();
 
-  // Fonction qui gère le clic sur le bouton check pour marquer une habitude comme complétée
+  // ----------- Fonction qui gère le clic sur le bouton check pour marquer une habitude comme complétée------------------------//
   const toggleHabitCompletion = async (habit) => {
     // Inverse l'état actuel de isCompleted
     const newIsCompleted = !habit.isCompleted;
@@ -53,6 +55,7 @@ const HabitsTrackers = ({ userId }) => {
     }
   };
 
+
   // Fonction qui retourne les styles CSS en fonction de l'état isCompleted
   const getHabitStyles = (isCompleted) => {
     return {
@@ -62,6 +65,22 @@ const HabitsTrackers = ({ userId }) => {
       borderColor: isCompleted ? "green" : "#1464C7",
     };
   };
+
+    // ------------------------ Fonction pour supprimer une habitude ----------------------------------------------------//
+    async function handledelete(habit) {
+      try {
+        await axios.delete(`http://localhost:8080/habitstrackers/${habit._id}`);
+        location.reload();
+      } catch (error) {
+        console.log("Erreur lors de la suppression de l'habitude :", error);
+      }
+    };
+
+    // ------------------------ Fonction pour éditer une habitude ----------------------------------------------------//
+
+    const goToEdit = async (habitId) => {
+      navigate (`/update/habit/${habitId}`)
+    }
 
   // Si les données sont en cours de chargement, on affiche le composant Loading
   if (loading) return <Loading />;
@@ -80,9 +99,9 @@ const HabitsTrackers = ({ userId }) => {
             {/* Bouton check qui appelle toggleHabitCompletion au clic */}
             <img className="iconeUpdateDelete Ud1" src="../../../public/check-solid.svg" alt="icone update" onClick={() => toggleHabitCompletion(habit)}/>
             {/* Bouton pour modifier l'habitude */}
-            <img className="iconeUpdateDelete Ud2" src="../../../public/pencil-solid.svg" alt="icone update"/>
+            <img className="iconeUpdateDelete Ud2" src="../../../public/pencil-solid.svg" alt="icone update" onClick={() => goToEdit(habit._id)}/>
             {/* Bouton pour supprimer l'habitude */}
-            <img className="iconeUpdateDelete Ud3" src="../../../public/xmark-solid.svg" alt="icone update"/>
+            <img className="iconeUpdateDelete Ud3" src="../../../public/xmark-solid.svg" alt="icone update" onClick={() => handledelete(habit)}/>
           </div>
           {/* Barre principale de l'habitude avec les styles dynamiques */}
           <div className="barreTracker" style={getHabitStyles(habit.isCompleted)}>
