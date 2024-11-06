@@ -18,7 +18,8 @@ import Register from './pages/Register';
 import Agenda from './pages/Agenda';
 import Bucketlist from './pages/Bucketlist';
 import CreateHabit from "./pages/CreateHabit";
-import TaskDetail from './pages/TaskDetail.jsx'; 
+import TaskDetail from './pages/TaskDetail.jsx';
+import UpdateHabit from './pages/UpdateHabit.jsx'; 
 
 // On importe le style global qui sera appliqué à l'ensemble de l'application
 import './assets/css/style.css';
@@ -102,6 +103,7 @@ function App() {
           <Route path="register" element={<Register/>} />
           <Route path="create/habit" element={<CreateHabit/>} />
           <Route path="task/:id" element={<TaskDetail />} /> {/* Nouvelle route pour afficher une tâche spécifique */}
+          <Route path="update/habit/:id" element={<UpdateHabit/>}/>
 
           {/* Le path * correspond à l'erreur 404, si une page est inexistante ou introuvable */}
           <Route path="*" element={<NoPage />} />
