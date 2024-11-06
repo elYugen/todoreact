@@ -1,5 +1,6 @@
 // Importation des dépendances nécessaires
 import React, { useEffect, useState } from "react"; // React et ses hooks
+import { useParams, useNavigate } from 'react-router-dom';
 import useUserHabits from "../../hook/useHabits"; // Hook personnalisé pour gérer les habitudes
 import Loading from "../Loading/Loading"; // Composant de chargement
 import "./HabitsTrackers.css" // Styles CSS
@@ -13,6 +14,8 @@ const HabitsTrackers = ({ userId }) => {
   // error: message d'erreur s'il y en a un
   // setHabits: fonction pour mettre à jour les habitudes
   const { habits, loading, error, setHabits } = useUserHabits(userId);
+  const navigate = useNavigate();
+  
 
   // Fonction qui gère le clic sur le bouton check pour marquer une habitude comme complétée
   const toggleHabitCompletion = async (habit) => {
@@ -63,6 +66,16 @@ const HabitsTrackers = ({ userId }) => {
     };
   };
 
+  async function handleDelete(habit) {
+    try {
+      await axios.delete(`http://localhost:8080/habitstrackers/${habit._id}`);
+      location.reload();
+    } catch (error) {
+      console.log("Erreur lors de la suppression de l'habitude.");
+    }
+  }
+
+
   // Si les données sont en cours de chargement, on affiche le composant Loading
   if (loading) return <Loading />;
   // Si une erreur s'est produite, on affiche le message d'erreur
@@ -82,7 +95,7 @@ const HabitsTrackers = ({ userId }) => {
             {/* Bouton pour modifier l'habitude */}
             <img className="iconeUpdateDelete Ud2" src="../../../public/pencil-solid.svg" alt="icone update"/>
             {/* Bouton pour supprimer l'habitude */}
-            <img className="iconeUpdateDelete Ud3" src="../../../public/xmark-solid.svg" alt="icone update"/>
+            <img className="iconeUpdateDelete Ud3" src="../../../public/xmark-solid.svg" alt="icone update" onClick={() => handleDelete(habit)}/>
           </div>
           {/* Barre principale de l'habitude avec les styles dynamiques */}
           <div className="barreTracker" style={getHabitStyles(habit.isCompleted)}>
