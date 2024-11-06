@@ -29,7 +29,7 @@ const HabitsTrackers = ({ userId }) => {
                 isCompleted: newIsCompleted,
               };
             }
-            return h;
+            return habits;
           })
         );
       }
