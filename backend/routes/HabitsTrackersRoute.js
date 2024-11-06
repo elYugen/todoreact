@@ -68,24 +68,30 @@ router.get('/:id', async (request, response) => {
 router.put('/:id', async (request, response) => {
     try {
         const { id } = request.params;
-        const { isCompleted } = request.body;
-        
-        // Validation de isCompleted
-        if (typeof isCompleted !== 'boolean') {
-            return response.status(400).json({ 
-                message: "isCompleted doit être un booléen (true/false)" 
+        const { habitname, date, icone, isCompleted } = request.body;
+
+        // iscompleted est validé seulement si il est dans la requete
+        if (isCompleted !== undefined && typeof isCompleted !== 'boolean') {
+            return response.status(400).json({
+                message: "isCompleted doit être un booléen (true/false)"
             });
+        }
+
+        // champ pour les maj pour éviter que iscompleted  sois envoyer si il n'y est pas
+        const updateFields = { habitname, date, icone };
+        if (isCompleted !== undefined) {
+            updateFields.isCompleted = isCompleted;
         }
 
         const result = await HabitsTrackers.findByIdAndUpdate(
             id,
-            { isCompleted },
+            updateFields,
             { new: true }
         );
 
         if (!result) {
-            return response.status(404).json({ 
-                message: "Habitude non trouvée" 
+            return response.status(404).json({
+                message: "Habitude non trouvée"
             });
         }
 
@@ -93,9 +99,9 @@ router.put('/:id', async (request, response) => {
 
     } catch (error) {
         console.error('Erreur lors de la mise à jour :', error.message);
-        return response.status(500).json({ 
+        return response.status(500).json({
             message: "Erreur lors de la mise à jour de l'habitude",
-            error: error.message 
+            error: error.message
         });
     }
 });
