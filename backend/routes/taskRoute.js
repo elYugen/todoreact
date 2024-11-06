@@ -167,22 +167,22 @@ router.get('/user/:userId', async (request, response) => {
 
         const tasks = await Task.find(filters);
 
-        // Parcourir les tâches et vérifier celles dont la date d'échéance est le lendemain
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
+        // // Parcourir les tâches et vérifier celles dont la date d'échéance est le lendemain
+        // const tomorrow = new Date();
+        // tomorrow.setDate(tomorrow.getDate() + 1);
 
-        const tasksWithTomorrowDeadline = tasks.filter(task => {
-            const taskDate = new Date(task.date);
-            return taskDate.toDateString() === tomorrow.toDateString();
-        });
+        // const tasksWithTomorrowDeadline = tasks.filter(task => {
+        //     const taskDate = new Date(task.date);
+        //     return taskDate.toDateString() === tomorrow.toDateString();
+        // });
 
-        // Envoyer la notification pour chaque tâche avec échéance le lendemain
-        await Promise.all(tasksWithTomorrowDeadline.map(async task => {
-            await sendNotification(
-                subscriptions,
-                `Rappel : Échéance de la tâche "${task.name}" demain`
-            );
-        }));
+        // // Envoyer la notification pour chaque tâche avec échéance le lendemain
+        // await Promise.all(tasksWithTomorrowDeadline.map(async task => {
+        //     await sendNotification(
+        //         subscriptions,
+        //         `Rappel : Échéance de la tâche "${task.name}" demain`
+        //     );
+        // }));
 
         return response.status(200).json({
             count: tasks.length,
