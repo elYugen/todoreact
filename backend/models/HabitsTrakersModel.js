@@ -11,6 +11,12 @@ const HabitsTrackersSchema = new mongoose.Schema(
         date: { type: String, required: true },
  
         user: { type: String, required: true },
+
+        backgroundColor: { type: String, default: "#4cc0ee" },
+        
+        borderColor: { type: String, default: "#1464C7" },
+
+        isCompleted: { type: Boolean, default: false },
  
     },
  

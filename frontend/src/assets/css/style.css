@@ -129,7 +129,7 @@ a {
     padding-left: 10px;
     padding-right: 10px;
     background-color: #4cc0ee;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .pHabits {
@@ -141,6 +141,45 @@ a {
     border: none;
     width: 40px;
     height: 40px;
+}
+
+.containerBarre {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.boutonsBarre{
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    width: 100%;
+    top: -13px;
+}
+
+.iconeUpdateDelete {
+width: 15px;
+height: 15px;
+border: 1px solid black;
+border-radius: 50%;
+padding: 5px;
+position: absolute;
+}
+
+.Ud1{
+background-color: lightgreen;
+left: 70%;
+}
+
+.Ud2{
+    background-color: lightsalmon;
+    left: 80%;
+}
+
+.Ud3{
+    background-color: lightcoral;
+    left: 90%;
 }
 
 
@@ -261,6 +300,10 @@ a {
     align-items: center;
     justify-content: center;
     padding: 5px;
+}
+
+.countBox2 {
+    border-right: none;
 }
 
 .bottomBox {

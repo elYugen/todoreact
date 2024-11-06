@@ -2,11 +2,8 @@ import React from "react";
 import useUserProjects from "../../hook/useUserProjects";
 import Loading from "../Loading/Loading";
 import "./Bucketlist.css";
-<<<<<<< HEAD
 import { useAuth } from "../../hook/useAuth";
-=======
-import { useNavigate } from 'react-router-dom';
->>>>>>> origin/main
+import { useNavigate } from "react-router-dom";
 
 const Bucketlist = ({ userId }) => {
   const { projects, loading, error } = useUserProjects(userId);
