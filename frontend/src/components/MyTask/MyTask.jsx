@@ -7,11 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 function MyTask({ userId, filter }) {
   const { tasks, loading, error, setTasks } = useUserTasks(userId);
-  const [editingTaskId, setEditingTaskId] = useState(null);
-  const [editedTaskName, setEditedTaskName] = useState('');
   const [showAllTasks, setShowAllTasks] = useState(false); 
   const navigate = useNavigate();
-
 
   if (loading) return <Loading />;
   if (error) return <div>Erreur: {error}</div>;
@@ -20,49 +17,20 @@ function MyTask({ userId, filter }) {
     return <><p>Tu n'as pas encore de tâche en cours.</p></>;
   }
 
-  const completeTask = async (taskId) => {
-    try {
-      await axios.put(`http://localhost:8080/task/${taskId}`, { isCompleted: true });
-      setTasks((prevTasks) =>
-        prevTasks.map((task) =>
-          task._id === taskId ? { ...task, isCompleted: true } : task
-        )
-      );
-    } catch (error) {
-      console.error("Erreur lors de la validation de la tâche :", error);
-    }
+  // Fonction pour obtenir la date du jour au format XX-XX-XXXX
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return `${d.getDate().toString().padStart(2, '0')}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getFullYear()}`;
   };
 
-  const startEditing = (taskId, taskName) => {
-    setEditingTaskId(taskId);
-    setEditedTaskName(taskName);
-  };
+  // Date du jour
+  const today = formatDate(new Date());
 
-  const saveEditedTask = async (taskId) => {
-    try {
-      await axios.put(`http://localhost:8080/task/${taskId}`, { name: editedTaskName });
-      setTasks((prevTasks) =>
-        prevTasks.map((task) =>
-          task._id === taskId ? { ...task, name: editedTaskName } : task
-        )
-      );
-      setEditingTaskId(null);
-    } catch (error) {
-      console.error("Erreur lors de l'édition de la tâche :", error);
-    }
-  };
-
-  const deleteTask = async (taskId) => {
-    try {
-      await axios.delete(`http://localhost:8080/task/${taskId}`);
-      setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
-    } catch (error) {
-      console.error("Erreur lors de la suppression de la tâche :", error);
-    }
-  };
-
+  // Filtrage des tâches en fonction du filtre et de la date
   const filteredTasks = tasks.filter((task) => {
-    if (filter === 'todo') return !task.isCompleted;
+    const taskDate = formatDate(task.date); // Date de la tâche formatée
+
+    if (filter === 'todo') return !task.isCompleted && taskDate === today;
     if (filter === 'completed') return task.isCompleted;
     return true;
   });
@@ -70,8 +38,8 @@ function MyTask({ userId, filter }) {
   // Limitation à 5 tâches si showAllTasks est false
   const displayedTasks = showAllTasks ? filteredTasks : filteredTasks.slice(0, 4);
 
-  const goToAgenda = async (e) => { // fonction fléché qui permet de rediriger vers l'agenda
-    navigate('/agenda');          // en cliquant sur le bouton agenda
+  const goToAgenda = async (e) => { 
+    navigate('/agenda');          
   }
 
   const goToTask = async (taskId) => {
@@ -81,17 +49,17 @@ function MyTask({ userId, filter }) {
   return (
     <>
       {displayedTasks.map((task) => (
-        <div className="myTaskBox" key={task._id}  onClick={(e) => {e.stopPropagation(); goToTask(task._id);}}>
+        <div className="myTaskBox" key={task._id} onClick={(e) => { e.stopPropagation(); goToTask(task._id); }}>
           <div className="myTaskBoxContent">
             <div className="myTaskBoxContentIcon" style={{ backgroundColor: "lightgrey" }}>
               <span>🤹</span>
             </div>
 
             <div className="myTaskBoxContentTitle">
-                <p><b>{task.name}</b></p>
+              <p><b>{task.name}</b></p>
             </div>
             <div className="myTaskBoxSeeDetails">
-                <i className="bi bi-chevron-right"></i>
+              <i className="bi bi-chevron-right"></i>
             </div>
           </div>
         </div>
