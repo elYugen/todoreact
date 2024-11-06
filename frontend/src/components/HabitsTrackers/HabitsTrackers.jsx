@@ -31,19 +31,19 @@ const HabitsTrackers = ({ userId }) => {
         // Mise à jour de l'état local des habitudes
         setHabits(prevHabits =>
           // On parcourt toutes les habitudes
-          prevHabits.map((habit) => {
+          prevHabits.map((habite) => {
             // Si c'est l'habitude qu'on vient de modifier
-            if (habit._id === response.data._id) {
+            if (habite._id === response.data._id) {
               // On retourne une nouvelle habitude avec isCompleted mis à jour
               return {
-                _id: habit._id,
-                habitname: habit.habitname,
-                icone: habit.icone,
+                _id: habite._id,
+                habitname: habite.habitname,
+                icone: habite.icone,
                 isCompleted: newIsCompleted,
               };
             }
             // Sinon on retourne l'habitude sans la modifier
-            return habits;
+            return habite;
           })
         );
       }
