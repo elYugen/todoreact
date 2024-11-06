@@ -12,6 +12,13 @@ const Bucketlist = ({ userId }) => {
   if (loading) return <Loading/>;
   if (error) return <div>Erreur: {error}</div>;
 
+  const limiteNomProjet = (name) => {
+    if (name.length > 18) {
+      return name.substring(0, 13) + "..";
+    }
+    return name;
+  };
+
   return (
     <>
       {projects.map((project) => (
@@ -22,10 +29,10 @@ const Bucketlist = ({ userId }) => {
             </div>
             <div className="bucketlistBoxTitle" style={{ backgroundColor: "#efefef" }}>
               <div className="bucketlistBoxTitleTitre">
-                <p><b>{project.projectname}</b></p>
+                <p><b>{limiteNomProjet(project.projectname)}</b></p>
               </div>
               <div className="bucketlistBoxTitleRestant">
-                <p>{project.description}</p>
+                {/* <p>{project.description}</p> */}
               </div>
             </div>
           </div>
