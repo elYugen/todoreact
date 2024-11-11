@@ -3,109 +3,96 @@ import './MyTask.css';
 import Loading from '../Loading/Loading';
 import useUserTasks from '../../hook/useUserTask';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function MyTask({ userId, filter }) {
   const { tasks, loading, error, setTasks } = useUserTasks(userId);
-  const [editingTaskId, setEditingTaskId] = useState(null); // ID de la tâche en cours d'édition
-  const [editedTaskName, setEditedTaskName] = useState(''); // Nouveau nom de la tâche
-  
+  const [showAllTasks, setShowAllTasks] = useState(false); 
+  const navigate = useNavigate();
 
   if (loading) return <Loading />;
   if (error) return <div>Erreur: {error}</div>;
 
-  // Fonction pour marquer une tâche comme complétée
-  const completeTask = async (taskId) => {
-    try {
-      await axios.put(`http://localhost:8080/task/${taskId}`, { isCompleted: true });
-      setTasks((prevTasks) =>
-        prevTasks.map((task) =>
-          task._id === taskId ? { ...task, isCompleted: true } : task
-        )
-      );
-    } catch (error) {
-      console.error("Erreur lors de la validation de la tâche :", error);
-    }
+  if (tasks.length === 0) {
+    return <><p>Tu n'as pas encore de tâche en cours.</p></>;
+  }
+
+  // Fonction pour obtenir la date au format "YYYY-MM-DD"
+  const formatDate = (date) => {
+    const d = new Date(date);
+    d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
+    return d.toISOString().split('T')[0]; // Format "YYYY-MM-DD"
   };
 
-  // Fonction pour commencer l'édition d'une tâche
-  const startEditing = (taskId, taskName) => {
-    setEditingTaskId(taskId); // Définit la tâche en cours d'édition
-    setEditedTaskName(taskName); // Définit le nom actuel de la tâche dans le champ d'édition
-  };
+  // Date du jour
+  const today = formatDate(new Date());
 
-  // Fonction pour enregistrer les modifications de la tâche
-  const saveEditedTask = async (taskId) => {
-    try {
-      await axios.put(`http://localhost:8080/task/${taskId}`, { name: editedTaskName });
-      setTasks((prevTasks) =>
-        prevTasks.map((task) =>
-          task._id === taskId ? { ...task, name: editedTaskName } : task
-        )
-      );
-      setEditingTaskId(null); // Quitte le mode édition
-    } catch (error) {
-      console.error("Erreur lors de l'édition de la tâche :", error);
-    }
-  };
-
-  // Fonction pour supprimer une tâche
-  const deleteTask = async (taskId) => {
-    try {
-      await axios.delete(`http://localhost:8080/task/${taskId}`);
-      setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
-    } catch (error) {
-      console.error("Erreur lors de la suppression de la tâche :", error);
-    }
-  };
-
-  // Filtrage des tâches en fonction du filtre actif
+  // Filtrage des tâches en fonction du filtre et de la date
   const filteredTasks = tasks.filter((task) => {
-    if (filter === 'todo') return !task.isCompleted;
+    const taskDate = formatDate(task.date); // Date de la tâche formatée
+
+    if (filter === 'todo') return !task.isCompleted && taskDate === today;
     if (filter === 'completed') return task.isCompleted;
     return true;
   });
 
+  // Limitation à 4 tâches si showAllTasks est false
+  const displayedTasks = showAllTasks ? filteredTasks : filteredTasks.slice(0, 4);
+
+  const goToAgenda = () => { 
+    navigate('/agenda');          
+  }
+
+  const goToTask = (taskId) => {
+    navigate(`/task/${taskId}`)
+  }
+
+  // Fonction pour gérer la mise à jour de l'état "complété" de la tâche
+  const toggleTaskCompletion = async (taskId, currentStatus) => {
+    try {
+      // Envoyer la mise à jour au backend
+      await axios.put(`http://localhost:8080/tasks/${taskId}`, {
+        isCompleted: !currentStatus
+      }, { withCredentials: true });
+
+      // Mettre à jour l'état local des tâches après la mise à jour
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task._id === taskId ? { ...task, isCompleted: !currentStatus } : task
+        )
+      );
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour de la tâche:", error);
+    }
+  };
+
   return (
     <>
-      {filteredTasks.map((task) => (
-        <div className="myTaskBox" key={task._id}>
+      {displayedTasks.map((task) => (
+        <div className="myTaskBox" key={task._id} onClick={() => goToTask(task._id)}>
           <div className="myTaskBoxContent">
-            <div className="myTaskBoxContentIcon" style={{ backgroundColor: "lightgrey" }}>
-              <span>🤹</span>
-            </div>
+            {/* Checkbox pour marquer la tâche comme complétée ou non */}
+            <input
+              type="checkbox"
+              checked={task.isCompleted}
+              onChange={() => toggleTaskCompletion(task._id, task.isCompleted)}
+              className="myTaskCheckbox"
+            />
 
-            {/* Affichage de la tâche, soit en mode lecture, soit en mode édition */}
             <div className="myTaskBoxContentTitle">
-              {editingTaskId === task._id ? (
-                <input 
-                  value={editedTaskName} 
-                  onChange={(e) => setEditedTaskName(e.target.value)} 
-                />
-              ) : (
-                <p><b>{task.name}</b></p>
-              )}
+              <p><b>{task.name}</b></p>
             </div>
-
-            {/* Boutons d'action */}
-            <div className="myTaskActions">
-              {editingTaskId === task._id ? (
-                <>
-                  <button onClick={() => saveEditedTask(task._id)}>Enregistrer</button>
-                  <button onClick={() => setEditingTaskId(null)}>Annuler</button>
-                </>
-              ) : (
-                <>
-                  {!task.isCompleted && (
-                    <button onClick={() => completeTask(task._id)}>Valider</button>
-                  )}
-                  <button onClick={() => startEditing(task._id, task.name)}>Éditer</button>
-                  <button onClick={() => deleteTask(task._id)}>Supprimer</button>
-                </>
-              )}
+            <div className="myTaskBoxSeeDetails">
+              <i className="bi bi-chevron-right"></i>
             </div>
           </div>
         </div>
       ))}
+      
+      {/* Lien "Voir tout" si plus de 4 tâches et showAllTasks est false */}
+      {!showAllTasks && filteredTasks.length > 4 && (
+        <button onClick={goToAgenda} className="seeAllButton">Voir tout</button>
+      )}
     </>
   );
 }
