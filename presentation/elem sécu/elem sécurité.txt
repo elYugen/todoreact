@@ -1,2 +1,4 @@
 protection des routes de l'interface quand l'utilisateur n'est pas connecté avec une erreur
-générique
+générique "l'utilisateur n'est pas connecté ou erreur récupération des informations utilisateurs"
+
+hashage des mots de passe avec la fonction de hashage bcrpyt
