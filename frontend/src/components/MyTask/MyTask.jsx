@@ -17,10 +17,12 @@ function MyTask({ userId, filter }) {
     return <><p>Tu n'as pas encore de tâche en cours.</p></>;
   }
 
+
   // Fonction pour obtenir la date du jour au format XX-XX-XXXX
   const formatDate = (date) => {
     const d = new Date(date);
     return `${d.getDate().toString().padStart(2, '0')}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getFullYear()}`;
+
   };
 
   // Date du jour
@@ -35,25 +37,50 @@ function MyTask({ userId, filter }) {
     return true;
   });
 
-  // Limitation à 5 tâches si showAllTasks est false
+
+  // Limitation à 4 tâches si showAllTasks est false
   const displayedTasks = showAllTasks ? filteredTasks : filteredTasks.slice(0, 4);
 
-  const goToAgenda = async (e) => { 
+  const goToAgenda = () => { 
     navigate('/agenda');          
   }
 
-  const goToTask = async (taskId) => {
+  const goToTask = (taskId) => {
     navigate(`/task/${taskId}`)
   }
+
+  // Fonction pour gérer la mise à jour de l'état "complété" de la tâche
+  const toggleTaskCompletion = async (taskId, currentStatus) => {
+    try {
+      // Envoyer la mise à jour au backend
+      await axios.put(`http://localhost:8080/tasks/${taskId}`, {
+        isCompleted: !currentStatus
+      }, { withCredentials: true });
+
+      // Mettre à jour l'état local des tâches après la mise à jour
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task._id === taskId ? { ...task, isCompleted: !currentStatus } : task
+        )
+      );
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour de la tâche:", error);
+    }
+  };
 
   return (
     <>
       {displayedTasks.map((task) => (
-        <div className="myTaskBox" key={task._id} onClick={(e) => { e.stopPropagation(); goToTask(task._id); }}>
+        <div className="myTaskBox" key={task._id} onClick={() => goToTask(task._id)}>
+
           <div className="myTaskBoxContent">
-            <div className="myTaskBoxContentIcon" style={{ backgroundColor: "lightgrey" }}>
-              <span>🤹</span>
-            </div>
+            {/* Checkbox pour marquer la tâche comme complétée ou non */}
+            <input
+              type="checkbox"
+              checked={task.isCompleted}
+              onChange={() => toggleTaskCompletion(task._id, task.isCompleted)}
+              className="myTaskCheckbox"
+            />
 
             <div className="myTaskBoxContentTitle">
               <p><b>{task.name}</b></p>
@@ -65,7 +92,9 @@ function MyTask({ userId, filter }) {
         </div>
       ))}
       
+
       {/* Lien "Voir tout" si plus de 5 tâches et showAllTasks est false */}
+
       {!showAllTasks && filteredTasks.length > 4 && (
         <button onClick={goToAgenda} className="seeAllButton">Voir tout</button>
       )}
