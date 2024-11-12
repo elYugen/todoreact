@@ -1,85 +1,73 @@
 import TopBar from "../components/TopBar/TopBar";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../hook/useAuth";
-
+import Loading from "../components/Loading/Loading";
 
 function CreateTask() {
-
-    const [name, setName] = useState('')
-    const [category, setCategory] = useState('')
-    const [date, setDate] = useState('')
-    const [contenu, setContenu] = useState('')
-    const [created, setCreated] = useState(false)
-
-      // Hook pour la navigation - permet de rediriger l'utilisateur
+  const [name, setName] = useState('');
+  const [projectId, setProjectId] = useState('');
+  const [date, setDate] = useState('');
+  const [contenu, setContenu] = useState('');
+  const [projects, setProjects] = useState([]); 
+  const { user } = useAuth();
   const navigate = useNavigate();
 
-  const { user } = useAuth();
 
-  // Fonction qui s'exécute quand on clique sur le bouton "Créer un compte"
-  const handleSaveNewTask = () => {
-    // On prépare les données à envoyer au serveur
-    const data = {
-      name, category, date, contenu, author: user._id, //on associe la tâche a l'utilisateur co 
+  useEffect(() => {
+    if (user) { // Vérification que user est défini
+      axios.get(`http://localhost:8080/projects/user/${user._id}`)
+        .then(response => setProjects(response.data.data))
+        .catch(error => console.error("Erreur de chargement des projets:", error));
     }
-    setCreated(true) // On indique que la création est en cours
-    
-    // Requête POST vers notre serveur pour créer le compte
+  }, [user]);
+
+  // Enregistrer une tâche avec l'ID du projet sélectionné
+  const handleSaveNewTask = () => {
+    const data = {
+      name, project: projectId, date, contenu, author: user._id,
+    };
+    console.log("Données envoyées :", data);
     axios.post('http://localhost:8080/task', data)
-    .then(() => {
-      // Si la création réussit, on redirige vers la page d'accueil
-      console.log(data);
-      
-      navigate('/')
-    })
-    .catch((error) => {
-      // Si une erreur survient, on l'affiche dans la console
-      console.log("data", data);
-      console.log(error);  
-    })
-  }
-    
-    return(
-        <>
-         <section className="containerGeneral generalTask">
-        <TopBar pagename={"Créer une nouvelle tâche"}/>
+      .then(() => navigate('/'))
+      .catch(error => console.error("Erreur lors de la création de la tâche:", error));
+  };
 
-        <div className="creerTask">
+  if (!user) return <Loading/>;
+
+  return (
+    <section className="containerGeneral generalTask">
+      <TopBar pagename={"Créer une nouvelle tâche"} />
+
+      <div className="creerTask">
         <label className="labelTask">
-        Nom de la tâche : <input value={name} onChange={(e) => setName(e.target.value)} className="inputNomTask" name="inputNomTask"/>
+          Nom de la tâche : <input value={name} onChange={(e) => setName(e.target.value)} className="inputNomTask" />
         </label>
 
         <label className="labelTask">
-
-        Catégorie : <br></br>
-        <div>
-        <input value={category} onChange={(e) => setCategory(e.target.value)} className="addTask buttonTask" type="text" ></input>
-        </div>
-        </label>
-
-        <label className="optionTask" for="selectProjet">Selectionnez un projet</label>
-        <select name="selectProjet" id="selectProjet">
-            <option value="projet 1">Projet 1</option>
-            <option value="projet 2">Projet 2</option>
-            <option value="projet 3">Projet 3</option>
-            <option value="projet 4">Projet 4</option>
-        </select>
-
-        <label className="labelTask">
-        Date : <input value={date} onChange={(e) => setDate(e.target.value)} type="Date" className="inputCategorie" name="inputCategorie"/>
+          Projet :
+          <div>
+            {projects.map(project => (
+              <button key={project._id} onClick={() => setProjectId(project._id)} className={`addTask buttonTask ${projectId === project._id ? 'buttonTaskActive' : ''}`}>
+                {project.projectname}
+              </button>
+            ))}
+          </div>
         </label>
 
         <label className="labelTask">
-        Contenu : <input value={contenu} onChange={(e) => setContenu(e.target.value)} className="inputDescriptionTask" name="inputDescriptionTask"/>
+          Date : <input value={date} onChange={(e) => setDate(e.target.value)} type="Date" className="inputCategorie" />
+        </label>
+            <br />
+        <label className="labelTask">
+          Contenu : <input value={contenu} onChange={(e) => setContenu(e.target.value)} className="inputDescriptionTask" />
         </label>
 
-        <input onClick={handleSaveNewTask} className="addTask" type="button" value="Créer une tâche"/>
-        </div>
-        </section>
-        </>
-    )
+        <input onClick={handleSaveNewTask} className="addTask" type="button" value="Créer une tâche" />
+      </div>
+    </section>
+  );
 }
 
 export default CreateTask;

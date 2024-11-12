@@ -17,11 +17,12 @@ function MyTask({ userId, filter }) {
     return <><p>Tu n'as pas encore de tâche en cours.</p></>;
   }
 
-  // Fonction pour obtenir la date au format "YYYY-MM-DD"
+
+  // Fonction pour obtenir la date du jour au format XX-XX-XXXX
   const formatDate = (date) => {
     const d = new Date(date);
-    d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
-    return d.toISOString().split('T')[0]; // Format "YYYY-MM-DD"
+    return `${d.getDate().toString().padStart(2, '0')}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getFullYear()}`;
+
   };
 
   // Date du jour
@@ -35,6 +36,7 @@ function MyTask({ userId, filter }) {
     if (filter === 'completed') return task.isCompleted;
     return true;
   });
+
 
   // Limitation à 4 tâches si showAllTasks est false
   const displayedTasks = showAllTasks ? filteredTasks : filteredTasks.slice(0, 4);
@@ -70,6 +72,7 @@ function MyTask({ userId, filter }) {
     <>
       {displayedTasks.map((task) => (
         <div className="myTaskBox" key={task._id} onClick={() => goToTask(task._id)}>
+
           <div className="myTaskBoxContent">
             {/* Checkbox pour marquer la tâche comme complétée ou non */}
             <input
@@ -89,7 +92,9 @@ function MyTask({ userId, filter }) {
         </div>
       ))}
       
-      {/* Lien "Voir tout" si plus de 4 tâches et showAllTasks est false */}
+
+      {/* Lien "Voir tout" si plus de 5 tâches et showAllTasks est false */}
+
       {!showAllTasks && filteredTasks.length > 4 && (
         <button onClick={goToAgenda} className="seeAllButton">Voir tout</button>
       )}

@@ -5,7 +5,7 @@ FROM node:20 AS build
 WORKDIR /app
 COPY ./package*.json ./
 RUN npm install
-# COPY . .
+COPY . .
 # RUN npm run dev
 ENV CHOKIDAR_USEPOLLING=true
 ENV VITE_WATCH_POLL=true

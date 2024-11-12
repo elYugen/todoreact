@@ -7,12 +7,11 @@ const TaskSchema = new mongoose.Schema(
        // Nom de la tâche :
        // Doit être du texte (String)
        // Est obligatoire (required: true)
-       // Doit être unique (unique: true)
-       name: { type: String, required: true, unique: true },
+       name: { type: String, required: true },
 
        // Catégorie de la tâche :
-       // Doit être du texte
-       category: { type: String },
+       // Récupère les projets de l'utilisateur dans la base de donnée
+       project: { type: mongoose.Schema.Types.ObjectId, ref: 'projects' },
 
        // Date de la tâche :
        // Doit être du texte

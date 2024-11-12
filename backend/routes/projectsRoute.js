@@ -20,6 +20,8 @@ router.post('', async (request, response) => {
             projectname: request.body.projectname,
             description: request.body.description,
             user: request.body.user,
+            icone: request.body.icone,
+            xp: 50,
         };
  
         // On crée le projet dans la base de données
@@ -56,7 +58,7 @@ router.get('/', async (request, response) => {
 router.get('/:id', async (request, response) => {
    try {
        const { id } = request.params;  // On récupère l'ID depuis l'URL
-       const projet = await Projects.findById(id);  // On cherche le projet
+       const projet = await Projects.findById(id).populate('tasks');  // On cherche le projet
        return response.status(200).json(projet)
    } catch (error) {
        // Gestion des erreurs
@@ -109,16 +111,27 @@ router.get('/user/:userId', async (request, response) => {
         if (query) {
           filters.projectname = { $regex: query, $options: 'i' };  
         }
-        const projects = await Projects.find(filters);
+        const projects = await Projects.find(filters).populate('tasks');
+        
+        const projectsWithTaskInfo = projects.map(project => {
+            const totalTasks = project.tasks.length;
+            const completedTasks = project.tasks.filter(task => task.isCompleted).length;
+            return {
+                ...project.toObject(),
+                taskCount: totalTasks,
+                completedTaskCount: completedTasks
+            };
+        });
+
         return response.status(200).json({
-            count: projects.length,
-            data: projects
+            count: projectsWithTaskInfo.length,
+            data: projectsWithTaskInfo
         });
     } catch (error) {
         console.log(error.message);
         response.status(500).send({message: error.message});
     }
- });
+});
 
  // ROUTE pour la barre de recherche, qui affiche un resultat en fonction de l'entrée et de l'id utilisateur
 // On exporte notre routeur pour l'utiliser dans notre application

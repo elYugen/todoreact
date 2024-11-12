@@ -24,8 +24,12 @@ a {
     padding-bottom: 60px;
 }
 
-/* ----------------------------  Page détail projet ------------------------------------------ */
+[type="checkbox"] {
+    height: 30px;
+    width: 30px;
+}
 
+/* ----------------------------  Page détail projet ------------------------------------------ */
 .containerGeneral {
     width: 95%;
     margin: auto;
@@ -73,6 +77,7 @@ a {
 }
 
 .addTask {
+    height: 50px;
     color: white;
     background-color: #1464C7;
     border: 1px solid #1464C7;
@@ -112,6 +117,38 @@ a {
     padding-right: 10px;
 }
 
+.icone-input-container {
+    display: flex;
+    flex-direction: row-reverse; 
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  
+  .emoji-button {
+    height: 50px; 
+    width: 300px;
+    padding: 0 20px;
+    font-size: 16px;
+    background-color: #1464C7;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .emoji-button:hover {
+    background-color: #0d4fa3;
+  }
+  
+  .inputEmoji {
+    flex: 1;
+    margin-bottom: 0;
+    pointer-events: none; 
+    background-color: #f0f0f0; 
+  }
+
 /* ----------------------------  Page habits trackers ------------------------------------------ */
 
 .iconeHabits {
@@ -129,7 +166,7 @@ a {
     padding-left: 10px;
     padding-right: 10px;
     background-color: #4cc0ee;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .pHabits {
@@ -143,6 +180,48 @@ a {
     height: 40px;
 }
 
+.containerBarre {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.boutonsBarre{
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    width: 100%;
+    top: -13px;
+}
+
+.iconeUpdateDelete {
+width: 15px;
+height: 15px;
+border: 1px solid black;
+border-radius: 50%;
+padding: 5px;
+position: absolute;
+}
+
+.Ud1{
+background-color: lightgreen;
+left: 70%;
+}
+
+.Ud2{
+    background-color: lightsalmon;
+    left: 80%;
+}
+
+.Ud3{
+    background-color: lightcoral;
+    left: 90%;
+}
+
+.inputIsCompleted {
+    
+}
 
 /* ----------------------------  Page creer nouveau projet ------------------------------------------ */
 
@@ -160,11 +239,12 @@ a {
 }
 
 .inputNomProjet,
+.inputEmoji,
 .inputDescriptionProjet,
 .inputNomTask,
 .inputDescriptionTask,
 #selectProjet {
-    height: 30px;
+    height: 50px;
     width: 100%;
     margin-top: 10px;
     margin-bottom: 30px;
@@ -176,7 +256,7 @@ a {
 }
 
 .inputDescriptionProjet {
-    height: 200px;
+    height: 50px;
 }
 
 .inputDescriptionTask {
@@ -197,7 +277,14 @@ a {
 }
 
 .inputCategorie {
+    height: 50px;
     margin-top: 20px;
+    margin-bottom: 30px;
+    background-color: #ffffff;
+    transition: border-color 0.3s ease; 
+    box-shadow: 0 0 12px 1px rgba(128, 128, 128, 0.1);
+    border: none;
+    border-radius: 10px
 }
 
 .buttonTask {
@@ -206,6 +293,10 @@ a {
     margin-right: 10px;
 }
 
+.buttonTaskActive {
+    background-color: #0091ca;
+    border-color: #0091ca;
+}
 /* ----------------------------  Page profile ------------------------------------------ */
 
 .generalProfil {
@@ -229,8 +320,13 @@ a {
     height: 120px;
 }
 
+.profileBadge {
+    width: 40px;
+    height: 40px;
+}
+
 .topBox {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -254,13 +350,16 @@ a {
 .countBox,
 .countBox2 {
     width: 33%;
-    border-top: solid 1px black;
-    border-right: solid 1px black;
+    border-top: solid 1px rgb(230, 230, 230);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 5px;
+}
+
+.countBox2 {
+    border-right: none;
 }
 
 .bottomBox {
@@ -271,11 +370,19 @@ a {
 .barreProfil {
     padding: 15px;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 15px;
-    box-shadow: 0 0 6px 1px rgba(128, 128, 128, 0.718);
+    /* box-shadow: 0 0 10px 1px rgba(128, 128, 128, 0.718); */
+    border-radius: 5px;
 }
 
+.profileLink {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-direction: row;
+}
 /* ----------------------------  Page autres ------------------------------------------ */
 
 .carteH {

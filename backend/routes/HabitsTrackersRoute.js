@@ -66,17 +66,45 @@ router.get('/:id', async (request, response) => {
 
 // Route pour MODIFIER un utilisateur (PUT)
 router.put('/:id', async (request, response) => {
-   try {
-       const { id } = request.params  // On récupère l'ID du projet à modifier
-       // On met à jour le projet avec les nouvelles données
-       const result = await HabitsTrackers.findByIdAndUpdate(id, request.body, {new: true})
-       return response.status(200).json(result)
-   } catch (error) {
-       // Gestion des erreurs
-       console.log(error.message);
-       response.status(404).send({ message: error.message })
-   }
-})
+    try {
+        const { id } = request.params;
+        const { habitname, date, icone, isCompleted } = request.body;
+
+        // iscompleted est validé seulement si il est dans la requete
+        if (isCompleted !== undefined && typeof isCompleted !== 'boolean') {
+            return response.status(400).json({
+                message: "isCompleted doit être un booléen (true/false)"
+            });
+        }
+
+        // champ pour les maj pour éviter que iscompleted  sois envoyer si il n'y est pas
+        const updateFields = { habitname, date, icone };
+        if (isCompleted !== undefined) {
+            updateFields.isCompleted = isCompleted;
+        }
+
+        const result = await HabitsTrackers.findByIdAndUpdate(
+            id,
+            updateFields,
+            { new: true }
+        );
+
+        if (!result) {
+            return response.status(404).json({
+                message: "Habitude non trouvée"
+            });
+        }
+
+        return response.status(200).json(result);
+
+    } catch (error) {
+        console.error('Erreur lors de la mise à jour :', error.message);
+        return response.status(500).json({
+            message: "Erreur lors de la mise à jour de l'habitude",
+            error: error.message
+        });
+    }
+});
 
 // Route pour SUPPRIMER un projet (DELETE)
 router.delete('/:id', async (request, response) => {

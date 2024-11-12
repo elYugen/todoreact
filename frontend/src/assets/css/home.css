@@ -30,7 +30,7 @@
     border: none;
     color: white;
     border-radius: 10px;
-    width: 100px;
+    width: 120px;
     height: 40px;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .homeBody {
-    background: linear-gradient(to top, white, lightblue);
+    background: linear-gradient(to bottom, white, lightblue);
     height: 100vh;
     margin: 0; 
 }
@@ -82,8 +82,6 @@
     flex-direction: row;
     gap: 10px;
     overflow-x: auto;
-    white-space: nowrap; 
-    max-width: 100%;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
