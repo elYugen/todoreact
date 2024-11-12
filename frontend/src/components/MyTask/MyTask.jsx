@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './MyTask.css';
 import Loading from '../Loading/Loading';
 import useUserTasks from '../../hook/useUserTask';
@@ -17,12 +17,10 @@ function MyTask({ userId, filter }) {
     return <><p>Tu n'as pas encore de tâche en cours.</p></>;
   }
 
-
   // Fonction pour obtenir la date du jour au format XX-XX-XXXX
   const formatDate = (date) => {
     const d = new Date(date);
     return `${d.getDate().toString().padStart(2, '0')}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getFullYear()}`;
-
   };
 
   // Date du jour
@@ -37,7 +35,6 @@ function MyTask({ userId, filter }) {
     return true;
   });
 
-
   // Limitation à 4 tâches si showAllTasks est false
   const displayedTasks = showAllTasks ? filteredTasks : filteredTasks.slice(0, 4);
 
@@ -45,34 +42,39 @@ function MyTask({ userId, filter }) {
     navigate('/agenda');          
   }
 
-  const goToTask = (taskId) => {
-    navigate(`/task/${taskId}`)
-  }
-
   // Fonction pour gérer la mise à jour de l'état "complété" de la tâche
   const toggleTaskCompletion = async (taskId, currentStatus) => {
+    console.log(`Toggle task completion for taskId: ${taskId}, currentStatus: ${currentStatus}`);
     try {
       // Envoyer la mise à jour au backend
       await axios.put(`http://localhost:8080/tasks/${taskId}`, {
         isCompleted: !currentStatus
-      }, { withCredentials: true });
+      }, { withCredentials: true })
+      .then(() => {
+        console.log("Mise à jour réussie !");
+      });
 
       // Mettre à jour l'état local des tâches après la mise à jour
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
           task._id === taskId ? { ...task, isCompleted: !currentStatus } : task
-        )
+        ) //...task est appelé un opérateur de décomposition (ou spread operator). Il est utilisé pour copier toutes les propriétés de l'objet task dans un nouvel objet.Cela signifie que nous créons un nouvel objet qui contient toutes les mêmes propriétés que task. 
+        
       );
     } catch (error) {
       console.error("Erreur lors de la mise à jour de la tâche:", error);
+      if (error.response) {
+        console.log("Erreur de réponse:", error.response.status, error.response.data);
+      } else {
+        console.log("Erreur de requête:", error.message);
+      }
     }
   };
 
   return (
     <>
       {displayedTasks.map((task) => (
-        <div className="myTaskBox" key={task._id} onClick={() => goToTask(task._id)}>
-
+        <div className="myTaskBox" key={task._id}>
           <div className="myTaskBoxContent">
             {/* Checkbox pour marquer la tâche comme complétée ou non */}
             <input
@@ -92,9 +94,7 @@ function MyTask({ userId, filter }) {
         </div>
       ))}
       
-
       {/* Lien "Voir tout" si plus de 5 tâches et showAllTasks est false */}
-
       {!showAllTasks && filteredTasks.length > 4 && (
         <button onClick={goToAgenda} className="seeAllButton">Voir tout</button>
       )}

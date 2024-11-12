@@ -17,7 +17,7 @@ router.post('', async (request, response) => {
             });
         }
  
-        // On prépare les données du nouvel tache
+        // On prépare les données de la nouvelle tache
         const newTask = {
             name: request.body.name,
             project: request.body.project,
@@ -138,7 +138,7 @@ router.put('/:id', async (request, response) => {
 // Route pour SUPPRIMER un utilisateur (DELETE)
 router.delete('/:id', async (request, response) => {
    try {
-       const { id } = request.params  // On récupère l'ID de l'utilisateur à supprimer
+       const { id } = request.params  // On récupère l'ID de l'utilisateur à supprimer. En utilisant { id }, vous dites explicitement : "Extrais-moi la propriété id de l'objet request.params et assigne-la à une variable nommée id" 
        const task = await Task.findByIdAndDelete(id)  // On supprime l'utilisateur
 
        // Si l'utilisateur n'existe pas, on envoie un message d'erreur
@@ -166,24 +166,6 @@ router.get('/user/:userId', async (request, response) => {
         }
 
         const tasks = await Task.find(filters);
-
-        // // Parcourir les tâches et vérifier celles dont la date d'échéance est le lendemain
-        // const tomorrow = new Date();
-        // tomorrow.setDate(tomorrow.getDate() + 1);
-
-        // const tasksWithTomorrowDeadline = tasks.filter(task => {
-        //     const taskDate = new Date(task.date);
-        //     return taskDate.toDateString() === tomorrow.toDateString();
-        // });
-
-        // // Envoyer la notification pour chaque tâche avec échéance le lendemain
-        // await Promise.all(tasksWithTomorrowDeadline.map(async task => {
-        //     await sendNotification(
-        //         subscriptions,
-        //         `Rappel : Échéance de la tâche "${task.name}" demain`
-        //     );
-        // }));
-
         return response.status(200).json({
             count: tasks.length,
             data: tasks
