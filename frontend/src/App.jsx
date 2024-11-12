@@ -21,6 +21,8 @@ import CreateHabit from "./pages/CreateHabit";
 import TaskDetail from './pages/TaskDetail.jsx';
 import UpdateHabit from './pages/UpdateHabit.jsx'; 
 
+
+
 // On importe le style global qui sera appliqué à l'ensemble de l'application
 import './assets/css/style.css';
 
