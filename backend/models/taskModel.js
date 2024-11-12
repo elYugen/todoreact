@@ -10,7 +10,7 @@ const TaskSchema = new mongoose.Schema(
        name: { type: String, required: true },
 
        // Catégorie de la tâche :
-       // Récupère les projets de l'utilisateur dans la base de donnée
+       // Récupère les projets de l'utilisateur dans la base de donnée dans la collection projects
        project: { type: mongoose.Schema.Types.ObjectId, ref: 'projects' },
 
        // Date de la tâche :

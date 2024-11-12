@@ -1,0 +1,2 @@
+protection des routes de l'interface quand l'utilisateur n'est pas connecté avec une erreur
+générique

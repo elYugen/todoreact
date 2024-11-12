@@ -1,0 +1,4 @@
+Logique de progression :
+L'utilisateur possède des projets qu'il a pu créer avec un certain nombre de tâches à réaliser.
+Quand l'utilisateur complète un de ses projets, il rapporte 50 points d'expériences
+Quand l'utilisateur atteint les 100 points d'expériences il passe au niveau supérieur et obtient un badge qui correspond à son niveau

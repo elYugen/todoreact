@@ -14,7 +14,7 @@ const ProjectSchema = new mongoose.Schema(
        // doit être du texte
        description: { type: String },
 
-       // récupère les taches de l'utilisateur dans la base de donnée
+       // récupère les taches de l'utilisateur dans la base de donnée dans la collection task
        tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }],
 
        icone: { type: String, default: '🤹'},

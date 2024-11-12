@@ -35,15 +35,12 @@ const UserSchema = new mongoose.Schema(
        // image de profil:
        // doit être du texte (String)
        // avec une valeur par défaut
-       profilePicture: { 
-           type: String, 
-           default: 'https://mycrazystuff.com/20695-width_1000/decapsuleur-testicules.jpg' 
-       },
+       profilePicture: { type: String, default: 'https://mycrazystuff.com/20695-width_1000/decapsuleur-testicules.jpg' },
 
-       badge: {
-        type: String,
-        default: 'newbie.avif'
-       }
+       // badge:
+       // doit etre du text
+       // a pour valeur par défaut newbie.avif
+       badge: { type: String, default: 'newbie.avif' }
    },
    {
        // ajoute automatiquement la date de création et de dernière modification
@@ -55,8 +52,10 @@ const UserSchema = new mongoose.Schema(
 UserSchema.pre('save', async function(next) {
     // Si le niveau a changé
     if (this.isModified('level')) {
+        // On met à jour les badges de l'utilisateur
         await updateUserBadges(this);
     }
+    // On passe à l'étape suivante du processus de sauvegarde
     next();
 });
 

@@ -1,0 +1,4 @@
+Idées non réalisé :
+système de classement entre les utiliateurs en fonction de leurs niveau (voir classement page.png)
+Le classement aurait été un top 10, les seules utilisateurs affiché sur la page aurait été 
+les utilisateurs dans le classement et l'utilisateur avec son classement affiché

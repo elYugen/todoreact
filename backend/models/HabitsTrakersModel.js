@@ -2,20 +2,24 @@ import mongoose from "mongoose";
 
 const HabitsTrackersSchema = new mongoose.Schema(
     {
+        // icone :
+        // doit être du texte
         icone: { type: String, required: true },
         
+        // nom de l'habitude :
+        // doit être du texte
         habitname: { type: String, required: true, unique: true },
  
-        // description projet :
+        // date :
         // doit être du texte
         date: { type: String, required: true },
  
+        // auteur:
+        // doit être du texte
         user: { type: String, required: true },
 
-        // backgroundColor: { type: String, default: "#4cc0ee" },
-        
-        // borderColor: { type: String, default: "#1464C7" },
-
+        // si une tache est complété
+        // doit être un booleen
         isCompleted: { type: Boolean, default: false },
  
     },
